@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>互動媒體製作 第八單元</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,500;0,600;0,700;0,800;1,500&family=IBM+Plex+Mono:wght@400;600&family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
+<style>
+:root{
+  --paper:#F3EEE4; --surface:#FFFFFF; --surface-2:#F8F4EA;
+  --ink:#211C15; --ink-2:#5A5044; --ink-3:#8B806E;
+  --line:#DCD3C0; --line-soft:#EAE2D2;
+  --brand:#C1502E; --brand-soft:#F7E3D8;
+  --ai:#2B6E63; --ai-soft:#DEEBE7;
+  --ok:#2F7D4F; --ok-soft:#E4F2E9;
+  --warn:#9C6B14; --warn-soft:#F7ECD9;
+  --shadow:0 1px 2px rgba(33,28,21,.06),0 8px 24px rgba(33,28,21,.08);
+  --f-zh:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  --f-la:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-mo:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#181510; --surface:#211C16; --surface-2:#28221B;
+    --ink:#ECE6DA; --ink-2:#B8AD9B; --ink-3:#8C8171;
+    --line:#3A3327; --line-soft:#2E281F;
+    --brand:#E8845F; --brand-soft:#3A2419;
+    --ai:#68B3A2; --ai-soft:#173029;
+    --ok:#7EC495; --ok-soft:#163224;
+    --warn:#E1B35D; --warn-soft:#332715;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#181510; --surface:#211C16; --surface-2:#28221B;
+  --ink:#ECE6DA; --ink-2:#B8AD9B; --ink-3:#8C8171;
+  --line:#3A3327; --line-soft:#2E281F;
+  --brand:#E8845F; --brand-soft:#3A2419;
+  --ai:#68B3A2; --ai-soft:#173029;
+  --ok:#7EC495; --ok-soft:#163224;
+  --warn:#E1B35D; --warn-soft:#332715;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--f-zh);font-size:15px;line-height:1.72;
+  display:flex;flex-direction:column;overflow:hidden;
+}
+h1,h2,h3,h4,p,ul,ol{margin:0}
+ul,ol{padding-left:1.15em}
+li{margin-block:.4em}
+strong{font-weight:700}
+code{font-family:var(--f-mo);font-size:.86em;background:var(--surface-2);
+  border:1px solid var(--line-soft);border-radius:4px;padding:.08em .38em}
+
+.topbar{
+  flex:0 0 auto;display:flex;align-items:center;gap:12px;
+  padding:10px 20px;padding-top:calc(10px + env(safe-area-inset-top,0px));
+  background:var(--surface);border-bottom:1px solid var(--line);
+}
+.brand{font-family:var(--f-zh);font-weight:900;font-size:14px;white-space:nowrap}
+.brand span{color:var(--brand)}
+.lockchip{
+  font-family:var(--f-mo);font-size:11px;font-weight:600;
+  color:var(--ai);background:var(--ai-soft);border:1px solid color-mix(in srgb,var(--ai) 35%,transparent);
+  border-radius:99px;padding:3px 10px;white-space:nowrap;
+}
+.topbar .sp{flex:1 1 auto}
+.tbtn{
+  appearance:none;border:1px solid var(--line);background:var(--surface-2);color:var(--ink-2);
+  font-family:var(--f-mo);font-size:11px;border-radius:8px;padding:5px 10px;cursor:pointer;white-space:nowrap;
+}
+.tbtn:hover{color:var(--ink);border-color:var(--ink-3)}
+.progress{flex:0 0 auto;height:3px;background:var(--line-soft)}
+.progress i{display:block;height:100%;background:var(--brand);width:0;transition:width .25s ease}
+
+.stage{flex:1 1 auto;overflow-y:auto;overflow-x:hidden}
+.slide{max-width:1000px;margin:0 auto;padding:32px 20px 46px;display:flex;flex-direction:column;gap:18px}
+@media(prefers-reduced-motion:no-preference){.slide{animation:rise .28s ease both}}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.navbar{
+  flex:0 0 auto;display:flex;align-items:center;gap:10px;
+  padding:10px 20px;padding-bottom:calc(10px + env(safe-area-inset-bottom,0px));
+  background:var(--surface);border-top:1px solid var(--line);
+}
+.navbtn{
+  appearance:none;cursor:pointer;font-family:var(--f-zh);font-weight:700;font-size:13px;
+  border:1px solid var(--line);background:var(--surface-2);color:var(--ink);
+  border-radius:10px;padding:9px 15px;white-space:nowrap;
+}
+.navbtn:hover:not(:disabled){border-color:var(--brand);color:var(--brand)}
+.navbtn:disabled{opacity:.35;cursor:not-allowed}
+.navbtn:focus-visible,.tbtn:focus-visible,select:focus-visible,.toc button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.counter{flex:1 1 auto;text-align:center;font-family:var(--f-mo);font-size:12px;color:var(--ink-3);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.counter b{color:var(--ink);font-weight:600}
+.jump{font-family:var(--f-zh);font-size:12px;max-width:min(40vw,250px);
+  border:1px solid var(--line);background:var(--surface-2);color:var(--ink-2);border-radius:8px;padding:6px 8px}
+
+.eyebrow{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.num{font-family:var(--f-mo);font-weight:600;font-size:13px;letter-spacing:.06em;
+  color:var(--brand);background:var(--brand-soft);border-radius:6px;padding:3px 9px}
+.kicker{font-family:var(--f-mo);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+h2.title{font-family:var(--f-zh);font-weight:900;font-size:clamp(23px,4.2vw,33px);line-height:1.3;text-wrap:balance}
+.lead{font-family:var(--f-zh);font-size:15.5px;color:var(--ink-2);max-width:68ch}
+h3.sec{font-family:var(--f-zh);font-weight:700;font-size:15.5px;display:flex;align-items:flex-start;gap:9px}
+h3.sec::before{content:"";width:4px;height:17px;background:var(--brand);border-radius:2px;flex:0 0 auto;margin-top:4px}
+
+.card{background:var(--surface);border:1px solid var(--line-soft);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.flat{background:var(--surface-2);border:1px solid var(--line-soft);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.brandcard{border-top:3px solid var(--brand)}
+.aicard{border-top:3px solid var(--ai)}
+.tag{font-family:var(--f-mo);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.tag.brand{color:var(--brand)} .tag.ai{color:var(--ai)}
+
+.note{border-left:3px solid var(--warn);background:var(--warn-soft);border-radius:0 10px 10px 0;padding:12px 16px;font-size:14px}
+.note b{color:var(--warn)}
+.good{border-left:3px solid var(--ok);background:var(--ok-soft);border-radius:0 10px 10px 0;padding:12px 16px;font-size:14px}
+.good b{color:var(--ok)}
+.ai-callout{border-left:3px solid var(--ai);background:var(--ai-soft);border-radius:0 10px 10px 0;padding:12px 16px;font-size:14px}
+.ai-callout b{color:var(--ai)}
+
+.scroll{overflow-x:auto;border:1px solid var(--line-soft);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:13.5px}
+th,td{padding:10px 13px;text-align:left;border-bottom:1px solid var(--line-soft);vertical-align:top}
+thead th{background:var(--surface-2);font-family:var(--f-zh);font-weight:700;font-size:12.5px;
+  color:var(--ink-2);white-space:nowrap}
+tbody tr:last-child td{border-bottom:none}
+td.mono,th.mono{font-family:var(--f-mo);font-variant-numeric:tabular-nums}
+.wk{font-family:var(--f-mo);font-size:12px;color:var(--ink-3);white-space:nowrap}
+tr.hl td{background:color-mix(in srgb,var(--brand-soft) 55%,transparent)}
+
+.toc{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:10px}
+.toc button{text-align:left;cursor:pointer;font:inherit;font-family:var(--f-zh);
+  background:var(--surface);border:1px solid var(--line-soft);border-radius:11px;
+  padding:12px 14px;color:var(--ink);display:flex;gap:11px;align-items:flex-start}
+.toc button:hover{border-color:var(--brand)}
+.toc b{font-family:var(--f-mo);font-size:12px;color:var(--brand);font-weight:600;flex:0 0 auto;margin-top:2px}
+.toc span{font-size:14px;font-weight:500}
+.toc small{display:block;color:var(--ink-3);font-size:11.5px;font-weight:400;margin-top:2px}
+
+.cover{gap:24px;padding-top:50px}
+.cover .big{font-family:var(--f-zh);font-weight:900;font-size:clamp(28px,6vw,48px);line-height:1.2;letter-spacing:-.01em}
+.cover .big em{font-style:normal;color:var(--brand)}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.meta div{background:var(--surface);border:1px solid var(--line-soft);border-radius:11px;padding:11px 14px}
+.meta dt{font-family:var(--f-mo);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.meta dd{margin:2px 0 0;font-family:var(--f-zh);font-weight:700;font-size:14px}
+.kbd{font-family:var(--f-mo);font-size:11px;border:1px solid var(--line);border-bottom-width:2px;
+  border-radius:5px;padding:1px 5px;color:var(--ink-2);background:var(--surface-2)}
+
+.stepgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:640px){.stepgrid{grid-template-columns:repeat(2,1fr)}}
+.stepbox{background:var(--surface);border:1px solid var(--line-soft);border-radius:12px;padding:14px;box-shadow:var(--shadow);position:relative}
+.stepbox .sn{font-family:var(--f-mo);font-size:11px;color:var(--ai);font-weight:700;letter-spacing:.06em}
+.stepbox h4{font-family:var(--f-zh);font-weight:700;font-size:14.5px;margin:6px 0 4px}
+.stepbox p{font-size:12.5px;color:var(--ink-2);margin:0}
+
+.pill{display:inline-block;font-family:var(--f-mo);font-size:10.5px;font-weight:600;border-radius:99px;
+  padding:2px 9px;border:1px solid var(--line)}
+.pill.video{color:var(--ai);background:var(--ai-soft);border-color:transparent}
+.pill.f2f{color:var(--brand);background:var(--brand-soft);border-color:transparent}
+.pill.exam{color:var(--warn);background:var(--warn-soft);border-color:transparent}
+
+@media(max-width:640px){
+  .slide{padding:24px 16px 38px}
+  .jump{display:none}
+  .lockchip{display:none}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">互動媒體製作 · <span>第八單元</span></div>
+  <div class="lockchip">分段交付制 · AI Agent 協作</div>
+  <div class="sp"></div>
+  <button class="tbtn" id="themebtn" type="button">◐</button>
+</header>
+<div class="progress"><i id="bar"></i></div>
+
+<main class="stage" id="stage" tabindex="-1">
+
+<section class="slide cover" data-toc="封面" data-n="封面">
+  <div class="kicker">弘光科技大學 · 多媒體遊戲發展與應用系 · 115-1 進修部</div>
+  <h1 class="big">讓網站<br>不只是<em>文字</em></h1>
+  <p class="lead">第八單元｜Google Site 多媒體與互動整合。測驗②上線</p>
+  <dl class="meta">
+    <div><dt>Course</dt><dd>互動媒體製作（選課號 01544）</dd></div>
+    <div><dt>Class</dt><dd>進修四技多遊 4 年甲班 · G501</dd></div>
+    <div><dt>Time</dt><dd>週一 A 面授 1hr ／ 週五 A,B 非同步 2hr</dd></div>
+    <div><dt>Instructor</dt><dd>洪明顯</dd></div>
+    <div><dt>本週型態</dt><dd>影片｜Google Site 多媒體與互動整合</dd></div>
+    <div><dt>本週評量</dt><dd>測驗②：UI/UX 與 Google Site（8 題）</dd></div>
+  </dl>
+  <p class="lead" style="font-size:13.5px">操作方式：點下方「上一頁／下一頁」，或使用鍵盤 <span class="kbd">←</span> <span class="kbd">→</span> 翻頁。</p>
+</section>
+
+<section class="slide" data-toc="8.0 本單元目錄" data-n="8.0">
+  <div class="eyebrow"><span class="num">8.0</span><span class="kicker">Unit Map</span></div>
+  <h2 class="title">本單元目錄</h2>
+  <p class="lead">上週你把 Google Site 的骨架填滿了文字內容，這週幫它加料——影片、地圖、圖片輪播，讓下週期中檢核時的原型看起來更完整。</p>
+<div class="toc" id="toc"></div>
+</section>
+
+<section class="slide" data-toc="8.1 幫 Google Site 加料" data-n="8.1">
+  <div class="eyebrow"><span class="num">8.1</span><span class="kicker">Add-ons</span></div>
+  <h2 class="title">幫 Google Site 加料</h2>
+  <p class="lead">Google Site 內建就能插入這些元素，不需要寫任何程式碼。</p>
+<div class="grid4">
+    <div class="flat"><h3 class="sec" style="font-size:14px"><span>嵌入影片</span></h3><p style="font-size:12.5px;color:var(--ink-2)">插入 YouTube 連結即可播放</p></div>
+    <div class="flat"><h3 class="sec" style="font-size:14px"><span>嵌入地圖</span></h3><p style="font-size:12.5px;color:var(--ink-2)">用 Google Maps 顯示地點位置</p></div>
+    <div class="flat"><h3 class="sec" style="font-size:14px"><span>圖片輪播</span></h3><p style="font-size:12.5px;color:var(--ink-2)">多張圖片自動切換展示</p></div>
+    <div class="flat"><h3 class="sec" style="font-size:14px"><span>嵌入表單</span></h3><p style="font-size:12.5px;color:var(--ink-2)">簡單的聯絡表單或問卷</p></div>
+  </div>
+</section>
+
+<section class="slide" data-toc="8.2 UI/UX 原則不只是理論，這週實測" data-n="8.2">
+  <div class="eyebrow"><span class="num">8.2</span><span class="kicker">Self Check</span></div>
+  <h2 class="title">UI/UX 原則不只是理論，這週實測</h2>
+  <p class="lead">把第六週學的四個原則，套進自己的 Google Site 檢查一次——這不是額外功課，是替下週期中檢核先做一次自我體檢。</p>
+<div class="grid2">
+    <div class="flat"><span style="font-family:var(--f-mo);color:var(--brand);font-size:12px">檢查</span><p style="font-size:13.5px;margin-top:4px">對比與可視性：文字看得清楚嗎</p></div>
+    <div class="flat"><span style="font-family:var(--f-mo);color:var(--brand);font-size:12px">檢查</span><p style="font-size:13.5px;margin-top:4px">首屏原則：重點有沒有放在最上面</p></div>
+    <div class="flat"><span style="font-family:var(--f-mo);color:var(--brand);font-size:12px">檢查</span><p style="font-size:13.5px;margin-top:4px">導覽易尋性：分頁找得到嗎</p></div>
+    <div class="flat"><span style="font-family:var(--f-mo);color:var(--brand);font-size:12px">檢查</span><p style="font-size:13.5px;margin-top:4px">介面一致性：每頁風格統一嗎</p></div>
+  </div>
+</section>
+
+<section class="slide" data-toc="8.3 測驗②上線" data-n="8.3">
+  <div class="eyebrow"><span class="num">8.3</span><span class="kicker">Quiz 2 Live</span></div>
+  <h2 class="title">測驗②上線</h2>
+  <p class="lead">8 題單選，範圍涵蓋 UI/UX 編排、Google Site 操作與多媒體整合。</p>
+<h3 class="sec">代表題型</h3>
+  <ul style="font-size:13.5px;color:var(--ink-2)">
+    <li>對比與可視性的判斷</li>
+    <li>首屏原則的應用情境</li>
+    <li>Alt Text 與螢幕報讀器</li>
+    <li>自動有聲播放的問題</li>
+    <li>導覽易尋性</li>
+    <li>介面一致性</li>
+    <li>行動版欄位堆疊</li>
+  </ul>
+</section>
+
+<section class="slide" data-toc="8.4 期中前自我檢查清單" data-n="8.4">
+  <div class="eyebrow"><span class="num">8.4</span><span class="kicker">Midterm Checklist</span></div>
+  <h2 class="title">期中前自我檢查清單</h2>
+  <p class="lead">下週就是期中專案檢核，先照這張清單自己過一遍。</p>
+<div class="stepgrid">
+    <div class="stepbox"><div class="sn">01</div><h4>至少 3 個子頁面</h4><p>符合評量②的最低要求</p></div>
+    <div class="stepbox"><div class="sn">02</div><h4>內容對應企劃</h4><p>每個子頁面都看得出跟你的品牌企劃有關</p></div>
+    <div class="stepbox"><div class="sn">03</div><h4>至少一項多媒體元素</h4><p>影片、地圖或圖片輪播擇一加入</p></div>
+    <div class="stepbox"><div class="sn">04</div><h4>UI/UX 基本原則</h4><p>對比、首屏、導覽、一致性都檢查過</p></div>
+  </div>
+</section>
+
+<section class="slide" data-toc="8.5 本週任務" data-n="8.5">
+  <div class="eyebrow"><span class="num">8.5</span><span class="kicker">This Week's Task</span></div>
+  <h2 class="title">本週任務</h2>
+  <p class="lead">充實 Google Site 的多媒體內容（不另外計分，是為期中做準備），並完成測驗②。</p>
+<div class="note"><b>提醒：</b>多媒體加料不強制、不列入正式評量，但期中口頭報告時，一個有影片或地圖的原型會讓你更容易講清楚自己做了什麼。</div>
+</section>
+
+<section class="slide" data-toc="9 下週銜接" data-n="8.6">
+  <div class="eyebrow"><span class="num">8.6</span><span class="kicker">Next Up</span></div>
+  <h2 class="title">下週銜接</h2>
+<div class="ai-callout"><b>第九單元：</b>期中專案檢核，實體 3 小時——帶著完整的 Google Site 原型出席，準備好講清楚你怎麼問 AI、怎麼判斷取捨。</div>
+</section>
+
+</main>
+
+<nav class="navbar">
+  <button class="navbtn" id="prevBtn" type="button">← 上一頁</button>
+  <div class="counter"><b id="curNo">1</b> / <span id="totNo">9</span>　<span id="curLabel"></span></div>
+  <select class="jump" id="jump" aria-label="跳到指定頁面"></select>
+  <button class="navbtn" id="nextBtn" type="button">下一頁 →</button>
+</nav>
+
+<script>
+(function(){
+  var stage=document.getElementById('stage');
+  var slides=Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var bar=document.getElementById('bar');
+  var curNo=document.getElementById('curNo'), totNo=document.getElementById('totNo'), curLabel=document.getElementById('curLabel');
+  var prevBtn=document.getElementById('prevBtn'), nextBtn=document.getElementById('nextBtn');
+  var jump=document.getElementById('jump'), tocEl=document.getElementById('toc'), themebtn=document.getElementById('themebtn');
+  var idx=0;
+  totNo.textContent=slides.length;
+
+  slides.forEach(function(s,i){
+    var opt=document.createElement('option');
+    opt.value=i; opt.textContent=(i+1)+'　'+s.getAttribute('data-toc');
+    jump.appendChild(opt);
+  });
+
+  function buildToc(){
+    tocEl.innerHTML='';
+    slides.forEach(function(s,i){
+      if(i===0) return;
+      var b=document.createElement('button');
+      b.type='button'; b.dataset.go=i;
+      b.innerHTML='<b>'+s.getAttribute('data-n')+'</b><span>'+s.getAttribute('data-toc').replace(/^\S+\s/,'')+'</span>';
+      b.addEventListener('click',function(){show(i);});
+      tocEl.appendChild(b);
+    });
+  }
+  buildToc();
+
+  function show(i){
+    idx=Math.max(0,Math.min(slides.length-1,i));
+    slides.forEach(function(s,j){s.style.display=(j===idx)?'':'none';});
+    stage.scrollTop=0; stage.focus({preventScroll:true});
+    bar.style.width=((idx+1)/slides.length*100)+'%';
+    curNo.textContent=idx+1; curLabel.textContent=slides[idx].getAttribute('data-toc');
+    jump.value=idx;
+    prevBtn.disabled=(idx===0); nextBtn.disabled=(idx===slides.length-1);
+  }
+  prevBtn.addEventListener('click',function(){show(idx-1);});
+  nextBtn.addEventListener('click',function(){show(idx+1);});
+  jump.addEventListener('change',function(){show(parseInt(jump.value,10));});
+  document.addEventListener('keydown',function(e){
+    if(e.target.tagName==='SELECT') return;
+    if(e.key==='ArrowRight') show(idx+1);
+    if(e.key==='ArrowLeft') show(idx-1);
+  });
+  window.addEventListener('click',function(e){
+    var go=e.target.closest('[data-go]');
+    if(go) show(parseInt(go.dataset.go,10));
+  });
+
+  themebtn.addEventListener('click',function(){
+    var root=document.documentElement;
+    var cur=root.getAttribute('data-theme');
+    var sysDark=window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var next = cur==='dark' ? 'light' : (cur==='light' ? (sysDark?'dark':'light') : (sysDark?'light':'dark'));
+    root.setAttribute('data-theme',next);
+    try{localStorage.setItem('imm-theme',next);}catch(e){}
+  });
+  try{
+    var saved=localStorage.getItem('imm-theme');
+    if(saved) document.documentElement.setAttribute('data-theme',saved);
+  }catch(e){}
+
+  show(0);
+})();
+</script>
+</body>
+</html>
