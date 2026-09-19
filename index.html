@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>互動媒體製作 W2-W9 講義</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
+<style>
+:root{
+  --paper:#F3EEE4; --surface:#FFFFFF; --surface-2:#F8F4EA;
+  --ink:#211C15; --ink-2:#5A5044; --ink-3:#8B806E;
+  --line:#DCD3C0; --line-soft:#EAE2D2;
+  --brand:#C1502E; --brand-soft:#F7E3D8;
+  --ai:#2B6E63; --ai-soft:#DEEBE7;
+  --shadow:0 1px 2px rgba(33,28,21,.06),0 8px 24px rgba(33,28,21,.08);
+  --f-zh:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  --f-mo:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#181510; --surface:#211C16; --surface-2:#28221B;
+    --ink:#ECE6DA; --ink-2:#B8AD9B; --ink-3:#8C8171;
+    --line:#3A3327; --line-soft:#2E281F;
+    --brand:#E8845F; --brand-soft:#3A2419;
+    --ai:#68B3A2; --ai-soft:#173029;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#181510; --surface:#211C16; --surface-2:#28221B;
+  --ink:#ECE6DA; --ink-2:#B8AD9B; --ink-3:#8C8171;
+  --line:#3A3327; --line-soft:#2E281F;
+  --brand:#E8845F; --brand-soft:#3A2419;
+  --ai:#68B3A2; --ai-soft:#173029;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-zh);line-height:1.7;padding:48px 20px 64px}
+.wrap{max-width:880px;margin:0 auto}
+.kicker{font-family:var(--f-mo);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+h1{font-family:var(--f-zh);font-weight:900;font-size:clamp(26px,5vw,40px);line-height:1.3;margin:10px 0 8px}
+h1 em{font-style:normal;color:var(--brand)}
+p.lead{color:var(--ink-2);font-size:15.5px;max-width:64ch;margin:0 0 32px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+a.card{display:block;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line-soft);
+  border-radius:14px;padding:18px 20px;box-shadow:var(--shadow);border-top:3px solid var(--brand)}
+a.card:hover{border-color:var(--brand)}
+.num{font-family:var(--f-mo);font-weight:600;font-size:12px;color:var(--brand);background:var(--brand-soft);
+  border-radius:6px;padding:2px 8px;display:inline-block;margin-bottom:8px}
+.card h3{font-size:16px;font-weight:700;margin:0 0 4px}
+.card p{font-size:13px;color:var(--ink-2);margin:0}
+footer{margin-top:40px;font-size:12px;color:var(--ink-3);font-family:var(--f-mo)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">弘光科技大學 · 多媒體遊戲發展與應用系 · 115-1 進修部</div>
+  <h1>互動媒體製作<br><em>第二～九單元</em>互動講義</h1>
+  <p class="lead">分段交付制課程講義，每單元皆為可翻頁的互動網頁——含進度條、跳頁導覽、卡片與表格。點選下方任一單元開始閱讀。</p>
+  <div class="grid">
+      <a class="card" href="w2.html">
+        <span class="num">W2</span>
+        <h3>第二單元</h3>
+        <p>品牌企劃工作坊：企劃體檢五問、建立 HTML/CSS 助教 Agent</p>
+      </a>
+      <a class="card" href="w3.html">
+        <span class="num">W3</span>
+        <h3>第三單元</h3>
+        <p>網頁資訊架構規劃與 HTML 基礎標籤、十二席拉麵標準範本</p>
+      </a>
+      <a class="card" href="w4.html">
+        <span class="num">W4</span>
+        <h3>第四單元</h3>
+        <p>資訊架構檢討與 HTML 實作練習：改壞再修好</p>
+      </a>
+      <a class="card" href="w5.html">
+        <span class="num">W5</span>
+        <h3>第五單元</h3>
+        <p>CSS 選擇器與網頁視覺美化、Tailwind 辨識、測驗①</p>
+      </a>
+      <a class="card" href="w6.html">
+        <span class="num">W6</span>
+        <h3>第六單元</h3>
+        <p>UI/UX 編排與設計思考、討論②</p>
+      </a>
+      <a class="card" href="w7.html">
+        <span class="num">W7</span>
+        <h3>第七單元</h3>
+        <p>★Google Site 操作實作、起始檔、評量②</p>
+      </a>
+      <a class="card" href="w8.html">
+        <span class="num">W8</span>
+        <h3>第八單元</h3>
+        <p>Google Site 多媒體與互動整合、測驗②</p>
+      </a>
+      <a class="card" href="w9.html">
+        <span class="num">W9</span>
+        <h3>第九單元</h3>
+        <p>期中專案檢核（實體 3 小時）</p>
+      </a>
+  </div>
+  <footer>1151 互動媒體製作（選課號 01544）· 教師：洪明顯</footer>
+</div>
+</body>
+</html>
