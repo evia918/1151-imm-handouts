@@ -9,13 +9,13 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,500;0,600;0,700;0,800;1,500&family=IBM+Plex+Mono:wght@400;600&family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
 <style>
 :root{
-  --paper:#F3EEE4; --surface:#FFFFFF; --surface-2:#F8F4EA;
-  --ink:#211C15; --ink-2:#5A5044; --ink-3:#8B806E;
-  --line:#DCD3C0; --line-soft:#EAE2D2;
-  --brand:#C1502E; --brand-soft:#F7E3D8;
-  --ai:#2B6E63; --ai-soft:#DEEBE7;
-  --ok:#2F7D4F; --ok-soft:#E4F2E9;
-  --warn:#9C6B14; --warn-soft:#F7ECD9;
+  --paper:#F7F2F3; --surface:#FFFFFF; --surface-2:#FAF6F7;
+  --ink:#262631; --ink-2:#5A5044; --ink-3:#8B806E;
+  --line:#DDD0D3; --line-soft:#EDE4E6;
+  --brand:#C23F84; --brand-soft:#FBEEF4; --deco:#ED64A9; /* W2 紫靛玫瑰 */
+  --ai:#27225E; --ai-soft:#EFEEF5;
+  --ok:#3D7A6A; --ok-soft:#E6F1EE;
+  --warn:#A45235; --warn-soft:#FDEDE6;
   --shadow:0 1px 2px rgba(33,28,21,.06),0 8px 24px rgba(33,28,21,.08);
   --f-zh:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
   --f-la:"Archivo","Helvetica Neue",Arial,sans-serif;
@@ -26,10 +26,10 @@
     --paper:#181510; --surface:#211C16; --surface-2:#28221B;
     --ink:#ECE6DA; --ink-2:#B8AD9B; --ink-3:#8C8171;
     --line:#3A3327; --line-soft:#2E281F;
-    --brand:#E8845F; --brand-soft:#3A2419;
-    --ai:#68B3A2; --ai-soft:#173029;
+    --brand:#F08CC0; --brand-soft:#3A1B2C; --deco:#ED64A9;
+    --ai:#B2B0CD; --ai-soft:#221F3D;
     --ok:#7EC495; --ok-soft:#163224;
-    --warn:#E1B35D; --warn-soft:#332715;
+    --warn:#E89A7C; --warn-soft:#35201A;
     --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.35);
   }
 }
@@ -37,17 +37,17 @@
   --paper:#181510; --surface:#211C16; --surface-2:#28221B;
   --ink:#ECE6DA; --ink-2:#B8AD9B; --ink-3:#8C8171;
   --line:#3A3327; --line-soft:#2E281F;
-  --brand:#E8845F; --brand-soft:#3A2419;
-  --ai:#68B3A2; --ai-soft:#173029;
+  --brand:#F08CC0; --brand-soft:#3A1B2C; --deco:#ED64A9;
+  --ai:#B2B0CD; --ai-soft:#221F3D;
   --ok:#7EC495; --ok-soft:#163224;
-  --warn:#E1B35D; --warn-soft:#332715;
+  --warn:#E89A7C; --warn-soft:#35201A;
   --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.35);
 }
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
   margin:0;background:var(--paper);color:var(--ink);
-  font-family:var(--f-zh);font-size:15px;line-height:1.72;
+  font-family:var(--f-zh);font-size:16px;line-height:1.8;
   display:flex;flex-direction:column;overflow:hidden;
 }
 h1,h2,h3,h4,p,ul,ol{margin:0}
@@ -76,7 +76,7 @@ code{font-family:var(--f-mo);font-size:.86em;background:var(--surface-2);
 }
 .tbtn:hover{color:var(--ink);border-color:var(--ink-3)}
 .progress{flex:0 0 auto;height:3px;background:var(--line-soft)}
-.progress i{display:block;height:100%;background:var(--brand);width:0;transition:width .25s ease}
+.progress i{display:block;height:100%;background:var(--deco);width:0;transition:width .25s ease}
 
 .stage{flex:1 1 auto;overflow-y:auto;overflow-x:hidden}
 .slide{max-width:1000px;margin:0 auto;padding:32px 20px 46px;display:flex;flex-direction:column;gap:18px}
@@ -107,21 +107,24 @@ code{font-family:var(--f-mo);font-size:.86em;background:var(--surface-2);
   color:var(--brand);background:var(--brand-soft);border-radius:6px;padding:3px 9px}
 .kicker{font-family:var(--f-mo);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
 h2.title{font-family:var(--f-zh);font-weight:900;font-size:clamp(23px,4.2vw,33px);line-height:1.3;text-wrap:balance}
-.lead{font-family:var(--f-zh);font-size:15.5px;color:var(--ink-2);max-width:68ch}
+.lead{font-family:var(--f-zh);font-size:16.5px;color:var(--ink-2);max-width:68ch}
 h3.sec{font-family:var(--f-zh);font-weight:700;font-size:15.5px;display:flex;align-items:flex-start;gap:9px}
-h3.sec::before{content:"";width:4px;height:17px;background:var(--brand);border-radius:2px;flex:0 0 auto;margin-top:4px}
+h3.sec::before{content:"";width:4px;height:17px;background:var(--deco);border-radius:2px;flex:0 0 auto;margin-top:4px}
 
 .card{background:var(--surface);border:1px solid var(--line-soft);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow)}
 .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));gap:16px}
 .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
 .grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
 .flat{background:var(--surface-2);border:1px solid var(--line-soft);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
-.brandcard{border-top:3px solid var(--brand)}
+.brandcard{border-top:3px solid var(--deco)}
 .aicard{border-top:3px solid var(--ai)}
 .tag{font-family:var(--f-mo);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
 .tag.brand{color:var(--brand)} .tag.ai{color:var(--ai)}
 
-.note{border-left:3px solid var(--warn);background:var(--warn-soft);border-radius:0 10px 10px 0;padding:12px 16px;font-size:14px}
+.story{border-left:4px solid var(--deco);background:var(--surface);border-radius:0 12px 12px 0;
+  padding:14px 18px;font-size:15.5px;color:var(--ink);box-shadow:var(--shadow);max-width:72ch}
+.story b{display:block;font-family:var(--f-mo);font-size:11.5px;letter-spacing:.12em;color:var(--brand);margin-bottom:4px}
+.note{border-left:3px solid var(--warn);background:var(--warn-soft);border-radius:0 10px 10px 0;padding:12px 16px;font-size:14.5px}
 .note b{color:var(--warn)}
 .good{border-left:3px solid var(--ok);background:var(--ok-soft);border-radius:0 10px 10px 0;padding:12px 16px;font-size:14px}
 .good b{color:var(--ok)}
@@ -191,7 +194,7 @@ tr.hl td{background:color-mix(in srgb,var(--brand-soft) 55%,transparent)}
 <section class="slide cover" data-toc="封面" data-n="封面">
   <div class="kicker">弘光科技大學 · 多媒體遊戲發展與應用系 · 115-1 進修部</div>
   <h1 class="big">從企劃到提示詞<br>的<em>橋</em></h1>
-  <p class="lead">第二單元｜品牌企劃工作坊：檢視上週的企劃初稿，再一起打造一個能陪你走完接下來七週語法課的 HTML/CSS 助教 Agent</p>
+  <p class="lead">第二單元｜品牌企劃工作坊。今天做兩件事：先幫上週的企劃初稿做一次體檢，再一起找一個 HTML/CSS 助教 Agent，讓它陪你走完接下來七週的語法課。</p>
   <dl class="meta">
     <div><dt>Course</dt><dd>互動媒體製作（選課號 01544）</dd></div>
     <div><dt>Class</dt><dd>進修四技多遊 4 年甲班 · G501</dd></div>
@@ -200,103 +203,109 @@ tr.hl td{background:color-mix(in srgb,var(--brand-soft) 55%,transparent)}
     <div><dt>本週型態</dt><dd>面授｜9/25 中秋，本週無非同步</dd></div>
     <div><dt>本週評量</dt><dd>無正式評量｜建立你的 Agent 並留一次問答紀錄</dd></div>
   </dl>
-  <p class="lead" style="font-size:13.5px">操作方式：點下方「上一頁／下一頁」，或使用鍵盤 <span class="kbd">←</span> <span class="kbd">→</span> 翻頁。</p>
+  <p class="lead" style="font-size:14px">翻頁方式：點下方「上一頁／下一頁」，或按鍵盤 <span class="kbd">←</span> <span class="kbd">→</span>。</p>
 </section>
 
 <section class="slide" data-toc="2.0 本單元目錄" data-n="2.0">
   <div class="eyebrow"><span class="num">2.0</span><span class="kicker">Unit Map</span></div>
   <h2 class="title">本單元目錄</h2>
-  <p class="lead">今天是面授課，也是整學期唯一一次「先不寫程式碼」的工作坊。上半場把你的品牌企劃改到堪用，下半場一起組出一個你自己的 HTML/CSS 助教 Agent，讓它陪你撐過接下來最陌生的四週。</p>
+  <div class="story"><b>先想像一下</b>出國自助旅行的前一晚，你大概會做兩件事：把行程表再順一次，確認每一站真的知道要去哪；然後把一位熟門熟路的朋友加進 LINE，路上迷路了可以隨時問。今天的課就是這兩件事。</div>
+  <p class="lead">今天是面授，也是整學期唯一一次「先不寫程式碼」的工作坊。上半場，我們把你的品牌企劃修到下週拿得出來用。下半場，你會組出一個自己的 HTML/CSS 助教 Agent。接下來四週是最陌生的一段路，有它陪著會好走很多。</p>
 <div class="toc" id="toc"></div>
 </section>
 
 <section class="slide" data-toc="2.1 為什麼今天要面授" data-n="2.1">
   <div class="eyebrow"><span class="num">2.1</span><span class="kicker">Why Face-to-Face</span></div>
   <h2 class="title">為什麼今天要面授</h2>
-  <p class="lead">接下來這幾週是整學期最容易放棄的階段——企劃要改、語法完全沒學過、還要裝新工具。所以這學期把最容易卡關的第 2、4 週安排成面授，有問題當場問，不用等一整週。</p>
+  <div class="story"><b>你可能有過這種經驗</b>學一門新語言時，每個字單獨看都認得，湊成一句卻不知道在說什麼。接下來的 HTML 和 CSS 很可能就是這種感覺。這不是你不夠努力，任何人第一次碰到都會這樣。</div>
+  <p class="lead">接下來幾週，企劃要改、語法沒學過、還要摸新工具，三件事擠在一起，是整學期最容易想放棄的階段。所以我把最容易卡住的第 2、4 週排成面授。卡住了當場舉手，不用自己悶一整週。</p>
 <div class="grid2">
     <div class="card brandcard">
       <div class="tag brand">今天不做的事</div>
       <h3 class="sec" style="margin-top:6px"><span>不裝任何新工具</span></h3>
-      <p style="font-size:13.5px;color:var(--ink-2)">接下來到第 5 週，你只需要瀏覽器就能寫程式——用 <code>vscode.dev</code> 免安裝版。桌面版 VS Code 留到第 11 週才裝，介面完全一樣，屆時不是在學新東西。</p>
+      <p style="font-size:14px;color:var(--ink-2)">一次學太多新東西，腦袋會塞車。所以到第 5 週為止，你只需要一個瀏覽器，用免安裝的 <code>vscode.dev</code> 寫程式。桌面版 VS Code 留到第 11 週才裝。它的介面跟 <code>vscode.dev</code> 一模一樣，到時候你只是換個地方打開，不用重學。</p>
     </div>
     <div class="card aicard">
       <div class="tag ai">今天要做的事</div>
       <h3 class="sec" style="margin-top:6px"><span>把企劃改到能用</span></h3>
-      <p style="font-size:13.5px;color:var(--ink-2)">上週的企劃初稿多半還有點空——這是正常的，第一版本來就是拿來改的。今天先做「企劃體檢」，再動手做你的專屬 Agent。</p>
+      <p style="font-size:14px;color:var(--ink-2)">上週的企劃初稿，多半讀起來還有點空。這很正常，第一版本來就是拿來改的。今天的上半場就是「企劃體檢」，下半場換成動手做你的專屬 Agent。</p>
     </div>
   </div>
-  <div class="note"><b>本週唯一的行事曆風險：</b>9/25 中秋節剛好是週五，本週沒有非同步線上活動——不代表這週輕鬆，面授的工作量會補回來。</div>
+  <div class="note"><b>行事曆提醒：</b>9/25 中秋節剛好是週五，所以本週沒有非同步線上活動。少了週五那一段，並不代表這週比較輕鬆，面授的工作量會把它補回來。</div>
 </section>
 
 <section class="slide" data-toc="2.2 企劃體檢五問" data-n="2.2">
   <div class="eyebrow"><span class="num">2.2</span><span class="kicker">Plan Checkup</span></div>
   <h2 class="title">企劃體檢五問</h2>
-  <p class="lead">拿出你上週交出去的 Prompt 與企劃初稿，一題一題對照。五題裡只要有一題答不出來，代表這份企劃還需要再修一輪——現在改，比 W9 期中才發現划算得多。</p>
+  <div class="story"><b>像做健康檢查</b>醫生不會一看到你就說「全身重做」。他量血壓、抽血、看報告，找出哪一項紅字，再針對那一項處理。企劃也是這樣：先檢查，才知道哪裡要動。</div>
+  <p class="lead">拿出你上週交的 Prompt 和企劃初稿，一題一題對照下面五個問題。只要有一題答不出來，這份企劃就還需要再修一輪。現在發現是好事，等到 W9 期中才發現，要改的量會大得多。</p>
 <div class="scroll">
     <table>
-      <thead><tr><th class="mono">#</th><th>檢查項目</th><th>怎麼判斷過不過關</th></tr></thead>
+      <thead><tr><th class="mono">#</th><th>問問自己</th><th>怎麼知道過關了？</th></tr></thead>
       <tbody>
-        <tr><td class="mono">01</td><td>目標客群夠具體嗎</td><td>不是「大家」，而是「什麼情境下、什麼樣的人會走進來」</td></tr>
-        <tr><td class="mono">02</td><td>品牌調性三形容詞互斥嗎</td><td>三個詞要能各自畫出不同畫面，不是「優質、簡約、獨特」這種誰都能貼的話</td></tr>
-        <tr><td class="mono">03</td><td>網站區塊都對應得到內容嗎</td><td>至少 3 個區塊，每個都要能想出「裡面實際要放什麼」，不是空模板</td></tr>
-        <tr><td class="mono">04</td><td>有沒有落入空泛形容詞</td><td>把「道地」「職人精神」「簡約現代」這類詞全部圈出來，換成具體描述</td></tr>
-        <tr><td class="mono">05</td><td>能不能比照十二席拉麵拆法</td><td>試著把你的企劃拆成 5 個 <code>&lt;section&gt;</code>，拆不出來代表內容還不夠具體</td></tr>
+        <tr><td class="mono">01</td><td>我的目標客群夠具體嗎？</td><td>寫「大家」就還不夠。要能說出：什麼情境下、什麼樣的人會走進這家店。</td></tr>
+        <tr><td class="mono">02</td><td>三個品牌調性的形容詞，彼此不一樣嗎？</td><td>每個詞都能各自畫出不同的畫面。像「優質、簡約、獨特」這種誰都能貼的詞，畫出來是同一個白色房間，就還不夠。</td></tr>
+        <tr><td class="mono">03</td><td>網站的每個區塊，都想得到要放什麼嗎？</td><td>至少 3 個區塊，而且每一塊你都說得出「裡面實際要放什麼」。說不出來的，就只是空模板。</td></tr>
+        <tr><td class="mono">04</td><td>我有沒有用了空泛的形容詞？</td><td>把「道地」「職人精神」「簡約現代」這類詞全部圈出來，換成看得到的描述。例如「道地」可以換成湯頭熬幾小時、用哪裡的食材。</td></tr>
+        <tr><td class="mono">05</td><td>能不能照十二席拉麵那樣拆開？</td><td>試著把企劃拆成 5 個 <code>&lt;section&gt;</code>。拆不出來，通常代表內容還不夠具體。</td></tr>
       </tbody>
     </table>
   </div>
-  <div class="good"><b>體檢完不用重寫全部：</b>通常只有 1–2 題卡住，針對那幾題補資訊、重新問一次 AI 就好，不需要整份重來。</div>
+  <div class="good"><b>體檢完不用整份重寫：</b>通常只有 1–2 題卡住。針對那幾題補上資訊，再問一次 AI 就好，就像體檢只追蹤紅字那幾項。</div>
 </section>
 
 <section class="slide" data-toc="2.3 建立你的 HTML/CSS 助教 Agent" data-n="2.3">
   <div class="eyebrow"><span class="num">2.3</span><span class="kicker">Your Agent</span></div>
   <h2 class="title">建立你的 HTML/CSS 助教 Agent</h2>
-  <p class="lead">從下週開始，你會常常卡在看不懂一段程式碼在幹嘛。與其每次都從頭問，不如現在花一節課，把一個「助教角色」的提示詞寫好、存起來，之後直接貼上用。</p>
+  <div class="story"><b>想像你請了一位導遊</b>好的導遊會先帶你站到路口說「你看，左邊那棟紅色的房子」，然後才告訴你「那叫巴洛克式建築」。他也會先問你是第一次來，還是來過很多次。你的助教 Agent 應該就是這樣的導遊。</div>
+  <p class="lead">從下週開始，你會常常盯著一段程式碼，不知道它在做什麼。每次都從頭解釋一遍自己的程度很累。不如現在花一節課，把「助教」這個角色的提示詞寫好、存起來，之後要問問題時直接貼上用。</p>
 <div class="grid2">
     <div class="flat">
       <div class="tag" style="color:var(--ink-2)">規則一</div>
-      <p style="font-size:13.5px">先講「這段程式碼在畫面上做了什麼」，再解釋語法名詞。順序不能顛倒——你需要的是看得懂效果，不是先背術語。</p>
+      <p style="font-size:14px">請它先說「這段程式碼在畫面上做了什麼」，再解釋語法名稱。順序不能顛倒。因為你現在最需要的是看懂效果，名詞有了畫面才記得住，先背術語只會更混亂。</p>
     </div>
     <div class="flat">
       <div class="tag" style="color:var(--ink-2)">規則二</div>
-      <p style="font-size:13.5px">明確告訴 Agent「請以完全沒學過程式設計為前提回答」——這句話要寫進提示詞本體，不是靠它自己猜。</p>
+      <p style="font-size:14px">導遊不會猜你來過幾次，AI 也不會。你沒說，它就當你什麼都懂。所以提示詞本體裡要明明白白寫上：「請以完全沒學過程式設計為前提回答。」</p>
     </div>
   </div>
-  <div class="ai-callout"><b>最重要的一條護欄：</b>要求 Agent 產出的程式碼必須「打得開、看得到效果」——優先給一個 CSS 內嵌在 <code>&lt;style&gt;</code> 裡的單一自足 HTML 檔；如果一定要分成 HTML／CSS 兩個檔案，一定要講清楚檔名怎麼對應、<code>&lt;link&gt;</code> 怎麼寫。這是課堂實測踩過的坑：分檔名字對不上，CSS 就整個失效。</div>
+  <div class="ai-callout"><b>最重要的一條護欄：</b>導遊給你的地圖，路名要跟街上的路牌一樣，不然照著走也到不了。程式碼也一樣：請 Agent 給你的程式碼必須「打得開、看得到效果」。優先請它給一個單一、自足的 HTML 檔，CSS 直接寫在 <code>&lt;style&gt;</code> 裡。如果一定要分成 HTML、CSS 兩個檔，就要它講清楚檔名怎麼對應、<code>&lt;link&gt;</code> 怎麼寫。這是課堂實測真的踩過的坑：兩個檔名對不上，CSS 就整個失效。</div>
 </section>
 
 <section class="slide" data-toc="2.4 為什麼要講究這麼細" data-n="2.4">
   <div class="eyebrow"><span class="num">2.4</span><span class="kicker">Version History</span></div>
   <h2 class="title">為什麼要講究這麼細</h2>
-  <p class="lead">這套助教提示詞其實已經改過三次——每一次修改都是踩到真實的坑之後補上的護欄，看一次版本沿革，你會更清楚每條規則在防什麼。</p>
+  <div class="story"><b>像一份家傳食譜</b>第一次照著煮，發現太鹹，下次少放一匙鹽；後來發現火太大會焦，再補一句「轉小火」。食譜上的每一行，背後都有一次失敗。提示詞也是這樣長出來的。</div>
+  <p class="lead">這套助教提示詞其實已經改過三次。每一次修改，都是踩到真實的坑以後才補上的護欄。看一遍它的版本沿革，你會更清楚每條規則在防什麼。</p>
 <div class="scroll">
     <table>
-      <thead><tr><th class="mono">版本</th><th>改了什麼</th><th>為什麼</th></tr></thead>
+      <thead><tr><th class="mono">版本</th><th>改了什麼</th><th>為什麼改</th></tr></thead>
       <tbody>
-        <tr><td class="mono">v1</td><td>原始版本</td><td>假設使用者已經有 HTML/CSS 基礎——問題是我們班沒人有</td></tr>
-        <tr><td class="mono">v2</td><td>改成零基礎起點</td><td>目標從「幫我寫」下修為「幫我看懂、幫我改」；加入「先講效果再解釋語法」</td></tr>
-        <tr><td class="mono">v3</td><td>內容不變，課堂實測</td><td>確認整套規則在真實對話裡站得住腳</td></tr>
-        <tr class="hl"><td class="mono">v4</td><td>加上「打得開看得到效果」護欄</td><td>實測發現 AI 常把 HTML/CSS 拆成兩個檔名不對應的檔案，下載後畫面是空的</td></tr>
+        <tr><td class="mono">v1</td><td>原始版本</td><td>當初假設使用者已經有 HTML/CSS 基礎。問題是，我們班沒有人有。</td></tr>
+        <tr><td class="mono">v2</td><td>改成零基礎起點</td><td>目標從「幫我寫」下修成「幫我看懂、幫我改」，並加上「先講效果，再解釋語法」。</td></tr>
+        <tr><td class="mono">v3</td><td>內容不變，拿到課堂實測</td><td>確認這套規則放進真實對話裡，還是行得通。</td></tr>
+        <tr class="hl"><td class="mono">v4</td><td>加上「打得開、看得到效果」護欄</td><td>實測發現 AI 常把 HTML/CSS 拆成兩個檔名對不上的檔案，下載後打開，畫面是空的。</td></tr>
       </tbody>
     </table>
   </div>
-  <p class="lead" style="font-size:13.5px">你今天要組的是屬於自己的 v1——之後遇到新狀況，回來加一條規則即可，不需要整篇重寫。</p>
+  <p class="lead" style="font-size:14px">你今天組的是屬於自己的 v1。之後遇到新狀況，回來加一條規則就好，就像在食譜旁邊多寫一行筆記，不必整篇重寫。</p>
 </section>
 
 <section class="slide" data-toc="2.5 Copilot 在這門課的兩種角色" data-n="2.5">
   <div class="eyebrow"><span class="num">2.5</span><span class="kicker">Two Roles</span></div>
   <h2 class="title">Copilot 在這門課的兩種角色</h2>
-  <p class="lead">同一個 AI 工具，這學期要分兩個階段用。搞清楚現在是哪個階段，才不會該自己動手時偷懶、該交給 AI 時卻硬要手刻。</p>
+  <div class="story"><b>像學開車</b>剛開始上路，教練坐在副駕，你自己握方向盤，他只在你快撞到時出聲。等你熟了，才輪到車子的輔助系統幫你開一段，你負責看路、決定要不要介入。</div>
+  <p class="lead">同一個 AI 工具，這學期分兩個階段用。先弄清楚現在是哪個階段，才不會該自己動手時偷懶，該交給 AI 時又硬要手刻。</p>
 <div class="grid2">
     <div class="card brandcard">
       <div class="tag brand">第 2–5 週｜學語法階段</div>
       <h3 class="sec" style="margin-top:6px"><span>解釋器＋除錯器</span></h3>
-      <p style="font-size:13.5px;color:var(--ink-2)">你自己先寫、先拆解，卡住才問 AI。這時候還沒有足夠的詞彙量判斷 AI 給的答案對不對，直接整段複製貼上等於在賭運氣。</p>
+      <p style="font-size:14px;color:var(--ink-2)">教練坐副駕的階段。你自己先寫、先拆解，卡住了才問 AI。因為這時候你認得的詞還不夠多，沒辦法判斷 AI 給的答案對不對。整段複製貼上，等於在賭運氣。</p>
     </div>
     <div class="card aicard">
       <div class="tag ai">第 10–14 週｜做專案階段</div>
       <h3 class="sec" style="margin-top:6px"><span>產生器</span></h3>
-      <p style="font-size:13.5px;color:var(--ink-2)">這時你已經看得懂結構，換成請 AI 直接產出切版與程式碼，你負責判斷、驗證、微調。</p>
+      <p style="font-size:14px;color:var(--ink-2)">輔助駕駛的階段。這時你已經看得懂結構，可以請 AI 直接產出切版和程式碼。你的工作換成判斷、驗證、微調，方向盤還是在你手上。</p>
     </div>
   </div>
 </section>
@@ -304,26 +313,27 @@ tr.hl td{background:color-mix(in srgb,var(--brand-soft) 55%,transparent)}
 <section class="slide" data-toc="2.6 本週任務" data-n="2.6">
   <div class="eyebrow"><span class="num">2.6</span><span class="kicker">This Week's Task</span></div>
   <h2 class="title">本週任務</h2>
-  <p class="lead">今天結束前，確認你手上有兩樣東西——但這兩樣都不是正式評量，是為了讓接下來四週不要卡關。</p>
+  <div class="story"><b>出門前摸一下口袋</b>鑰匙、手機都在，才放心關門。今天下課前，也請你確認手上有這兩樣東西。</div>
+  <p class="lead">這兩樣都不是正式評量。它們存在的理由只有一個：讓你接下來四週不要卡住。</p>
 <div class="grid2">
     <div class="card brandcard">
       <div class="tag brand">帶回家①</div>
       <h3 class="sec" style="margin-top:6px"><span>改好的品牌企劃</span></h3>
-      <p style="font-size:13.5px;color:var(--ink-2)">用企劃體檢五問修過的版本——下週開始，網頁上的文字、顏色、圖片全部從這份企劃來。</p>
+      <p style="font-size:14px;color:var(--ink-2)">用企劃體檢五問修過的版本。為什麼一定要今天修好？因為下週開始，網頁上的文字、顏色、圖片，全部都從這份企劃來。</p>
     </div>
     <div class="card brandcard">
       <div class="tag brand">帶回家②</div>
       <h3 class="sec" style="margin-top:6px"><span>你的 Agent + 一次問答紀錄</span></h3>
-      <p style="font-size:13.5px;color:var(--ink-2)">實際丟一個問題測試看看，把對話存下來——下週開始你會很常用到它。</p>
+      <p style="font-size:14px;color:var(--ink-2)">實際丟一個問題給它，看它回答得像不像你要的導遊，然後把對話存下來。下週開始，你會很常用到它。</p>
     </div>
   </div>
-  <div class="note"><b>不列入正式評量分數：</b>但這是接下來討論①與測驗①能不能跟上的基礎，別把它當作可有可無的作業。</div>
+  <div class="note"><b>不列入正式評量分數：</b>但討論①和測驗①能不能跟上，就看這兩樣有沒有準備好。請別把它當成可有可無的作業。</div>
 </section>
 
 <section class="slide" data-toc="3 下週銜接" data-n="2.7">
   <div class="eyebrow"><span class="num">2.7</span><span class="kicker">Next Up</span></div>
   <h2 class="title">下週銜接</h2>
-<div class="ai-callout"><b>第三單元：</b>換成影片自學——網頁資訊架構規劃與 HTML 基礎標籤，用 <code>vscode.dev</code> 免安裝就能動手。「十二席拉麵」的標準範本會在這週正式出場，之後每次測驗、每次示範都會用到它。</div>
+<div class="ai-callout"><b>第三單元：</b>換成影片自學，主題是網頁資訊架構規劃與 HTML 基礎標籤。用 <code>vscode.dev</code> 免安裝就能動手。「十二席拉麵」的標準範本會在這週正式出場，之後每一次測驗、每一次示範都會用到它，今天體檢第 05 題先跟它打過招呼了。</div>
 </section>
 
 </main>
