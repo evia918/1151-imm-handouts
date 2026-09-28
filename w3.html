@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="zh-Hant">
 <head>
@@ -191,14 +192,14 @@ tr.hl td{background:color-mix(in srgb,var(--brand-soft) 55%,transparent)}
 <section class="slide cover" data-toc="封面" data-n="封面">
   <div class="kicker">弘光科技大學 · 多媒體遊戲發展與應用系 · 115-1 進修部</div>
   <h1 class="big">拆開一個網站<br>看懂它怎麼<em>長</em></h1>
-  <p class="lead">第三單元｜網頁資訊架構規劃與 HTML 基礎標籤（vscode.dev 免安裝）。討論①：AI 協作與網頁原創性</p>
+  <p class="lead">第三單元｜網頁資訊架構規劃與 HTML 基礎標籤（vscode.dev 免安裝）。議題討論W3、AI協作與網頁解讀</p>
   <dl class="meta">
     <div><dt>Course</dt><dd>互動媒體製作（選課號 01544）</dd></div>
     <div><dt>Class</dt><dd>進修四技多遊 4 年甲班 · G501</dd></div>
     <div><dt>Time</dt><dd>週一 A 面授 1hr ／ 週五 A,B 非同步 2hr</dd></div>
     <div><dt>Instructor</dt><dd>洪明顯</dd></div>
     <div><dt>本週型態</dt><dd>影片｜網頁資訊架構規劃與 HTML 基礎標籤</dd></div>
-    <div><dt>本週評量</dt><dd>討論①：AI 協作與網頁原創性</dd></div>
+    <div><dt>本週評量</dt><dd>議題討論W3、AI協作與網頁解讀</dd></div>
   </dl>
   <p class="lead" style="font-size:13.5px">操作方式：點下方「上一頁／下一頁」，或使用鍵盤 <span class="kbd">←</span> <span class="kbd">→</span> 翻頁。</p>
 </section>
@@ -226,31 +227,60 @@ tr.hl td{background:color-mix(in srgb,var(--brand-soft) 55%,transparent)}
       <p style="font-size:13.5px;color:var(--ink-2)">不需要背語法、不需要憑空生出一個網頁——看得懂、能小幅修改，就達標。</p>
     </div>
   </div>
-  <div class="good"><b>今天用什麼工具：</b>瀏覽器版的 <code>vscode.dev</code>，不用安裝，直接打開就能編輯、預覽 HTML。桌面版 VS Code 留到第 11 週再裝。</div>
+  <div class="good"><b>今天用什麼工具：</b>瀏覽器版的 <code>vscode.dev</code>，不用安裝，直接打開就能編輯、預覽 HTML。請用 Chrome 或 Edge 開啟（僅支援 Chromium 系瀏覽器），桌面版 VS Code 留到第 11 週再裝。</div>
 </section>
 
-<section class="slide" data-toc="3.2 HTML 基本結構速查" data-n="3.2">
-  <div class="eyebrow"><span class="num">3.2</span><span class="kicker">HTML Skeleton</span></div>
+<section class="slide" data-toc="3.2 十二席拉麵：標準範本" data-n="3.2">
+  <div class="eyebrow"><span class="num">3.2</span><span class="kicker">Ramen Template</span></div>
+  <h2 class="title">十二席拉麵：標準範本</h2>
+  <p class="lead">這學期會反覆看到同一個案例——「十二席拉麵」。從品牌企劃、HTML 拆解範例到之後的測驗題目，全部用同一條故事線，不會突然換成陌生的抽象範例。今天要操作的網頁語法，也是延續這個範本產生的。</p>
+<div class="flat">
+    <p style="font-size:13.5px;color:var(--ink-2)">標準範本用 5 個 <code>&lt;section&gt;</code> 把一個網頁拆成 5 塊內容區——例如品牌故事、菜單、營業資訊、空間介紹、交通位置。你的網站不一定要照抄這個切法，但可以用同樣的邏輯，把自己的企劃拆成「一個 <code>&lt;section&gt;</code> 負責一個主題」。</p>
+  </div>
+  <div class="ai-callout"><b>看範本的重點：</b>不是背它怎麼寫，而是練習回答「這個 &lt;section&gt; 在畫面上對應到哪一塊」——這正是討論①要交的東西。接下來就用這個範本，實際跑一次從提示詞到網頁的完整流程。</div>
+</section>
+
+<section class="slide" data-toc="3.3 從提示詞到網頁：Gemini + vscode.dev 實戰" data-n="3.3">
+  <div class="eyebrow"><span class="num">3.3</span><span class="kicker">Prompt to Page</span></div>
+  <h2 class="title">從提示詞到網頁：Gemini + vscode.dev 實戰</h2>
+  <p class="lead">延續第二週你自己修改過的「助教 Agent」提示詞，今天實際操作一遍：從貼提示詞、產生網頁語法，到存成檔案、打開預覽，走完整條路。</p>
+<div class="stepgrid">
+    <div class="stepbox"><div class="sn">STEP 1</div><h4>貼提示詞給 Gemini</h4><p>把第二週修改好的「助教 Agent」提示詞貼到 Gemini，送出後會產生一整段網頁語法（HTML 程式碼）</p></div>
+    <div class="stepbox"><div class="sn">STEP 2</div><h4>複製到記事本</h4><p>把 Gemini 產生的程式碼整段複製，貼到記事本（Notepad／文字編輯器）</p></div>
+    <div class="stepbox"><div class="sn">STEP 3</div><h4>另存為 .html 檔</h4><p>存檔時檔名結尾改成 <code>.html</code>（例如 <code>index.html</code>），存檔類型選「所有檔案」</p></div>
+    <div class="stepbox"><div class="sn">STEP 4</div><h4>用 vscode.dev 開啟預覽</h4><p>打開 vscode.dev，用 Open Folder 選擇檔案所在資料夾，就能在編輯器裡看到並預覽這個網頁</p></div>
+  </div>
+  <div class="note"><b>常見狀況：</b>記事本存檔預設副檔名是 <code>.txt</code>，如果沒有手動改成 <code>.html</code> 或選「所有檔案」，瀏覽器會把它當純文字打開而不是網頁。vscode.dev 每次重新整理都要重新授權資料夾，這是正常現象。</div>
+  <div class="good"><b>今天不用做的事：</b>不需要看懂 Gemini 產生的每一行程式碼，重點是走完「提示詞 → 語法 → 檔案 → 預覽」這個流程，看懂結果長什麼樣子。</div>
+</section>
+
+<section class="slide" data-toc="3.4 HTML 基本結構速查" data-n="3.4">
+  <div class="eyebrow"><span class="num">3.4</span><span class="kicker">HTML Skeleton</span></div>
   <h2 class="title">HTML 基本結構速查</h2>
-  <p class="lead">任何一個網頁，打開原始碼第一眼看到的骨架都長這樣。先認得這幾行，之後看任何網站的原始碼都不會慌。</p>
-<div class="scroll">
-    <table>
-      <thead><tr><th>標籤／寫法</th><th>作用</th></tr></thead>
-      <tbody>
-        <tr><td class="mono">&lt;!DOCTYPE html&gt;</td><td>告訴瀏覽器「這是一份 HTML5 文件」，一定放在第一行</td></tr>
-        <tr><td class="mono">&lt;html&gt;…&lt;/html&gt;</td><td>整份文件的最外層容器</td></tr>
-        <tr><td class="mono">&lt;head&gt;…&lt;/head&gt;</td><td>放給瀏覽器和搜尋引擎看的設定，不會直接顯示在畫面上</td></tr>
-        <tr><td class="mono">&lt;meta charset="utf-8"&gt;</td><td>宣告文字編碼，少了這行中文字常會變亂碼</td></tr>
-        <tr><td class="mono">&lt;title&gt;…&lt;/title&gt;</td><td>瀏覽器分頁上顯示的標題文字</td></tr>
-        <tr><td class="mono">&lt;body&gt;…&lt;/body&gt;</td><td>真正會顯示在畫面上的所有內容都寫在這裡面</td></tr>
-      </tbody>
-    </table>
+  <p class="lead">剛剛用 vscode.dev 打開的網頁檔案，原始碼第一眼看到的骨架都長這樣。對照著你自己產生的那份檔案，一起認得這幾行。</p>
+<div class="grid2">
+    <div class="flat">
+      <h3 class="sec" style="font-size:14px"><span class="wk" style="font-size:15px">&lt;!DOCTYPE html&gt;</span></h3>
+      <p style="font-size:12.5px;color:var(--ink-2)">宣告這份文件使用的 HTML 版本，永遠放第一行</p>
+    </div>
+    <div class="flat">
+      <h3 class="sec" style="font-size:14px"><span class="wk" style="font-size:15px">&lt;html&gt;</span></h3>
+      <p style="font-size:12.5px;color:var(--ink-2)">網頁的根元素，包住整份網頁最外層</p>
+    </div>
+    <div class="flat">
+      <h3 class="sec" style="font-size:14px"><span class="wk" style="font-size:15px">&lt;head&gt;</span></h3>
+      <p style="font-size:12.5px;color:var(--ink-2)">瀏覽器看得到、畫面看不到：標題、字型、CSS 連結…</p>
+    </div>
+    <div class="flat">
+      <h3 class="sec" style="font-size:14px"><span class="wk" style="font-size:15px">&lt;body&gt;</span></h3>
+      <p style="font-size:12.5px;color:var(--ink-2)">畫面上實際看得到的所有內容都在這裡</p>
+    </div>
   </div>
   <div class="note"><b>標籤沒封閉會怎樣：</b>忘記寫 <code>&lt;/div&gt;</code> 這類收尾標籤，瀏覽器不會報錯，但後面的內容排版常會整個跑掉——這是拆解練習時最常見的踩雷點。</div>
 </section>
 
-<section class="slide" data-toc="3.3 常見標籤速查卡" data-n="3.3">
-  <div class="eyebrow"><span class="num">3.3</span><span class="kicker">Tag Reference</span></div>
+<section class="slide" data-toc="3.5 常見標籤速查卡" data-n="3.5">
+  <div class="eyebrow"><span class="num">3.5</span><span class="kicker">Tag Reference</span></div>
   <h2 class="title">常見標籤速查卡</h2>
   <p class="lead">拆解網站時，這幾個標籤出現的頻率最高，先把它們的用途記熟。</p>
 <div class="grid4">
@@ -265,18 +295,266 @@ tr.hl td{background:color-mix(in srgb,var(--brand-soft) 55%,transparent)}
   </div>
 </section>
 
-<section class="slide" data-toc="3.4 十二席拉麵：標準範本" data-n="3.4">
-  <div class="eyebrow"><span class="num">3.4</span><span class="kicker">Ramen Template</span></div>
-  <h2 class="title">十二席拉麵：標準範本</h2>
-  <p class="lead">這學期會反覆看到同一個案例——「十二席拉麵」。從品牌企劃、HTML 拆解範例到之後的測驗題目，全部用同一條故事線，不會突然換成陌生的抽象範例。</p>
-<div class="flat">
-    <p style="font-size:13.5px;color:var(--ink-2)">標準範本用 5 個 <code>&lt;section&gt;</code> 把一個網頁拆成 5 塊內容區——例如品牌故事、菜單、營業資訊、空間介紹、交通位置。你的網站不一定要照抄這個切法，但可以用同樣的邏輯，把自己的企劃拆成「一個 <code>&lt;section&gt;</code> 負責一個主題」。</p>
+<section class="slide" data-toc="3.6 標籤細看①：meta、br、p" data-n="3.6">
+  <div class="eyebrow"><span class="num">3.6</span><span class="kicker">Tag Detail I</span></div>
+  <h2 class="title">標籤細看①：meta、br、p</h2>
+  <p class="lead">速查卡看過一輪之後，這裡把幾個容易搞混或容易忽略的標籤，配上「十二席拉麵」的實際程式碼展開講。</p>
+<div class="grid2">
+    <div class="flat">
+      <h3 class="sec" style="font-size:14px"><span>&lt;meta&gt; 元素</span></h3>
+      <p style="font-size:12.5px;color:var(--ink-2)">meta = metadata，設定「瀏覽器看得到、畫面看不到」的頁面資訊；常見用途：文字編碼、手機縮放比例、頁面描述；全部放在 &lt;head&gt; 裡面，沒有結束標籤。</p>
+      <div class="scroll"><table><tbody>
+        <tr><td class="mono" style="white-space:pre">&lt;meta charset="UTF-8"&gt;</td></tr>
+        <tr><td class="mono" style="white-space:pre">&lt;meta name="viewport"
+  content="width=device-width,
+  initial-scale=1.0"&gt;</td></tr>
+        <tr><td class="mono" style="white-space:pre">&lt;meta name="description"
+  content="十二席拉麵，一人一碗，深夜營業"&gt;</td></tr>
+      </tbody></table></div>
+    </div>
+    <div class="flat">
+      <h3 class="sec" style="font-size:14px"><span>&lt;p&gt; 段落</span></h3>
+      <p style="font-size:12.5px;color:var(--ink-2)">一個 &lt;p&gt; 是「一整個段落」，瀏覽器會自動在段落上下留一點空白；語意上代表一則獨立的敘述。</p>
+      <div class="scroll"><table><tbody>
+        <tr><td class="mono" style="white-space:pre">&lt;p&gt;獨立單人座位，無須社交互動&lt;/p&gt;
+&lt;p&gt;安心吃一碗熱湯&lt;/p&gt;</td></tr>
+      </tbody></table></div>
+      <div class="flat" style="background:var(--surface);gap:4px">
+        <span class="tag brand" style="font-size:10px">畫面呈現</span>
+        <p style="font-size:13px;margin:0">獨立單人座位，無須社交互動</p>
+        <p style="font-size:13px;margin:8px 0 0 0">安心吃一碗熱湯</p>
+      </div>
+    </div>
+    <div class="flat">
+      <h3 class="sec" style="font-size:14px"><span>&lt;br&gt; 換行</span></h3>
+      <p style="font-size:12.5px;color:var(--ink-2)">在文字「中間」強制換行，不是另起一段；沒有結束標籤；該用 &lt;p&gt; 分段的地方不要濫用 &lt;br&gt;。</p>
+      <div class="scroll"><table><tbody>
+        <tr><td class="mono" style="white-space:pre">&lt;p&gt;
+  獨立單人座位&lt;br&gt;
+  無須社交互動&lt;br&gt;
+  安心吃一碗熱湯
+&lt;/p&gt;</td></tr>
+      </tbody></table></div>
+      <div class="flat" style="background:var(--surface);gap:2px">
+        <span class="tag brand" style="font-size:10px">畫面呈現（同一段落內換行）</span>
+        <p style="font-size:13px;margin:0">獨立單人座位<br>無須社交互動<br>安心吃一碗熱湯</p>
+      </div>
+    </div>
+    <div class="flat aicard">
+      <h3 class="sec" style="font-size:14px"><span>p vs br 差異圖解</span></h3>
+      <p style="font-size:12.5px;color:var(--ink-2)">&lt;p&gt;&lt;p&gt; 兩段之間，瀏覽器自動留白（段落間距）；&lt;br&gt; 只是硬換行，沒有那段留白——這就是為什麼列地址、列座位這種「同一件事的三行」常用 &lt;br&gt;，而不同主題才分 &lt;p&gt;。</p>
+      <div style="display:flex;gap:14px;flex-wrap:wrap">
+        <div style="flex:1;min-width:140px;background:var(--surface);border:1px dashed var(--line);border-radius:8px;padding:10px">
+          <span class="tag ai" style="font-size:10px">&lt;p&gt;A&lt;/p&gt;&lt;p&gt;B&lt;/p&gt;</span>
+          <p style="font-size:12.5px;margin:8px 0 0">行 A</p>
+          <p style="font-size:12.5px;margin:14px 0 0">行 B（間距較大）</p>
+        </div>
+        <div style="flex:1;min-width:140px;background:var(--surface);border:1px dashed var(--line);border-radius:8px;padding:10px">
+          <span class="tag ai" style="font-size:10px">A&lt;br&gt;B</span>
+          <p style="font-size:12.5px;margin:8px 0 0">行 A<br>行 B（緊貼）</p>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="ai-callout"><b>看範本的重點：</b>不是背它怎麼寫，而是練習回答「這個 &lt;section&gt; 在畫面上對應到哪一塊」——這正是討論①要交的東西。</div>
 </section>
 
-<section class="slide" data-toc="3.5 示範①跟做① · 示範②跟做②" data-n="3.5">
-  <div class="eyebrow"><span class="num">3.5</span><span class="kicker">Practice Loop</span></div>
+<section class="slide" data-toc="3.6 標籤細看②：註解、有序／無序清單" data-n="3.6">
+  <div class="eyebrow"><span class="num">3.6</span><span class="kicker">Tag Detail II</span></div>
+  <h2 class="title">標籤細看②：註解、有序／無序清單</h2>
+  <p class="lead">這一頁把「寫給人看」的註解，跟兩種常被搞混的清單標籤一次講完。</p>
+<div class="grid2">
+    <div class="flat">
+      <h3 class="sec" style="font-size:14px"><span>&lt;!-- --&gt; 註解</span></h3>
+      <p style="font-size:12.5px;color:var(--ink-2)">寫給「人」看的說明，瀏覽器不會顯示在畫面上；標記「這一段在做什麼」，方便自己或別人維護；也能暫時「關掉」一段程式碼，不用真的刪除。</p>
+      <div class="scroll"><table><tbody>
+        <tr><td class="mono" style="white-space:pre">&lt;!-- 區塊二：今晚吃什麼 --&gt;
+&lt;section class="section"&gt;
+  &lt;h2&gt;今晚吃什麼&lt;/h2&gt;
+  &lt;!-- &lt;p&gt;豚骨湯底&lt;/p&gt; --&gt;
+  &lt;p&gt;每日精選豚骨與雞白湯底&lt;/p&gt;
+&lt;/section&gt;</td></tr>
+      </tbody></table></div>
+    </div>
+    <div class="flat">
+      <h3 class="sec" style="font-size:14px"><span>&lt;ul&gt; 無序清單</span></h3>
+      <p style="font-size:12.5px;color:var(--ink-2)">沒有順序，用項目符號（●）標示；適合「彼此平行、順序不重要」的項目，例如特色列表。</p>
+      <div class="scroll"><table><tbody>
+        <tr><td class="mono" style="white-space:pre">&lt;ul&gt;
+  &lt;li&gt;獨立單人座位&lt;/li&gt;
+  &lt;li&gt;深夜營業&lt;/li&gt;
+  &lt;li&gt;豚骨與雞白湯底&lt;/li&gt;
+&lt;/ul&gt;</td></tr>
+      </tbody></table></div>
+      <div class="flat" style="background:var(--surface)">
+        <span class="tag brand" style="font-size:10px">畫面呈現</span>
+        <ul style="font-size:13px;margin:6px 0 0">
+          <li>獨立單人座位</li>
+          <li>深夜營業</li>
+          <li>豚骨與雞白湯底</li>
+        </ul>
+      </div>
+    </div>
+    <div class="flat">
+      <h3 class="sec" style="font-size:14px"><span>&lt;ol&gt; 有序清單</span></h3>
+      <p style="font-size:12.5px;color:var(--ink-2)">有順序，自動編號（1. 2. 3.）；每個項目都放在 &lt;li&gt; 裡面；順序有意義時用 &lt;ol&gt;，像是步驟、排名。</p>
+      <div class="scroll"><table><tbody>
+        <tr><td class="mono" style="white-space:pre">&lt;ol&gt;
+  &lt;li&gt;點餐機投幣、選餐&lt;/li&gt;
+  &lt;li&gt;取票、找空位入座&lt;/li&gt;
+  &lt;li&gt;入座後切換手機靜音模式&lt;/li&gt;
+&lt;/ol&gt;</td></tr>
+      </tbody></table></div>
+      <div class="flat" style="background:var(--surface)">
+        <span class="tag brand" style="font-size:10px">畫面呈現</span>
+        <ol style="font-size:13px;margin:6px 0 0">
+          <li>點餐機投幣、選餐</li>
+          <li>取票、找空位入座</li>
+          <li>入座後切換手機靜音模式</li>
+        </ol>
+      </div>
+    </div>
+    <div class="flat aicard">
+      <h3 class="sec" style="font-size:14px"><span>ul vs ol 差異圖解</span></h3>
+      <p style="font-size:12.5px;color:var(--ink-2)">同樣三個 &lt;li&gt;，外層標籤換成 &lt;ol&gt; 就自動編號、換成 &lt;ul&gt; 就變項目符號——內容完全不用改，這就是「語意標籤決定呈現方式」的最好示範。</p>
+      <div style="display:flex;gap:14px;flex-wrap:wrap">
+        <div style="flex:1;min-width:140px;background:var(--surface);border:1px dashed var(--line);border-radius:8px;padding:10px">
+          <span class="tag ai" style="font-size:10px">&lt;ul&gt;：順序不重要</span>
+          <ul style="font-size:12.5px;margin:8px 0 0"><li>項目 A</li><li>項目 B</li></ul>
+        </div>
+        <div style="flex:1;min-width:140px;background:var(--surface);border:1px dashed var(--line);border-radius:8px;padding:10px">
+          <span class="tag ai" style="font-size:10px">&lt;ol&gt;：順序有意義</span>
+          <ol style="font-size:12.5px;margin:8px 0 0"><li>步驟一</li><li>步驟二</li></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-toc="3.6 標籤細看③：表格結構" data-n="3.6">
+  <div class="eyebrow"><span class="num">3.6</span><span class="kicker">Tag Detail III</span></div>
+  <h2 class="title">標籤細看③：&lt;table&gt; 表格結構</h2>
+  <p class="lead">表格是拆解「營業時間」「價目表」這類資訊時最常遇到的結構，一次把它的組成規則講清楚。</p>
+<div class="grid2">
+    <div class="flat">
+      <h3 class="sec" style="font-size:14px"><span>組成元素</span></h3>
+      <p style="font-size:12.5px;color:var(--ink-2)"><code>&lt;table&gt;</code>：整張表格的外框　<code>&lt;tr&gt;</code>：一「列」（table row）　<code>&lt;th&gt;</code>：標題格，通常粗體置中　<code>&lt;td&gt;</code>：內容格（table data）</p>
+    </div>
+    <div class="flat">
+      <h3 class="sec" style="font-size:14px"><span>結構規則</span></h3>
+      <p style="font-size:12.5px;color:var(--ink-2)">&lt;table&gt; 裡面放 &lt;tr&gt;；每個 &lt;tr&gt; 裡面放 &lt;th&gt; 或 &lt;td&gt;；第一列通常放 &lt;th&gt; 當欄位標題。</p>
+    </div>
+  </div>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>時段</th><th>營業狀態</th></tr></thead>
+      <tbody>
+        <tr><td>22:00 - 01:00</td><td>座位充足</td></tr>
+        <tr><td>01:00 - 04:00</td><td>可能候位</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note"><b>對應的程式碼：</b><code>&lt;table&gt;&lt;tr&gt;&lt;th&gt;時段&lt;/th&gt;&lt;th&gt;營業狀態&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;22:00 - 01:00&lt;/td&gt;&lt;td&gt;座位充足&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</code> ——每一列的儲存格數量要對齊，欄位標題與內容才不會錯位。</div>
+</section>
+
+<section class="slide" data-toc="3.6 標籤細看④：img、a" data-n="3.6">
+  <div class="eyebrow"><span class="num">3.6</span><span class="kicker">Tag Detail IV</span></div>
+  <h2 class="title">標籤細看④：&lt;img&gt;、&lt;a&gt;</h2>
+  <p class="lead">這兩個標籤都帶屬性（attribute），拆解時要連屬性一起看，才知道圖片來源、連結去哪。</p>
+<div class="grid2">
+    <div class="flat">
+      <h3 class="sec" style="font-size:14px"><span>&lt;img&gt; 圖片屬性</span></h3>
+      <p style="font-size:12.5px;color:var(--ink-2)">src 是圖片來源路徑；alt 是圖片說明文字，載入失敗時顯示，也是螢幕報讀器會念出來的內容，無障礙必備；沒有結束標籤。</p>
+      <div class="scroll"><table><tbody><tr><td class="mono" style="white-space:pre">&lt;img src="images/seats.jpg"
+  alt="12個獨立單人座位"&gt;</td></tr></tbody></table></div>
+    </div>
+    <div class="flat">
+      <h3 class="sec" style="font-size:14px"><span>&lt;a&gt; 超連結屬性</span></h3>
+      <p style="font-size:12.5px;color:var(--ink-2)">href 是連結目標，可以是別的網站，也可以是同一頁面的某個區塊（用 #id）；target="_blank" 讓連結在新分頁打開。</p>
+      <div class="scroll"><table><tbody><tr><td class="mono" style="white-space:pre">&lt;a href="https://maps.app.goo.gl/xxxx"
+  target="_blank"&gt;開啟地圖&lt;/a&gt;
+&lt;a href="#map"&gt;查看店址&lt;/a&gt;</td></tr></tbody></table></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-toc="3.6 標籤細看⑤：strong、em 文字強調" data-n="3.6">
+  <div class="eyebrow"><span class="num">3.6</span><span class="kicker">Tag Detail V</span></div>
+  <h2 class="title">標籤細看⑤：&lt;strong&gt;、&lt;em&gt; 文字強調</h2>
+  <p class="lead">這兩個標籤常被誤會成「純粹的外觀效果」，其實它們是語意標籤——先講語意，瀏覽器才順便給預設樣式。</p>
+<div class="grid2">
+    <div class="flat">
+      <h3 class="sec" style="font-size:14px"><span>&lt;strong&gt; 重要</span></h3>
+      <p style="font-size:12.5px;color:var(--ink-2)">語意上「很重要」，預設會粗體顯示——不是為了讓字變粗才用它，是先確定內容重要，樣式才跟著來。</p>
+      <div class="scroll"><table><tbody><tr><td class="mono" style="white-space:pre">&lt;p&gt;&lt;strong&gt;今晚 12 席全開&lt;/strong&gt;&lt;/p&gt;</td></tr></tbody></table></div>
+      <div class="flat" style="background:var(--surface)">
+        <span class="tag brand" style="font-size:10px">畫面呈現</span>
+        <p style="font-size:13px;margin:6px 0 0"><strong>今晚 12 席全開</strong></p>
+      </div>
+    </div>
+    <div class="flat">
+      <h3 class="sec" style="font-size:14px"><span>&lt;em&gt; 強調語氣</span></h3>
+      <p style="font-size:12.5px;color:var(--ink-2)">語意上「加強語氣」，預設會斜體顯示——朗讀軟體念到這裡，語氣也會不一樣，不只是視覺效果。</p>
+      <div class="scroll"><table><tbody><tr><td class="mono" style="white-space:pre">&lt;p&gt;&lt;em&gt;建議提早入座&lt;/em&gt;&lt;/p&gt;</td></tr></tbody></table></div>
+      <div class="flat" style="background:var(--surface)">
+        <span class="tag brand" style="font-size:10px">畫面呈現</span>
+        <p style="font-size:13px;margin:6px 0 0"><em>建議提早入座</em></p>
+      </div>
+    </div>
+    <div class="flat aicard" style="grid-column:1/-1">
+      <h3 class="sec" style="font-size:14px"><span>語意 vs 外觀 圖解</span></h3>
+      <p style="font-size:12.5px;color:var(--ink-2)">同樣是「看起來粗體」，&lt;strong&gt; 是語意上真的重要；如果只是想要字變粗但沒有「重要」的意思，正確做法是用 CSS（<code>font-weight:bold</code>），而不是濫用 &lt;strong&gt;——這是「標籤該不該用在這裡」最常考的觀念。</p>
+      <div style="display:flex;gap:14px;flex-wrap:wrap">
+        <div style="flex:1;min-width:160px;background:var(--surface);border:1px dashed var(--line);border-radius:8px;padding:10px">
+          <span class="tag ai" style="font-size:10px">正確：語意上重要</span>
+          <p style="font-size:12.5px;margin:8px 0 0">&lt;strong&gt;今晚 12 席全開&lt;/strong&gt;</p>
+        </div>
+        <div style="flex:1;min-width:160px;background:var(--surface);border:1px dashed var(--line);border-radius:8px;padding:10px">
+          <span class="tag ai" style="font-size:10px">只是想要粗體效果</span>
+          <p style="font-size:12.5px;margin:8px 0 0">改用 CSS：<code>style="font-weight:bold"</code></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-toc="3.6 CSS Box Model 與本週標籤綜合範例" data-n="3.6">
+  <div class="eyebrow"><span class="num">3.6</span><span class="kicker">Tag Detail VI</span></div>
+  <h2 class="title">CSS Box Model 與本週標籤綜合範例</h2>
+  <p class="lead">最後補一個 CSS 的預告知識，再把這週學到的標籤兜在一起看一次完整範例。</p>
+<div class="grid2">
+    <div class="flat">
+      <h3 class="sec" style="font-size:14px"><span>CSS Box Model（盒子模型）</span></h3>
+      <p style="font-size:12.5px;color:var(--ink-2)">由內而外：content（內容）→ padding（內邊距）→ border（邊框）→ margin（外邊距）。怎麼讀：在開發者工具點一個元素，右下角就會秀出這四層目前的數值。下週會用到：調整 padding／margin 的數值，就是「排版變好看」最常做的事。</p>
+      <div style="background:#DEC9A8;border-radius:6px;padding:18px" role="img" aria-label="Box Model 圖解：margin 外邊距包住 border 邊框，border 包住 padding 內邊距，padding 包住 content 內容">
+        <div style="font-family:var(--f-mo);font-size:9.5px;color:#5A4326;text-align:center;margin-bottom:4px">margin 外邊距</div>
+        <div style="background:#EBDFC3;border-radius:4px;padding:12px">
+          <div style="font-family:var(--f-mo);font-size:9.5px;color:#6B5A2E;text-align:center;margin-bottom:4px">border 邊框</div>
+          <div style="background:#F3EAD0;border:2px solid #B08D4F;border-radius:3px;padding:10px">
+            <div style="font-family:var(--f-mo);font-size:9.5px;color:#7A6633;text-align:center;margin-bottom:4px">padding 內邊距</div>
+            <div style="background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:12px;text-align:center;font-size:11px;color:var(--ink)">content 內容</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flat">
+      <h3 class="sec" style="font-size:14px"><span>本週標籤綜合範例</span></h3>
+      <div class="scroll"><table><tbody><tr><td class="mono" style="white-space:pre">&lt;section class="hero-section"&gt;
+  &lt;h1&gt;十二席拉麵&lt;/h1&gt;
+  &lt;p&gt;獨立單人座位&lt;br&gt;無須社交互動&lt;/p&gt;
+  &lt;p&gt;&lt;strong&gt;今晚 12 席全開&lt;/strong&gt;，
+     &lt;em&gt;建議提早入座&lt;/em&gt;&lt;/p&gt;
+  &lt;a href="#map"&gt;開啟地圖&lt;/a&gt;
+&lt;/section&gt;
+&lt;ol&gt;
+  &lt;li&gt;點餐機投幣、選餐&lt;/li&gt;
+  &lt;li&gt;取票、找空位入座&lt;/li&gt;
+&lt;/ol&gt;</td></tr></tbody></table></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-toc="3.7 示範①跟做① · 示範②跟做②" data-n="3.7">
+  <div class="eyebrow"><span class="num">3.7</span><span class="kicker">Practice Loop</span></div>
   <h2 class="title">示範①跟做① · 示範②跟做②</h2>
   <p class="lead">今天的練習分成四段，前兩段在同一個範本上打好底，後兩段換成你自己的網站直接產出討論①要交的東西。</p>
 <div class="stepgrid">
@@ -287,8 +565,8 @@ tr.hl td{background:color-mix(in srgb,var(--brand-soft) 55%,transparent)}
   </div>
 </section>
 
-<section class="slide" data-toc="3.6 檢核點今天正式上線" data-n="3.6">
-  <div class="eyebrow"><span class="num">3.6</span><span class="kicker">Checkpoints Live</span></div>
+<section class="slide" data-toc="3.8 檢核點今天正式上線" data-n="3.8">
+  <div class="eyebrow"><span class="num">3.8</span><span class="kicker">Checkpoints Live</span></div>
   <h2 class="title">檢核點今天正式上線</h2>
   <p class="lead">從這週開始，影片裡會出現內嵌檢核點——這是「觀看分數 20%」的計分依據，不是看播放進度。</p>
 <div class="grid2">
@@ -300,35 +578,38 @@ tr.hl td{background:color-mix(in srgb,var(--brand-soft) 55%,transparent)}
   <div class="good"><b>為什麼這樣設計：</b>檢核點是為了確認你真的看過、聽懂內容，不是用來為難人的關卡——答不出來就回去重看那一小段，不會影響分數。</div>
 </section>
 
-<section class="slide" data-toc="3.7 本週任務：作業與討論①" data-n="3.7">
-  <div class="eyebrow"><span class="num">3.7</span><span class="kicker">This Week's Task</span></div>
-  <h2 class="title">本週任務：作業與討論①</h2>
-  <p class="lead">拆解一個你自己常逛的真實網站，畫出區塊對照圖，再把成果貼進討論區。</p>
+<section class="slide" data-toc="3.9 議題討論W3、AI協作與網頁解讀" data-n="3.9">
+  <div class="eyebrow"><span class="num">3.9</span><span class="kicker">This Week's Task</span></div>
+  <h2 class="title">本週任務：議題討論W3、AI協作與網頁解讀</h2>
+  <p class="lead">拆解一個你自己常逛的真實網站，畫出區塊對照圖，再把成果貼進討論區。看得懂的同學提問題、互相回應；還看不懂的同學也有另一條路可以參與。</p>
 <div class="grid2">
     <div class="card brandcard">
       <div class="tag brand">作業</div>
       <h3 class="sec" style="margin-top:6px"><span>拆解一個真實網站</span></h3>
-      <p style="font-size:13.5px;color:var(--ink-2)">選一個你自己常逛的網站，畫出「這一塊對應哪一段標籤」的區塊對照圖。</p>
+      <p style="font-size:13.5px;color:var(--ink-2)">選一個你自己常逛的網站，畫出「這一塊對應哪一段標籤」的區塊對應圖。</p>
     </div>
     <div class="card brandcard">
-      <div class="tag brand">討論① · 三步驟</div>
+      <div class="tag brand">討論① · 路線 A</div>
       <h3 class="sec" style="margin-top:6px"><span>貼作品 → 提問題 → 回應兩人</span></h3>
-      <p style="font-size:13.5px;color:var(--ink-2)">主題是「AI 協作與網頁原創性」。具體問題要包含明確情境或畫面描述，不能只寫「我都看不懂」。</p>
+      <p style="font-size:13.5px;color:var(--ink-2)">主題是「AI 協作與網頁原創性」。貼出自己的區塊對照圖，提出一個具體卡關問題，並回應兩位同學。</p>
     </div>
   </div>
+  <div class="note"><b>路線 B（看不懂也能參與）：</b>如果連「提出具體卡關問題」都有困難——自己都看不懂、不知道怎麼問——改成直接列舉一段「看不懂的語法」貼上討論區，由老師親自回覆解說。</div>
+  <div class="good"><b>加分機制：</b>只要有其他同學主動幫忙回應路線 B 的「看不懂語法」貼文，該位幫忙的同學加一分——鼓勵已經看懂的人拉一把還在卡關的人。</div>
 </section>
 
-<section class="slide" data-toc="4 下週銜接" data-n="3.8">
-  <div class="eyebrow"><span class="num">3.8</span><span class="kicker">Next Up</span></div>
+<section class="slide" data-toc="4 下週銜接" data-n="3.10">
+  <div class="eyebrow"><span class="num">3.10</span><span class="kicker">Next Up</span></div>
   <h2 class="title">下週銜接</h2>
-<div class="ai-callout"><b>第四單元：</b>換回面授——資訊架構檢討與 HTML 實作練習，這次不是自己從頭寫，而是「改壞再修好」：老師會先在範例裡埋三個錯誤，換你用 Copilot 助教把它們揪出來。10/9 補假，本週同樣沒有非同步。</div>
+<div class="ai-callout"><b>第四單元：</b>換回面授——資訊架構檢討與 HTML 實作練習，這次不是從零開始寫，而是「改壞再修好」：老師會在範例中埋下三處錯誤，換你用 Copilot 助教把它們揪出來。10/9 補假，本週照常有非同步。</div>
 </section>
+
 
 </main>
 
 <nav class="navbar">
   <button class="navbtn" id="prevBtn" type="button">← 上一頁</button>
-  <div class="counter"><b id="curNo">1</b> / <span id="totNo">9</span>　<span id="curLabel"></span></div>
+  <div class="counter"><b id="curNo">1</b> / <span id="totNo">17</span>　<span id="curLabel"></span></div>
   <select class="jump" id="jump" aria-label="跳到指定頁面"></select>
   <button class="navbtn" id="nextBtn" type="button">下一頁 →</button>
 </nav>
@@ -356,7 +637,8 @@ tr.hl td{background:color-mix(in srgb,var(--brand-soft) 55%,transparent)}
       if(i===0) return;
       var b=document.createElement('button');
       b.type='button'; b.dataset.go=i;
-      b.innerHTML='<b>'+s.getAttribute('data-n')+'</b><span>'+s.getAttribute('data-toc').replace(/^\S+\s/,'')+'</span>';
+      var label=s.getAttribute('data-toc').replace(/^[\d.]+\s*/,'');
+      b.innerHTML='<b>'+s.getAttribute('data-n')+'</b><span>'+label+'</span>';
       b.addEventListener('click',function(){show(i);});
       tocEl.appendChild(b);
     });
