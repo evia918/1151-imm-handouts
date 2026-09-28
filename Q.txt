@@ -1,0 +1,3 @@
+git config --global user.evia918
+git config --global user.evua918@gmail.com
+git config --global --list
