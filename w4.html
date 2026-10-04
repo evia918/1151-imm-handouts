@@ -191,7 +191,7 @@ tr.hl td{background:color-mix(in srgb,var(--brand-soft) 55%,transparent)}
 <section class="slide cover" data-toc="封面" data-n="封面">
   <div class="kicker">弘光科技大學 · 多媒體遊戲發展與應用系 · 115-1 進修部</div>
   <h1 class="big">先學會修<br>才敢自己<em>寫</em></h1>
-  <p class="lead">第四單元｜資訊架構檢討與 HTML 實作練習：Copilot 助教 Agent 排錯演練</p>
+  <p class="lead">第四單元｜資訊架構檢討與 HTML 實作練習：Gemini 助教 Agent 排錯演練</p>
   <dl class="meta">
     <div><dt>Course</dt><dd>互動媒體製作（選課號 01544）</dd></div>
     <div><dt>Class</dt><dd>進修四技多遊 4 年甲班 · G501</dd></div>
@@ -220,22 +220,23 @@ tr.hl td{background:color-mix(in srgb,var(--brand-soft) 55%,transparent)}
 <section class="slide" data-toc="4.2 三處預埋錯誤示範" data-n="4.2">
   <div class="eyebrow"><span class="num">4.2</span><span class="kicker">Three Bugs</span></div>
   <h2 class="title">三處預埋錯誤示範</h2>
-  <p class="lead">老師會在一份看起來正常的範例裡，埋進三個常見錯誤。你的任務是先靠肉眼比對畫面症狀，抓出問題出在哪一段標籤或樣式。</p>
+  <p class="lead">老師把上週拆解過的十二席拉麵頁面改壞了三個地方。你的任務是先靠肉眼比對正常版和壞掉版的畫面，再抓出問題出在哪一行。</p>
 <div class="scroll">
     <table>
       <thead><tr><th class="mono">#</th><th>錯誤類型</th><th>畫面症狀</th><th>排錯第一步</th></tr></thead>
       <tbody>
-        <tr><td class="mono">01</td><td>標籤沒封閉</td><td>後面的內容排版整個跑掉</td><td>從症狀開始的地方往前找有沒有漏寫收尾標籤</td></tr>
-        <tr><td class="mono">02</td><td>&lt;img&gt; 路徑打錯</td><td>圖片位置變成一個破圖示</td><td>對照 src 路徑跟實際檔名是否一致</td></tr>
-        <tr><td class="mono">03</td><td>CSS 類別名稱打錯</td><td>樣式完全沒有生效</td><td>比對 HTML 裡的 class 名稱跟 CSS 裡的選擇器拼字</td></tr>
+        <tr><td class="mono">01</td><td>標籤沒封閉</td><td>某段之後的文字全部變粗、變大，排版跑掉</td><td>從症狀開始的地方往前找，看有沒有漏寫收尾標籤</td></tr>
+        <tr><td class="mono">02</td><td>註解沒寫完整</td><td>某個區塊整個不見了，程式碼裡卻還在</td><td>往消失那段的上一行看，檢查 &lt;!-- 有沒有用 --&gt; 正確收尾</td></tr>
+        <tr><td class="mono">03</td><td>&lt;a&gt; 屬性的引號少一個</td><td>原本的按鈕變成藍色底線的普通連結</td><td>檢查 href="…" 的引號有沒有成對</td></tr>
       </tbody>
     </table>
   </div>
+<div class="good"><b>小提示：</b>在 vscode.dev 裡，語法顏色突然不對勁的地方，通常就是錯誤的附近。修完三處後想一想：這三個錯誤有什麼共通點？</div>
 </section>
 
-<section class="slide" data-toc="4.3 用 Copilot 除錯的正確流程" data-n="4.3">
+<section class="slide" data-toc="4.3 用 Gemini 除錯的正確流程" data-n="4.3">
   <div class="eyebrow"><span class="num">4.3</span><span class="kicker">Debug Flow</span></div>
-  <h2 class="title">用 Copilot 除錯的正確流程</h2>
+  <h2 class="title">用 Gemini 除錯的正確流程</h2>
   <p class="lead">卡住的時候，不要一開口就問「幫我改」，照這個順序問，你才會真的學到東西。</p>
 <div class="stepgrid">
     <div class="stepbox"><div class="sn">STEP 1</div><h4>先描述症狀</h4><p>畫面現在跑成什麼樣子，具體寫下來</p></div>
@@ -260,7 +261,7 @@ tr.hl td{background:color-mix(in srgb,var(--brand-soft) 55%,transparent)}
 <section class="slide" data-toc="4.5 本週任務" data-n="4.5">
   <div class="eyebrow"><span class="num">4.5</span><span class="kicker">This Week's Task</span></div>
   <h2 class="title">本週任務</h2>
-  <p class="lead">今天的練習不列入正式評量分數，但它是接下來測驗①、討論②能不能跟上的基礎。</p>
+  <p class="lead">今天的練習不列入正式評量分數，但下週將進行 測驗①、討論② 能不能跟上的基礎。</p>
 <div class="card brandcard">
     <div class="tag brand">練習作業</div>
     <h3 class="sec" style="margin-top:6px"><span>改壞再修好</span></h3>
