@@ -220,17 +220,18 @@ tr.hl td{background:color-mix(in srgb,var(--brand-soft) 55%,transparent)}
 <section class="slide" data-toc="4.2 三處預埋錯誤示範" data-n="4.2">
   <div class="eyebrow"><span class="num">4.2</span><span class="kicker">Three Bugs</span></div>
   <h2 class="title">三處預埋錯誤示範</h2>
-  <p class="lead">老師會在一份看起來正常的範例裡，埋進三個常見錯誤。你的任務是先靠肉眼比對畫面症狀，抓出問題出在哪一段標籤或樣式。</p>
+  <p class="lead">老師把上週拆解過的十二席拉麵頁面改壞了三個地方。你的任務是先靠肉眼比對正常版和壞掉版的畫面，再抓出問題出在哪一行。</p>
 <div class="scroll">
     <table>
       <thead><tr><th class="mono">#</th><th>錯誤類型</th><th>畫面症狀</th><th>排錯第一步</th></tr></thead>
       <tbody>
-        <tr><td class="mono">01</td><td>標籤沒封閉</td><td>後面的內容排版整個跑掉</td><td>從症狀開始的地方往前找有沒有漏寫收尾標籤</td></tr>
-        <tr><td class="mono">02</td><td>&lt;img&gt; 路徑打錯</td><td>圖片位置變成一個破圖示</td><td>對照 src 路徑跟實際檔名是否一致</td></tr>
-        <tr><td class="mono">03</td><td>CSS 類別名稱打錯</td><td>樣式完全沒有生效</td><td>比對 HTML 裡的 class 名稱跟 CSS 裡的選擇器拼字</td></tr>
+        <tr><td class="mono">01</td><td>標籤沒封閉</td><td>某段之後的文字全部變粗、變大，排版跑掉</td><td>從症狀開始的地方往前找，看有沒有漏寫收尾標籤</td></tr>
+        <tr><td class="mono">02</td><td>註解沒寫完整</td><td>某個區塊整個不見了，程式碼裡卻還在</td><td>往消失那段的上一行看，檢查 &lt;!-- 有沒有用 --&gt; 正確收尾</td></tr>
+        <tr><td class="mono">03</td><td>&lt;a&gt; 屬性的引號少一個</td><td>原本的按鈕變成藍色底線的普通連結</td><td>檢查 href="…" 的引號有沒有成對</td></tr>
       </tbody>
     </table>
   </div>
+<div class="good"><b>小提示：</b>在 vscode.dev 裡，語法顏色突然不對勁的地方，通常就是錯誤的附近。修完三處後想一想：這三個錯誤有什麼共通點？</div>
 </section>
 
 <section class="slide" data-toc="4.3 用 Copilot 除錯的正確流程" data-n="4.3">
