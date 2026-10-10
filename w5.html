@@ -299,8 +299,6 @@ td.tw{color:var(--ai);font-weight:600}
 .match code{display:block;padding:8px 10px;font-size:12.5px}
 .match span{display:block;padding:8px 10px;font-size:13px;background:var(--surface-2);border:1px solid var(--line-soft);border-radius:6px}
 @media(max-width:640px){.match{grid-template-columns:1fr}}
-<<<<<<< HEAD
-=======
 
 .shot-box{position:relative;background:#FFFFFF}
 .shot-box img{max-height:none;cursor:zoom-in}
@@ -308,7 +306,6 @@ td.tw{color:var(--ai);font-weight:600}
   background:var(--brand);color:#FFFFFF;font-family:var(--f-mo);font-weight:700;font-size:14px;
   display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 3px #FFFFFF,0 2px 6px rgba(0,0,0,.35);pointer-events:none}
 @media(max-width:640px){.pin{width:20px;height:20px;font-size:11px;box-shadow:0 0 0 2px #FFFFFF}}
->>>>>>> dd4ee2d54f0b2a2bfa623453eedc5752e2899ac0
 </style>
 </head>
 <body>
@@ -431,11 +428,7 @@ td.tw{color:var(--ai);font-weight:600}
       <p class="mini">直接寫在標籤上，只影響這一個元素。AI 偶爾會產生這種寫法，看得懂即可。</p>
     </div>
   </div>
-<<<<<<< HEAD
-  <div class="good"><b>辨識重點：</b>三種寫法效果一樣，差別只在「寫在哪」。還有第四種——Tailwind 把樣式寫在 class 裡，留到 5.13 介紹。</div>
-=======
   <div class="good"><b>辨識重點：</b>三種寫法效果一樣，差別只在「寫在哪」。還有第四種——Tailwind 把樣式寫在 class 裡，留到 5.14 介紹。</div>
->>>>>>> dd4ee2d54f0b2a2bfa623453eedc5752e2899ac0
 </section>
 
 <section class="slide" data-toc="5.4 三種選擇器：點名的方式" data-n="5.4">
@@ -541,20 +534,12 @@ td.tw{color:var(--ai);font-weight:600}
       <li>用 Chrome 開啟拉麵頁，按 <span class="kbd">F12</span>。</li>
       <li>用箭頭工具點「今晚有開」標籤，Elements 會亮出 <code>&lt;div class="status-badge"&gt;</code>。</li>
       <li>在 Styles 找到 <code>.status-badge</code>，取消 <code>background-color</code> 的勾勾 → 標籤變透明；再勾回來。</li>
-<<<<<<< HEAD
-      <li>捲到 Styles 最下方，找到彩色同心方塊（Box Model 圖），滑鼠移上去，畫面會亮出對應範圍——下一頁就講它。</li>
-=======
       <li>捲到 Styles 最下方，找到彩色同心方塊（Box Model 圖），滑鼠移上去，畫面會亮出對應範圍——5.8 有實際畫面對照，5.9 再細講它。</li>
->>>>>>> dd4ee2d54f0b2a2bfa623453eedc5752e2899ac0
     </ol>
   </div>
   <div class="good"><b>放心亂試：</b>F12 只改你自己瀏覽器上的畫面，不會改到檔案，重新整理就恢復。</div>
 </section>
 
-<<<<<<< HEAD
-<section class="slide" data-toc="5.8 盒模型：每個元素都是一張卡" data-n="5.8">
-  <div class="eyebrow"><span class="num">5.8</span><span class="kicker">B · Box Model</span></div>
-=======
 <section class="slide" data-toc="5.8 實際畫面：讀懂 F12 的五個地方" data-n="5.8">
   <div class="eyebrow"><span class="num">5.8</span><span class="kicker">B · DevTools Tour</span></div>
   <h2 class="title">實際畫面：讀懂 F12 的五個地方</h2>
@@ -583,7 +568,6 @@ td.tw{color:var(--ai);font-weight:600}
 
 <section class="slide" data-toc="5.9 盒模型：每個元素都是一張卡" data-n="5.9">
   <div class="eyebrow"><span class="num">5.9</span><span class="kicker">B · Box Model</span></div>
->>>>>>> dd4ee2d54f0b2a2bfa623453eedc5752e2899ac0
   <h2 class="title">盒模型：每個元素都是一張卡牌</h2>
   <p class="lead">瀏覽器把每個元素都看成一個長方形盒子。想像桌上並排的三張卡牌，就能分出盒子的四層。點下面的按鈕，逐一看每一層在哪裡。</p>
   <div class="bm-chips" role="group" aria-label="選擇要強調的盒模型層">
@@ -653,13 +637,8 @@ td.tw{color:var(--ai);font-weight:600}
   <div class="note"><b>回到拉麵頁：</b><code>.status-badge</code> 的 <code>padding: 6px 12px</code> 是標籤裡上下 6、左右 12 的留白（橘紅色會塗到）；<code>margin-bottom: 12px</code> 是它和下一行之間的透明距離。</div>
 </section>
 
-<<<<<<< HEAD
-<section class="slide" data-toc="5.9 border-box：寬度不再變胖" data-n="5.9">
-  <div class="eyebrow"><span class="num">5.9</span><span class="kicker">B · box-sizing</span></div>
-=======
 <section class="slide" data-toc="5.10 border-box：寬度不再變胖" data-n="5.10">
   <div class="eyebrow"><span class="num">5.10</span><span class="kicker">B · box-sizing</span></div>
->>>>>>> dd4ee2d54f0b2a2bfa623453eedc5752e2899ac0
   <h2 class="title">box-sizing: border-box —— 寬度不再「變胖」</h2>
   <p class="lead">測驗①一定會出的計算題，只需要加法。條件都一樣：<code>width: 200px</code>、<code>padding: 20px</code>、<code>border: 5px</code>。</p>
   <div class="card">
@@ -692,13 +671,8 @@ td.tw{color:var(--ai);font-weight:600}
   </details>
 </section>
 
-<<<<<<< HEAD
-<section class="slide" data-toc="5.10 常見屬性速查卡" data-n="5.10">
-  <div class="eyebrow"><span class="num">5.10</span><span class="kicker">B · Property Cheatsheet</span></div>
-=======
 <section class="slide" data-toc="5.11 常見屬性速查卡" data-n="5.11">
   <div class="eyebrow"><span class="num">5.11</span><span class="kicker">B · Property Cheatsheet</span></div>
->>>>>>> dd4ee2d54f0b2a2bfa623453eedc5752e2899ac0
   <h2 class="title">常見屬性速查卡：看到就認得</h2>
   <p class="lead">這 12 個屬性涵蓋拉麵頁大部分的 CSS。不用背，當查表用；跟做時可以開著這頁對照。</p>
   <div class="grid4">
@@ -713,23 +687,13 @@ td.tw{color:var(--ai);font-weight:600}
     <div class="flat"><code class="pn">border</code><b>邊框線</b><p class="mini">拉麵頁：1px solid 分隔線</p></div>
     <div class="flat"><code class="pn">border-radius</code><b>圓角</b><p class="mini">拉麵頁：4px 按鈕圓角</p></div>
     <div class="flat"><code class="pn">text-align</code><b>文字對齊</b><p class="mini">拉麵頁：center 置中</p></div>
-<<<<<<< HEAD
-    <div class="flat"><code class="pn">display</code><b>排列方式</b><p class="mini">拉麵頁：flex → 見 5.11</p></div>
+    <div class="flat"><code class="pn">display</code><b>排列方式</b><p class="mini">拉麵頁：flex → 見 5.12</p></div>
   </div>
   <div class="ai-callout"><b>遇到不認得的屬性：</b>用 F12 停在上面看效果，或把那一行貼給 Gemini 問「這一行在畫面上做什麼？」——先貼程式碼、再問畫面效果，比問「padding 是什麼」有用得多。</div>
 </section>
 
-<section class="slide" data-toc="5.11 Flexbox：display:flex 就是排隊" data-n="5.11">
-  <div class="eyebrow"><span class="num">5.11</span><span class="kicker">B · Flexbox</span></div>
-=======
-    <div class="flat"><code class="pn">display</code><b>排列方式</b><p class="mini">拉麵頁：flex → 見 5.12</p></div>
-  </div>
-  <div class="ai-callout"><b>遇到不認得的屬性：</b>用 F12 停在上面看效果，或把那一行貼給 Copilot 問「這一行在畫面上做什麼？」——先貼程式碼、再問畫面效果，比問「padding 是什麼」有用得多。</div>
-</section>
-
 <section class="slide" data-toc="5.12 Flexbox：display:flex 就是排隊" data-n="5.12">
   <div class="eyebrow"><span class="num">5.12</span><span class="kicker">B · Flexbox</span></div>
->>>>>>> dd4ee2d54f0b2a2bfa623453eedc5752e2899ac0
   <h2 class="title">Flexbox：看到 display:flex 就是「排隊」</h2>
   <p class="lead">看到 <code>display: flex</code>，就把它想成「裡面的子元素開始排隊」。按按鈕切換排隊方向。</p>
   <div class="split">
@@ -761,13 +725,8 @@ td.tw{color:var(--ai);font-weight:600}
   <p class="mini">另一個排版工具 Grid（<code>display: grid</code>）是「切格子排版」，看到 <code>grid-template-columns</code> 知道它在決定「分幾欄」即可。手機／桌面版的切換留到第 13 週。</p>
 </section>
 
-<<<<<<< HEAD
-<section class="slide" data-toc="5.12 跟做①：拆解開啟地圖按鈕" data-n="5.12">
-  <div class="eyebrow"><span class="num">5.12</span><span class="kicker">B · Follow Along 1</span></div>
-=======
 <section class="slide" data-toc="5.13 跟做①：拆解開啟地圖按鈕" data-n="5.13">
   <div class="eyebrow"><span class="num">5.13</span><span class="kicker">B · Follow Along 1</span></div>
->>>>>>> dd4ee2d54f0b2a2bfa623453eedc5752e2899ac0
   <h2 class="title">跟做①　拆解「開啟地圖」按鈕</h2>
   <p class="lead">請暫停影片，打開 vscode.dev 一起做。做完再展開下方答案對照。</p>
   <div class="split">
@@ -811,13 +770,8 @@ td.tw{color:var(--ai);font-weight:600}
 </section>
 
 <!-- ===================== C｜傳統 CSS vs Tailwind ===================== -->
-<<<<<<< HEAD
-<section class="slide" data-toc="5.13 為什麼要認識 Tailwind" data-n="5.13">
-  <div class="eyebrow"><span class="num">5.13</span><span class="kicker">C · Why Tailwind</span></div>
-=======
 <section class="slide" data-toc="5.14 為什麼要認識 Tailwind" data-n="5.14">
   <div class="eyebrow"><span class="num">5.14</span><span class="kicker">C · Why Tailwind</span></div>
->>>>>>> dd4ee2d54f0b2a2bfa623453eedc5752e2899ac0
   <h2 class="title">為什麼要認識 Tailwind？</h2>
   <p class="lead">你不一定要寫它，但你拿到的 AI 產出，很多都是它。</p>
   <figure class="fig">
@@ -831,13 +785,8 @@ td.tw{color:var(--ai);font-weight:600}
   </div>
 </section>
 
-<<<<<<< HEAD
-<section class="slide" data-toc="5.14 同一顆按鈕，兩種寫法" data-n="5.14">
-  <div class="eyebrow"><span class="num">5.14</span><span class="kicker">C · Side by Side</span></div>
-=======
 <section class="slide" data-toc="5.15 同一顆按鈕，兩種寫法" data-n="5.15">
   <div class="eyebrow"><span class="num">5.15</span><span class="kicker">C · Side by Side</span></div>
->>>>>>> dd4ee2d54f0b2a2bfa623453eedc5752e2899ac0
   <h2 class="title">同一顆按鈕，兩種寫法</h2>
   <p class="lead">左邊是拉麵頁原本的寫法，右邊是 Tailwind 寫法，畫出來的按鈕一模一樣。差別只在「樣式寫在哪」。</p>
   <div class="grid2">
@@ -870,19 +819,11 @@ td.tw{color:var(--ai);font-weight:600}
       </tbody>
     </table>
   </div>
-<<<<<<< HEAD
-  <p class="mini">方括號 <code>[ ]</code> 代表「自訂值」，常用來放品牌色；Stitch 產出也常直接用內建色名，例如 <code>bg-orange-700</code>（見 5.15）。</p>
-</section>
-
-<section class="slide" data-toc="5.15 Tailwind 解碼表" data-n="5.15">
-  <div class="eyebrow"><span class="num">5.15</span><span class="kicker">C · Decode Tailwind</span></div>
-=======
   <p class="mini">方括號 <code>[ ]</code> 代表「自訂值」，常用來放品牌色；Stitch 產出也常直接用內建色名，例如 <code>bg-orange-700</code>（見 5.16）。</p>
 </section>
 
 <section class="slide" data-toc="5.16 Tailwind 解碼表" data-n="5.16">
   <div class="eyebrow"><span class="num">5.16</span><span class="kicker">C · Decode Tailwind</span></div>
->>>>>>> dd4ee2d54f0b2a2bfa623453eedc5752e2899ac0
   <h2 class="title">Tailwind 解碼表：前綴＋數字＋顏色</h2>
   <p class="lead">看到一長串縮寫不用怕，解碼只要三招。</p>
   <div class="scroll">
@@ -914,17 +855,10 @@ td.tw{color:var(--ai);font-weight:600}
   </details>
 </section>
 
-<<<<<<< HEAD
-<section class="slide" data-toc="5.16 跟做②：Tailwind 連連看＋判讀" data-n="5.16">
-  <div class="eyebrow"><span class="num">5.16</span><span class="kicker">C · Follow Along 2</span></div>
-  <h2 class="title">跟做②　Tailwind 連連看＋判讀</h2>
-  <p class="lead">暫停影片作答，對照 5.14 表格與 5.15 解碼表；不確定就問 Gemini「這個 class 在畫面上做什麼？」</p>
-=======
 <section class="slide" data-toc="5.17 跟做②：Tailwind 連連看＋判讀" data-n="5.17">
   <div class="eyebrow"><span class="num">5.17</span><span class="kicker">C · Follow Along 2</span></div>
   <h2 class="title">跟做②　Tailwind 連連看＋判讀</h2>
-  <p class="lead">暫停影片作答，對照 5.15 表格與 5.16 解碼表；不確定就問 Copilot「這個 class 在畫面上做什麼？」</p>
->>>>>>> dd4ee2d54f0b2a2bfa623453eedc5752e2899ac0
+  <p class="lead">暫停影片作答，對照 5.15 表格與 5.16 解碼表；不確定就問 Gemini「這個 class 在畫面上做什麼？」</p>
   <div class="grid2">
     <div class="card">
       <h3 class="sec"><span>第 1 題：連連看</span></h3>
@@ -958,13 +892,8 @@ td.tw{color:var(--ai);font-weight:600}
 </section>
 
 <!-- ===================== 評量與銜接 ===================== -->
-<<<<<<< HEAD
-<section class="slide" data-toc="5.17 測驗①上線" data-n="5.17">
-  <div class="eyebrow"><span class="num">5.17</span><span class="kicker">Quiz 1 Live</span></div>
-=======
 <section class="slide" data-toc="5.18 測驗①上線" data-n="5.18">
   <div class="eyebrow"><span class="num">5.18</span><span class="kicker">Quiz 1 Live</span></div>
->>>>>>> dd4ee2d54f0b2a2bfa623453eedc5752e2899ac0
   <h2 class="title">測驗①上線</h2>
   <p class="lead">8 題單選，全部是程式碼判讀，不考名詞定義或語法默寫，範例延續十二席拉麵。</p>
   <div class="card">
@@ -975,35 +904,20 @@ td.tw{color:var(--ai);font-weight:600}
   <ul style="font-size:13.5px;color:var(--ink-2)">
     <li>兄弟／父子元素判讀（第 3 週）</li>
     <li>class 選擇器與 id 選擇器的差異（5.4）</li>
-<<<<<<< HEAD
-    <li><code>box-sizing: border-box</code> 的寬度計算（5.9）</li>
-    <li>後代選擇器的優先權（5.5）</li>
-    <li>Tailwind 工具類別辨識（5.14、5.15）</li>
-=======
     <li><code>box-sizing: border-box</code> 的寬度計算（5.10）</li>
     <li>後代選擇器的優先權（5.5）</li>
     <li>Tailwind 工具類別辨識（5.15、5.16）</li>
->>>>>>> dd4ee2d54f0b2a2bfa623453eedc5752e2899ac0
     <li>錨點連結怎麼運作（第 3 週）</li>
     <li>標籤沒封閉會造成什麼後果（第 4 週）</li>
   </ul>
 </section>
 
-<<<<<<< HEAD
-<section class="slide" data-toc="5.18 本週任務" data-n="5.18">
-  <div class="eyebrow"><span class="num">5.18</span><span class="kicker">This Week's Task</span></div>
-  <h2 class="title">本週任務</h2>
-  <p class="lead">看完影片、通過內嵌檢核點，再完成測驗①。</p>
-  <div class="grid3">
-    <div class="card"><span class="pill video">影片</span><h3 class="sec" style="margin-top:8px"><span>看影片＋檢核點</span></h3><p class="mini" style="margin-top:4px">3 個檢核點（5.5、5.9、5.15），答對即通過，計入影片觀看 20%。</p></div>
-=======
 <section class="slide" data-toc="5.19 本週任務" data-n="5.19">
   <div class="eyebrow"><span class="num">5.19</span><span class="kicker">This Week's Task</span></div>
   <h2 class="title">本週任務</h2>
   <p class="lead">看完影片、通過內嵌檢核點，再完成測驗①。</p>
   <div class="grid3">
     <div class="card"><span class="pill video">影片</span><h3 class="sec" style="margin-top:8px"><span>看影片＋檢核點</span></h3><p class="mini" style="margin-top:4px">3 個檢核點（5.5、5.10、5.16），答對即通過，計入影片觀看 20%。</p></div>
->>>>>>> dd4ee2d54f0b2a2bfa623453eedc5752e2899ac0
     <div class="card"><span class="pill">練習</span><h3 class="sec" style="margin-top:8px"><span>跟做①②</span></h3><p class="mini" style="margin-top:4px">拆解表＋改色截圖、連連看答案。不另計分，但第 6 週討論②會用到。</p></div>
     <div class="card"><span class="pill exam">測驗</span><h3 class="sec" style="margin-top:8px"><span>測驗①</span></h3><p class="mini" style="margin-top:4px">8 題程式碼判讀，題型就是本週兩個跟做。</p></div>
   </div>
@@ -1014,13 +928,8 @@ td.tw{color:var(--ai);font-weight:600}
   <div class="note"><b>提醒：</b>測驗①跟檢核點一樣可以無限重答、不倒扣——重點是搞懂錯在哪，不是一次考滿分。</div>
 </section>
 
-<<<<<<< HEAD
-<section class="slide" data-toc="6 下週銜接" data-n="5.19">
-  <div class="eyebrow"><span class="num">5.19</span><span class="kicker">Next Up</span></div>
-=======
 <section class="slide" data-toc="6 下週銜接" data-n="5.20">
   <div class="eyebrow"><span class="num">5.20</span><span class="kicker">Next Up</span></div>
->>>>>>> dd4ee2d54f0b2a2bfa623453eedc5752e2899ac0
   <h2 class="title">下週銜接</h2>
   <p class="lead">看得懂樣式，才說得出「為什麼好看、為什麼難用」。</p>
   <div class="ai-callout"><b>第六單元：</b>UI/UX 編排與設計思考。討論②會請你拿上週拆解的那個真實網站，換一副「UI/UX」的眼鏡重新檢視一次。</div>
@@ -1030,11 +939,7 @@ td.tw{color:var(--ai);font-weight:600}
 
 <nav class="navbar">
   <button class="navbtn" id="prevBtn" type="button">← 上一頁</button>
-<<<<<<< HEAD
-  <div class="counter"><b id="curNo">1</b> / <span id="totNo">21</span>　<span id="curLabel"></span></div>
-=======
   <div class="counter"><b id="curNo">1</b> / <span id="totNo">22</span>　<span id="curLabel"></span></div>
->>>>>>> dd4ee2d54f0b2a2bfa623453eedc5752e2899ac0
   <select class="jump" id="jump" aria-label="跳到指定頁面"></select>
   <button class="navbtn" id="nextBtn" type="button">下一頁 →</button>
 </nav>
@@ -1120,11 +1025,7 @@ td.tw{color:var(--ai);font-weight:600}
       state.textContent=on?'目前：有 CSS（十二席拉麵品牌樣式）':'目前：沒有 CSS（瀏覽器預設樣式）';
     });
   }
-<<<<<<< HEAD
-  // 5.8 盒模型逐層強調
-=======
   // 5.9 盒模型逐層強調
->>>>>>> dd4ee2d54f0b2a2bfa623453eedc5752e2899ac0
   var svg=document.getElementById('bmSvg');
   var chips=Array.prototype.slice.call(document.querySelectorAll('.bm-chip'));
   chips.forEach(function(c){
@@ -1133,11 +1034,7 @@ td.tw{color:var(--ai);font-weight:600}
       chips.forEach(function(x){x.setAttribute('aria-pressed',x===c?'true':'false');});
     });
   });
-<<<<<<< HEAD
-  // 5.11 Flex 方向切換
-=======
   // 5.12 Flex 方向切換
->>>>>>> dd4ee2d54f0b2a2bfa623453eedc5752e2899ac0
   var fd=document.getElementById('flexDemo'), ftx=document.getElementById('flexDirTx');
   var fbtns=Array.prototype.slice.call(document.querySelectorAll('[data-flex]'));
   fbtns.forEach(function(b){
@@ -1147,13 +1044,10 @@ td.tw{color:var(--ai);font-weight:600}
     });
   });
 })();
-<<<<<<< HEAD
-=======
 
 /* 5.8 截圖點擊放大 */
 (function(){var im=document.querySelector('.shot-box img');if(!im)return;
 im.addEventListener('click',function(){var w=window.open();if(w){w.document.write('<title>F12 實際畫面</title><body style="margin:0;background:#111"><img src="'+im.src+'" style="max-width:100%;display:block;margin:auto">');}});})();
->>>>>>> dd4ee2d54f0b2a2bfa623453eedc5752e2899ac0
 </script>
 </body>
 </html>
