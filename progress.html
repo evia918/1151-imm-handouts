@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>學習進度查詢</title>
+<style>
+  :root{
+    --bg:#F5F6FA; --card:#FFFFFF; --ink:#1E2761; --sub:#5B6280; --line:#DDE2EE;
+    --full:#2E7D5B; --mid:#C98A1B; --low:#C2412D; --track:#EEF2FB; --accent:#1E2761;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#11152A; --card:#1A2040; --ink:#E8ECFA; --sub:#A3AACB; --line:#2C3460;
+      --full:#4FB98A; --mid:#E0A63A; --low:#E2674F; --track:#232B52; --accent:#CADCFC;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Noto Sans TC","Source Han Sans TC","Microsoft JhengHei",system-ui,sans-serif;line-height:1.5}
+  .wrap{max-width:980px;margin:0 auto;padding:24px 16px 48px}
+  header h1{font-size:1.35rem;margin:0}
+  header p{margin:4px 0 0;color:var(--sub);font-size:.9rem}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin-top:18px}
+  .login{max-width:420px}
+  .tabs{display:flex;gap:8px;margin-bottom:14px}
+  .tabs button{flex:1;padding:8px;border:1px solid var(--line);background:transparent;color:var(--sub);
+    border-radius:8px;cursor:pointer;font:inherit}
+  .tabs button.on{background:var(--accent);color:var(--card);border-color:var(--accent)}
+  label{display:block;font-size:.85rem;color:var(--sub);margin:10px 0 4px}
+  input{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font:inherit;
+    background:var(--bg);color:var(--ink)}
+  .go{margin-top:14px;width:100%;padding:11px;border:0;border-radius:8px;background:var(--accent);
+    color:var(--card);font:inherit;font-weight:700;cursor:pointer}
+  .err{color:var(--low);font-size:.85rem;min-height:1.2em;margin-top:8px}
+  .hidden{display:none}
+  .top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+  .top h2{margin:0;font-size:1.15rem}
+  .top .meta{color:var(--sub);font-size:.85rem}
+  .out{padding:6px 12px;border:1px solid var(--line);border-radius:8px;background:transparent;
+    color:var(--sub);cursor:pointer;font:inherit;font-size:.85rem}
+  .big{font-size:2rem;font-weight:800}
+  /* 直條圖 */
+  .chart{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:8px;align-items:end;
+    height:var(--h,240px);margin-top:16px;border-bottom:1px solid var(--line);padding-top:22px}
+  .col{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%}
+  .val{font-size:.8rem;font-weight:700;margin-bottom:3px;white-space:nowrap}
+  .bar{width:70%;max-width:56px;border-radius:6px 6px 0 0;min-height:2px}
+  .xl{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:8px;margin-top:6px;text-align:center}
+  .xl div{font-size:.75rem;color:var(--sub)}
+  .xl b{display:block;color:var(--ink);font-size:.8rem}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.8rem;color:var(--sub);margin-top:12px}
+  .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+  /* 教師端小圖 */
+  .tools{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  .tools input,.tools select{width:auto;flex:1;min-width:160px}
+  select{padding:10px 12px;border:1px solid var(--line);border-radius:8px;font:inherit;background:var(--bg);color:var(--ink)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-top:14px}
+  .mini{border:1px solid var(--line);border-radius:12px;padding:12px 12px 8px}
+  .mini .hd{display:flex;justify-content:space-between;font-size:.9rem}
+  .mini .hd span{color:var(--sub);font-size:.8rem}
+  .mini .chart{--h:130px;gap:4px;padding-top:18px;margin-top:6px}
+  .mini .val{font-size:.62rem}
+  .mini .xl{gap:4px}
+  .mini .xl div{font-size:.62rem}
+  .note{color:var(--sub);font-size:.8rem;margin-top:14px}
+  @media (max-width:560px){
+    .chart{gap:4px}.xl{gap:4px}.val{font-size:.66rem}.xl b{font-size:.7rem}.xl div{font-size:.62rem}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><p style="margin:0 0 6px"><a href="index.html" style="color:var(--sub);font-size:.85rem">← 回講義首頁</a></p>
+    <h1>互動媒體製作｜第 1–9 週學習完成度</h1>
+    <p>115-1 進修四技多遊四甲　<span id="asof"></span></p>
+  </header>
+
+  <!-- 登入 -->
+  <section class="card login" id="loginBox">
+    <div class="tabs">
+      <button id="tabS" class="on" type="button">學生查詢</button>
+      <button id="tabT" type="button">教師登入</button>
+    </div>
+    <form id="fS">
+      <label for="sid">學號</label>
+      <input id="sid" autocomplete="off" placeholder="例：H1125xxx" required>
+      <button class="go">查詢我的進度</button>
+    </form>
+    <form id="fT" class="hidden">
+      <label for="tacc">帳號</label>
+      <input id="tacc" autocomplete="username" required>
+      <label for="tpw">密碼</label>
+      <input id="tpw" type="password" autocomplete="current-password" required>
+      <button class="go">登入</button>
+    </form>
+    <div class="err" id="err"></div>
+  </section>
+
+  <!-- 學生結果 -->
+  <section class="card hidden" id="stuBox">
+    <div class="top">
+      <div><h2 id="stuName"></h2><div class="meta">第 1–9 週平均完成度 <span class="big" id="stuAvg"></span></div></div>
+      <button class="out" type="button" data-out>登出</button>
+    </div>
+    <div id="stuChart"></div>
+    <div class="legend">
+      <span><i style="background:var(--full)"></i>100%　已完成</span>
+      <span><i style="background:var(--mid)"></i>50–99%　部分完成</span>
+      <span><i style="background:var(--low)"></i>0–49%　待補進度</span>
+    </div>
+    <p class="note">百分比為創課平台各週「閱讀／完成」數據；未達 100% 的週次，請回創課平台補看影片與完成活動。</p>
+  </section>
+
+  <!-- 教師結果 -->
+  <section class="hidden" id="tchBox">
+    <div class="card">
+      <div class="top">
+        <div><h2>全班各週平均完成度</h2><div class="meta" id="tchMeta"></div></div>
+        <button class="out" type="button" data-out>登出</button>
+      </div>
+      <div id="avgChart"></div>
+    </div>
+    <div class="card">
+      <div class="top"><h2>個別學生</h2></div>
+      <div class="tools">
+        <input id="q" placeholder="搜尋姓名或學號">
+        <select id="sort">
+          <option value="avg-desc">平均完成度：高 → 低</option>
+          <option value="avg-asc">平均完成度：低 → 高</option>
+          <option value="id">學號</option>
+        </select>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+</div>
+
+<script>
+const DATA = {"iter": 150000, "weeks": 9, "asof": "2026/10/29", "r": {"1bf33080c7a17e9a7d28fb3950d034636d32a6c32844ccbe5598840371baa10e": {"s": "SBa8auUOtuh9h09lHdSOOA==", "i": "KVCcq1pNEfyVpMUM", "c": "sgGrYPOl3jnmMhhqRPfEFlfMkN9lO6mjjbCG3/CrpNSQFhkTWDyA9vjgTymRn1LvgFS5F5zmroiqhJTq0VXrnRhJBrLLxkczlESvviiM1HxLFMNnC+OxDZVM/aNOiobaZcrlW2zOhQ=="}, "f4a83bac38045500c1591b2ef9dc6fde8ab0a35169aeee0db56d98dd977e76b8": {"s": "FIcxIeaGBJvPEZRUfal6Kg==", "i": "VUnCTIVHco+JmK+e", "c": "22h45jR5of7nEoEpzUQtHUGP+Vd3zzdo1RvwDGhtlVlvcIqr+BTsAtVMRLIaJBC3aVtzATfDcKZ7dB4mDD8orIBCCjCs95TOlcaTe/vmGkyqbD+uAk/oTg1N0UgktmbMWFjf0h8C3w=="}, "040ddbce0a7aea8646f7c3207b2ed13748a09bf89bc02f2cc5039dd7ef35d0de": {"s": "ncECDCToe7IqEearWVJl4g==", "i": "JWCa6GdqPmnGVB7h", "c": "TjUVBWrISoAvIO7EgFmvQpWt4j1KanBm/EKBD9ajvlhZxONcEaYbwzgGpIjJMQljqNivkj1elCjmYUUFYAJ82oHjz79FxdwD2QkEiDoNs45MCEz9c0052ZkZ3IIkTDjdfXxtNZi36fU="}, "e0f06f1eec45d3f3d58f4c34d2c93043457dac5c648df42a9b985467028b1329": {"s": "z9a5dvYTSqAMRq6nz91FUg==", "i": "uCztelLn28aSG18h", "c": "SB53s+wKeNOl9+2y7FeOZp85gSXnMPNisi3ksQTR1nZbrzCphZJ+v9cZr+DjG8yWV8+ZCdZNingeJSoGOj5cQykVMQwQE2y+HZM2sHbXO8F0ZAxCU49Biqy6MZHG6WCaStZ8XhgS"}, "fc7215748ee88ab808d1c1bfeec6975377bdf4dc49a4617e3f3f8b1554a49b43": {"s": "MObxXxLxaZHWj4LtWs9fxg==", "i": "45EcJfSACsLP3xia", "c": "u5oUzGXCSbXe71uNkYFOKX7yxzVGD+yn+ysZ19YYUKcHnYrBNIO+sxOLLB0sGdyFcqnocLfegZ39AoEzqKp4r1RHL5jPPXl25zQRd1BhfUEOqwFKMCSi6I3BKvsa4QK01Og="}, "bb399b10f129d92b99c9d276a88e1467a939b8f08f8dbcac73e2ad7c85beb8c6": {"s": "spEUkiEb/yNDoHTIIAWgNQ==", "i": "3NGic3HZNebgnVqZ", "c": "ynwvw5lBL/t4V15X3QRz8H6BLJIJ+TBcFJQ9OmHQNulmuBir3RixZyCByorKIA29jirsmOnHyiZtvMg6J/xUaWjhEA1tktUMy70SXzcSuw8s5s0QXx/9A8dZtkpbcocWkZtGgA=="}, "e166dfe6fba537315a7a34913eb144105e5f44cb243c57b055ae79bbe2d706ba": {"s": "fpd6t9oT3hWOnF7YX6cZRA==", "i": "W8O4HEFi96uCcSCX", "c": "aCGeR5qrHUc+CIhteL3Ryc1j8J6jRayxcNMOoeWESjbyNPzSJUrbagTsy3TmA1kyu68rV119i11C57dqgmoxk40rZYxV+/T9iesqR/FNnhH/gt0SlVTCgz+Q0de6VLh1+bkJSQ=="}, "2286ea9665d371636fdb064535c416fab5f2d392151ad4f22cfc0cee76343095": {"s": "uNh6q88hgRHiaqwN6HV0xg==", "i": "5WdA9p1IpSyRIIDA", "c": "EWyYAEp6QuLwwDB7PEGdFRa6u9drhXLDqQt0XbjergzIJ+7acqkwxuX4XfuQVM5oN1yZome6BsIpWzz7j8jQVtUFnEVMFvjWm6Gsg45P6vgAIdpyP26cNX8yzexCyiimTZZn7g=="}, "68cb6fc569cd69277855967c9e072c4743d6defa94ea0cd3124703c779901056": {"s": "lTGppeFH7eymlDH+8JdtOg==", "i": "6O3VQA1z3hc7yS/E", "c": "Z+oNNaAgUex7LLM6anzJgJ8kN48WzS+pNaf8C2XLHZkzpDMh13YrGoHz2kVwsnyU8TDiGDCZxQ5+oleKzhHoGihW9OSF8dKzLpQJn5hpqPdbKrrfqWi+CnnEoLGm4F9diPI="}, "0bbe39b8fd590e79282c6adee43dad7d531a71488bd5e0a7700ed73dc4e61662": {"s": "ko9tQWDZKFT97AxoVzJvwA==", "i": "hv9mD0l8keCFoO7H", "c": "9gbnBgehdEhjtM9Fi7HoC5xO2HxsADhFPonWZ3b0KA0IJuuEjoitoxa4eoRqqbXOnoHcni1rh5nm/4EGxM/hdcPvo7B/bS6H8KakePm7c0qsoQuTTzHvs7pROTbRqUCBqQ=="}, "e2ac8c807d3a34b92b30d21f8b6653b3f1d003fcc2bbc20da9e63a1dba981657": {"s": "iimIJE8h1iz3Hpf7aZHB1g==", "i": "u3zUP7OSqJUyIR0J", "c": "xDJYCSMZ0IXKVleR/tpEDTlkpNBarHYK2Kmcoy1usekKEUgUpsyDdzasRiN021Eu3QhKLtYprYOWRM2bsFYgJd3y78J8cZdn9ahO7V/fe50Ep1pikSuXisHXtK17WJYN"}, "444d9083197f2b5cb4c65981d0555fc5908569017d56357e263e2e40c2ec50d6": {"s": "BhwjvMbqdTJXL0FyhrH40A==", "i": "QzHOTmBINV/c6Gn5", "c": "2uev7Jlf5DZapCQOzDQsGZdVkXLPSA0162i31j0VjwRtrKkpmq0e7hGWNvzNUfSncWEOwEXJOqGC7a/vSjJr6rnR5yEH7Nac0wgow9S90jUuWk99wzowZPU7Q5fBJSdV9A=="}, "4fee2f6d6cddee7748c679bb0023fde16254d18c7821f3ca5c177821d57b07ce": {"s": "B17jEHcDazcleFUq7T0IFA==", "i": "//YfwE817sIrvtl/", "c": "o9bThO+4FvB6334Gxi4RIcJBS0uzCPbzXNb0XlbzDqru4YyjF1dmuhWWekhmbU5bETJUqgHd7WPhBOgmLivmrcd+QyXRrixyWN9h7mQShMBxS6SyORv4NdiB78+W6peivg=="}, "1bc5287146dc539ae4cdc2d05f9ffc09d9f76b5355165629558918753b86c934": {"s": "EEgCHoKPJkGiKwqHEFpGAg==", "i": "oNYniPugQ1WPh825", "c": "DgC5JxSJ//oe/X2uqB3UPQKcTHqP0IEGEG4odAxfRpe019NkpGtR3zQt709yLjDrg8WVCqDdGbSVjRA+SVKd6OrBurlUdkwCIANUHw6wKZFBaHH2mTceq4zmslAB/LkPFQ=="}, "6053d482dfc876412af1c8eeca6cb08af7df622c1183a619356d12febcf724aa": {"s": "n/CkMSkaZwdZ3FbE9bBR2w==", "i": "wmJMMT0btlwVpsU1", "c": "82rk0Z5tkafvTiwekFMQR3v/+V0AdGI6etZCwUcPGgP8F1uDOEKO6HybuwgBSsyBOIpcfux4mv75Aqyt8PGgiPm1/N0pyC3hnWiveSOmISac4xIokN6y4pvfenbUeGwv"}, "e35be4a60335c6263c0fdc3748ab6b3475712ca03e22451b976fbde285594a30": {"s": "MAr63jWkNrCcJcnmC0sfCw==", "i": "QBRJ4ZYn1p/KpPc5", "c": "IG5zjr0mSa42ljLv8yYVHotBLXRZIgyfgl9DSqPRHGXcL+UnKUSyew3e01BC9YJZpTsB0xff7YHMHEKApPzGpiXkmcdPhHdAAkhjqCYIaWJmzveYz6Qf0njD64BKSg=="}, "ac602562ff20d8c482595d0f324a57acae67203ce899de707b8d4174edbec605": {"s": "1ijUzJQFqt6W4A8lKAiAXw==", "i": "gSXqA0DcOs20MygE", "c": "moBzcPP9fO2FQvdiSoRgpam6wCrxxgSQE537KGmZtXDQinsfxEOWWj7QLWgWNxm+S8VUhG7zCX49eABtOPHmszvbgUySiUZCbtHww6JVBFRfAwKlX6GzvaxHE/0/"}, "f9a2801271557903343933c8114b9753a27b6095da4cfbfe9f0d8fb4797422e2": {"s": "Zu0d8PGzxvhozuPpodviDw==", "i": "o9WHvYOomAsCTnOv", "c": "2Z5Hsk6PE6jg9xyP1Fkdrmn+EmjgA5B0lHheakkw7VtCo3FdEzqoreBt1OxW02r8Ork0SvrFZdqdxYw5bY58Y5fcbxuoOwyErhn6PQ35+a1gyEYue2k8Z3lfgKdPTQ=="}, "7bb197ebb940b60da9fffd9398c353927f094e2117c0b6c99fab91addd3c5a22": {"s": "FgDNADoxtkTozLpqdIysRw==", "i": "pDTdNp2XkFlL+NdP", "c": "RdYbLVu1xL0c0o3Q4uyO5JsmO7HIvUoZNudf+W0jkx5eUvQrwuh3Sq8A3167ZlUgsZUaMyWvRLZGU/f1qPRfqbWyw9DP5d9iP2p5PlJ72YYAiE2OhqQQxXyDa38F"}, "4006626a74bf8df4cf77a1abcd406b90c9f971c301e8f98907b0f7501ea4713b": {"s": "G4jEx4VT0HKWwGin5Neyrg==", "i": "/hplseutKbrTozUE", "c": "tRnWJ4JW3jQPk2XjBVOomSqLnBOwPH8mWG0VeRkvOmOqeJs7jMpPBnXfJNCVQ0yjGSLKIv6808GbgzX07Umbh9MPkgN8B8xvItsZ+xlB4erL0as/S6A5iqGB/9hKiw=="}, "c8ad30c756bfaa79b10e9a055c1d8b5874567fe8b471496cb65e182d919966d8": {"s": "/ifyMfA2ngT+Up5CvU7SWw==", "i": "jleuYScrBtP5nuEQ", "c": "nDRcpTLzUBgJXoU6pc/oOBzxSTAgHEAtl0MQHAHmT9VnVfgRSaMEA3WQO3VTaL02ACq0jR96fS5VO5+cC1n+AaIatEtSF2dqtGUZNMtvwE3a+6vLZFofDyE0eLkL3Q=="}, "1e96feb8725e88867e00754f655922db1a85c6b28d3829d8885d91d6fb136987": {"s": "kbeUm/8zvFFxT9IZELc38w==", "i": "ZwcXl84Gtvsi+ENy", "c": "vZrZsfLWPiQXX0wybd+ah+JypYMq18teC37ubpVQEQFxX8RXJ/pgKeeckp5RbXNG/f96wsnKhNSg++ff02nnIlY2MU/diUUcKfYGUkeOftDZQ7rKAUeek6D6"}, "b114591a7b15636e30efc53e3b47e5888db93034da54c2ab21cb2e54ae4afbf1": {"s": "y8MQhme7IpoPjRVzPnJwCQ==", "i": "9vPGz5nvQtnSu/dA", "c": "PgHrxaWTZ+kz+zXzN18Oa2cQ+slfWDNAEQ9qwOBhTOCyaeiD8OdZsJs4Q+eRiRKLCKEmmFk/5JxNpX0KmzXIpr41/ksM+OmTWNZgPwga78SLspFeptkfDB8WdQ=="}, "dd470bc1eb24f024d17649ba7e3c59ae600941e4e97253fdfdc5e40d03a0114e": {"s": "w/f14eygZrOOjtht3zIihw==", "i": "CVbXlr886K4awGfs", "c": "bOunN1pLXJNhcB34rnB2HoemPPhRgZUYc4TN2gFj0Tba9ZcP26apZgTsFuuRt9LKVaTH8ocYsPq5xMzBKDvjW/AaFwiEg7AEwWElGu/mrD8vvCBjOIysZUYZ1w=="}, "75bea2ebb15dac58051c716d667a47ebb97e5f7f6cb6bd17d39863e682ad2356": {"s": "uwLXA5ScwbaSuDUwWlw8Qw==", "i": "LL7sQ1RoOW+t4C7b", "c": "uT5vftqsQfKgLDymrg9sKi+Kiuq5gat5tEwlQfAdOG/O/SvBtF4snqGxbLdQU2ydakfbuHlOKUWMMw0CUa2SznWrNXAC0VG9VQjvOBMODNsb5DxO0VmC77na"}, "f2c46af8004b37cda6f7d909326e0a8ef637e5e2e8949147ddc16fe2409e22fe": {"s": "JY9SncOrDYeMeyyLbp41SQ==", "i": "wvgFRpxbGSeDlYS8", "c": "ZJFQ5t6Jzc4uqn1enjgLm9E+dqrBq28Z0pkrO2wD3cEsOCDelNoZ0DsKSUOdtxXa0QzmPpxn7LOxwer3bZWcXBO7dwhZpi9g9Yp+N/0nHWHTQWextTaqUydG"}, "53951da1e2288ff79ea5a9870212e990ee73cb4cd84da0ab81678699c41220d9": {"s": "ByXR49DoLcezeG4Y78SXsw==", "i": "3564CTwwpGLuNoRX", "c": "9YM1AUPF1Zu4EKh5dGWYwxTXgb+JctrsaIwKMG/NbHPJcTpxfVgCm+AlIFnZT7TR9nqYnBvNG1+jmHya7RXlExrHdwNCMNlwSp1rDurbPek+6kEy2CyldZ4="}, "3281d68a3625e8021ee4e300bb2854a781103b46e652bb921e528b9186f7979f": {"s": "tTyS8XDv/Ixx4tLY/qsDqQ==", "i": "ss1O0n7yrWsC6e61", "c": "9dWQ/ThyaiHOOcsj7aQmdKev0a0vgI2Sv5FrG2OkJA/0tMZk/KzCHihXlTf6EXeMlFQXHkTR1uEBRUwhP7N/UnZThAw986NU+6CH7Klbo643fUlRo8f7yPE="}, "79b0f3f1180e37fa5eee299ce0c977e893a3241f6b51baf6c73c21a0edbb7239": {"s": "6ZcVYB/EkCrzTkfM73GK6A==", "i": "teHTsDsMvOiglymL", "c": "ZSW+r+kmeILJNCZSIJdoS0TqaEz5LI6h4lM3eQVA1DSBqi3OP89NWpkKQ+DnzD4DmWeCQIn7lFGMIUGB0bxTvjFksz8vf4CB2JHu5Q//FNZD+bDort991I0="}, "b0bb86086e28b00fd164d2df1ff8d50e52eca5eecbd369dc71d366a52023d7b4": {"s": "HAX9jY1VqnHfiXDEVPJJmA==", "i": "zTx9aIwGnDy3ZCif", "c": "0OoSxM2V2jClHReKsltxdOIMjpNTHvrGxUEW5xxJtqSNvHg/Gbbmz9iVMxPkYcBbsH528ZSD4b2I6dCu5lagAfVEyq6/zYLn0dJvEVV4JdWyQ8IAlmuSKsw="}, "f742f8a2fe6195dab924e52799297742b969f478b08cc2b7e73ecc388400d357": {"s": "AsDXNfdgUP2lJn3WS6+lvw==", "i": "CZZDK62pclWK9PZM", "c": "IKvsaWB9gxnDWCPy5CcE08Z5/mt6ArIfjH+0gxaEhQdm+npljHNYYkxuW8/dchQglY9TGnpn5LDH9xGKm48iMFYUQK0M0cR8qxRlQDUfMubW2La3p4eXt0w="}, "1a7227ce8498c8d7a16e0e2692622d648b91f438a44ab6ee0ed97d5f3c48bfab": {"s": "aWjueYVntfjHet1hFP0DFg==", "i": "BEUWDTYoumIilP6+", "c": "wrIMwVcRCBSa/0ziVNI4eewKJ7LfoYE1SwMLcCEjwcaoHcg22IR3YMZ2gHP6wT+Y979i5gKGHl+JUrQ3GG3kTu4t+95HDhQR6eOX87PcSp5kciGcduDFrEA="}, "a6e05dccccaf55c4e2215cb88013ca7fe2260de4b076757c8ca5fdb69e929874": {"s": "tr1XZTW4yw0+vW3K64ouaQ==", "i": "+Q4QD8+k+z5fMWPt", "c": "THNw6xAfKzQEi7y1P7tHWSaImibi1uHJCWMBrHNc9drCUEpdk2Ow36LHxFukQZHSFhGobKLajISWWPKqKyc56vsVHzBdAZjG6BjCWpxL8AEC+NpKQqX2CmI="}}, "t": {"s": "yY8dTdEGZElKhgIMYH/bbQ==", "i": "SIWiZ4UGF62mnYwR", "c": "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"}};
+const WEEK_TITLES = ["AI專案企劃","助教Agent","HTML基礎","HTML實作","CSS選擇器","UI/UX","Google Site","多媒體整合","期中檢核"];
+const $ = s => document.querySelector(s);
+const enc = new TextEncoder();
+const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+
+// 以 PBKDF2 衍生金鑰並以 AES-GCM 解密；密碼錯誤時會丟出例外
+async function decrypt(secret, rec){
+  const base = await crypto.subtle.importKey("raw", enc.encode(secret), "PBKDF2", false, ["deriveKey"]);
+  const key = await crypto.subtle.deriveKey(
+    {name:"PBKDF2", salt:b64(rec.s), iterations:DATA.iter, hash:"SHA-256"},
+    base, {name:"AES-GCM", length:256}, false, ["decrypt"]);
+  const pt = await crypto.subtle.decrypt({name:"AES-GCM", iv:b64(rec.i)}, key, b64(rec.c));
+  return JSON.parse(new TextDecoder().decode(pt));
+}
+async function sha256hex(s){
+  const h = await crypto.subtle.digest("SHA-256", enc.encode(s));
+  return [...new Uint8Array(h)].map(b => b.toString(16).padStart(2,"0")).join("");
+}
+
+const color = v => v >= 100 ? "var(--full)" : v >= 50 ? "var(--mid)" : "var(--low)";
+const avg = a => Math.round(a.reduce((x,y)=>x+y,0) / a.length * 10) / 10;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+// 直條圖：每根長條上方標示百分比
+function barChart(vals, {mini=false} = {}){
+  const n = vals.length;
+  const cols = vals.map(v => `<div class="col"><div class="val">${v}%</div>
+      <div class="bar" style="height:${Math.max(v,0.8)}%;background:${color(v)}"></div></div>`).join("");
+  const xl = vals.map((_,i) => mini ? `<div>W${i+1}</div>` :
+      `<div><b>W${i+1}</b>${WEEK_TITLES[i]}</div>`).join("");
+  return `<div class="chart" style="--n:${n}" role="img" aria-label="第1到${n}週完成度：${vals.map((v,i)=>`第${i+1}週${v}%`).join("，")}">${cols}</div>
+          <div class="xl" style="--n:${n}">${xl}</div>`;
+}
+
+function show(id){
+  ["#loginBox","#stuBox","#tchBox"].forEach(s => $(s).classList.toggle("hidden", s !== id));
+}
+function setTab(t){
+  $("#tabS").classList.toggle("on", t==="s"); $("#tabT").classList.toggle("on", t==="t");
+  $("#fS").classList.toggle("hidden", t!=="s"); $("#fT").classList.toggle("hidden", t!=="t");
+  $("#err").textContent = "";
+}
+$("#tabS").onclick = () => setTab("s");
+$("#tabT").onclick = () => setTab("t");
+$("#asof").textContent = "資料截至 " + DATA.asof;
+
+// 學生登入：學號即密碼
+$("#fS").onsubmit = async e => {
+  e.preventDefault();
+  const id = $("#sid").value.trim().toUpperCase();
+  const rec = DATA.r[await sha256hex("hk1151|" + id)];
+  if(!rec){ $("#err").textContent = "查無此學號，請確認輸入是否正確。"; return; }
+  $("#err").textContent = "查詢中…";
+  try{
+    const d = await decrypt(id, rec);
+    $("#stuName").textContent = d.name + " 的學習進度";
+    $("#stuAvg").textContent = avg(d.w) + "%";
+    $("#stuChart").innerHTML = barChart(d.w);
+    $("#err").textContent = ""; $("#sid").value = "";
+    show("#stuBox");
+  }catch{ $("#err").textContent = "查無此學號，請確認輸入是否正確。"; }
+};
+
+// 教師登入：帳號＋密碼解開全班資料
+let CLASS = [];
+$("#fT").onsubmit = async e => {
+  e.preventDefault();
+  const acc = $("#tacc").value.trim(), pw = $("#tpw").value;
+  $("#err").textContent = "登入中…";
+  try{
+    CLASS = await decrypt(acc + "|" + pw, DATA.t);
+    CLASS.forEach(s => s.avg = avg(s.w));
+    const weekAvg = [...Array(DATA.weeks)].map((_,i) => avg(CLASS.map(s => s.w[i])));
+    $("#avgChart").innerHTML = barChart(weekAvg);
+    $("#tchMeta").textContent = `共 ${CLASS.length} 位學生｜第 1–9 週全班平均 ${avg(weekAvg)}%`;
+    renderGrid();
+    $("#err").textContent = ""; $("#tpw").value = "";
+    show("#tchBox");
+  }catch{ $("#err").textContent = "帳號或密碼錯誤。"; }
+};
+
+function renderGrid(){
+  const q = $("#q").value.trim().toUpperCase(), mode = $("#sort").value;
+  let list = CLASS.filter(s => !q || s.id.includes(q) || s.name.toUpperCase().includes(q));
+  list.sort(mode==="id" ? (a,b)=>a.id.localeCompare(b.id)
+          : mode==="avg-asc" ? (a,b)=>a.avg-b.avg : (a,b)=>b.avg-a.avg);
+  $("#grid").innerHTML = list.map(s => `<div class="mini">
+      <div class="hd"><b>${esc(s.name)}</b><span>${esc(s.id)}｜平均 ${s.avg}%</span></div>
+      ${barChart(s.w,{mini:true})}</div>`).join("") || `<p class="note">沒有符合的學生。</p>`;
+}
+$("#q").oninput = renderGrid;
+$("#sort").onchange = renderGrid;
+
+document.querySelectorAll("[data-out]").forEach(b => b.onclick = () => { CLASS = []; show("#loginBox"); });
+</script>
+</body>
+</html>
