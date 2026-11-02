@@ -1,0 +1,195 @@
+<!--META {"cn":"第十一單元"}-->
+<section class="slide cover" data-toc="封面" data-n="封面">
+  <div class="kicker">弘光科技大學 · 多媒體遊戲發展與應用系 · 115-1 進修部</div>
+  <h1 class="big">從一份檔案<br>變成一個<em>專案</em></h1>
+  <p class="lead">第十一單元｜★桌面版 VS Code 環境建置與專案化檔案管理（提供起始檔）。評量③：Stitch 程式碼匯入 VS Code</p>
+  <dl class="meta">
+    <div><dt>Course</dt><dd>互動媒體製作（選課號 01544）</dd></div>
+    <div><dt>Class</dt><dd>進修四技多遊 4 年甲班 · G501</dd></div>
+    <div><dt>Week</dt><dd>11/23 – 11/29</dd></div>
+    <div><dt>Instructor</dt><dd>洪明顯</dd></div>
+    <div><dt>本週型態</dt><dd>影片 60 分＋面授 1 節</dd></div>
+    <div><dt>本週評量</dt><dd>評量③</dd></div>
+  </dl>
+  <p class="lead" style="font-size:13.5px">操作方式：點下方「上一頁／下一頁」，或使用鍵盤 <span class="kbd">←</span> <span class="kbd">→</span> 翻頁。</p>
+</section>
+
+<section class="slide" data-toc="11.0 本單元目錄" data-n="11.0">
+  <div class="eyebrow"><span class="num">11.0</span><span class="kicker">Unit Map</span></div>
+  <h2 class="title">本單元目錄</h2>
+  <p class="lead">這週做兩件事：把散落的檔案整理成專案資料夾，再用一行 CSS 修好中文字型。</p>
+  <div class="toc" id="toc"></div>
+</section>
+
+<section class="slide" data-toc="11.1 本週學習目標" data-n="11.1">
+  <div class="eyebrow"><span class="num">11.1</span><span class="kicker">Goals</span></div>
+  <h2 class="title">看完這支影片，你能夠……</h2>
+  <div class="grid2">
+    <div class="flat"><span class="pill f2f">應用</span><p>安裝桌面版 VS Code，用 <b>開啟資料夾</b> 的方式管理網站</p></div>
+    <div class="flat"><span class="pill video">理解</span><p>說出專案資料夾的 <b>命名規則</b>，以及為什麼要這樣命名</p></div>
+    <div class="flat"><span class="pill video">理解</span><p>用「點餐順序」解釋 <b>font-family</b> 為什麼會讓中文變怪</p></div>
+    <div class="flat"><span class="pill f2f">應用</span><p>加入 <b>兩行程式碼</b>，修好 Stitch 頁面的中文字型</p></div>
+  </div>
+</section>
+
+<section class="slide" data-toc="11.2 開場：下載資料夾裡的第三份檔案" data-n="11.2">
+  <div class="eyebrow"><span class="num">11.2</span><span class="kicker">Scenario</span></div>
+  <h2 class="title">下載資料夾裡的 <code>stitch_export (3).html</code></h2>
+  <p class="lead">上週匯出的檔案，現在躺在「下載」資料夾，旁邊是發票 PDF、手機照片，還有 <code>(1)</code>、<code>(2)</code>、<code>(3)</code> 三個版本。哪一個才是最新的？</p>
+  <div class="grid2">
+    <div class="card brandcard"><div class="tag brand">散在桌上的文件</div><p class="mini" style="margin-top:6px">每次要用都要翻找，圖片跟網頁分開放，網頁一搬家圖片就破掉。</p></div>
+    <div class="card aicard"><div class="tag ai">歸好檔的資料夾</div><p class="mini" style="margin-top:6px">一個網站＝一個資料夾。網頁、圖片都在裡面，整包搬走也不會壞。<b>W14 上線就是整包上傳。</b></p></div>
+  </div>
+  <div class="ai-callout"><b>「專案化」只有一個意思：</b>一個網站所需要的所有東西，都放在同一個資料夾裡。</div>
+</section>
+
+<section class="slide" data-toc="11.3 為什麼現在才裝桌面版" data-n="11.3">
+  <div class="eyebrow"><span class="num">11.3</span><span class="kicker">Why Now</span></div>
+  <h2 class="title">為什麼現在才裝桌面版</h2>
+  <p class="lead">W3–W5 用的 vscode.dev 是「借來的工作台」，打開網頁就能用，但它不擅長管理整個資料夾。現在你有了自己的專案，該換一張自己的桌子了。</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th></th><th>vscode.dev（W3–W5）</th><th>桌面版 VS Code（W11 起）</th></tr></thead>
+      <tbody>
+        <tr><td>安裝</td><td>不用</td><td>要，約 5 分鐘</td></tr>
+        <tr><td>介面</td><td colspan="2" style="text-align:center">幾乎一模一樣，所以<b>不是學新工具</b></td></tr>
+        <tr><td>管理整個資料夾</td><td>可以，但每次要重新授權</td><td>開一次，之後都記得</td></tr>
+        <tr><td>即時預覽</td><td>有限</td><td>可裝擴充套件 Live Server</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="slide" data-toc="11.4 示範①：安裝 VS Code" data-n="11.4">
+  <div class="eyebrow"><span class="num">11.4</span><span class="kicker">A · Demo 1</span></div>
+  <h2 class="title">示範①　安裝 VS Code</h2>
+  <div class="stepgrid">
+    <div class="stepbox"><div class="sn">01</div><h4>下載</h4><p>到 <code>code.visualstudio.com</code>，按 Download（Windows）</p></div>
+    <div class="stepbox"><div class="sn">02</div><h4>安裝時勾兩個</h4><p>「新增至 PATH」＋「將『以 Code 開啟』加入檔案總管右鍵選單」</p></div>
+    <div class="stepbox"><div class="sn">03</div><h4>中文介面（可選）</h4><p>左側擴充套件搜尋 <code>Chinese (Traditional)</code> 安裝，重開</p></div>
+    <div class="stepbox"><div class="sn">04</div><h4>預覽工具（建議）</h4><p>擴充套件搜尋 <code>Live Server</code> 安裝</p></div>
+  </div>
+  <div class="note"><b>學校電腦裝不了？</b>繼續用 vscode.dev 完成本週作業，評量③一樣可以繳交。差別只在每次都要重新開啟資料夾。</div>
+</section>
+
+<section class="slide" data-toc="11.5 專案資料夾長這樣" data-n="11.5">
+  <div class="eyebrow"><span class="num">11.5</span><span class="kicker">Folder</span></div>
+  <h2 class="title">專案資料夾長這樣</h2>
+  <div class="split">
+<pre class="code"><span class="c-sel">my-site/</span>              <span class="c-cm">← 整個網站就是這個資料夾</span>
+├── <span class="c-tag">index.html</span>        <span class="c-cm">← 首頁，名字固定是這個</span>
+├── <span class="c-tag">menu.html</span>         <span class="c-cm">← 第二頁（期末那「一頁」）</span>
+└── <span class="c-sel">images/</span>
+    ├── <span class="c-val">logo.png</span>
+    └── <span class="c-val">ramen-01.jpg</span></pre>
+    <div class="flat">
+      <h3 class="sec"><span>命名四規則</span></h3>
+      <ol class="mini">
+        <li>首頁一定叫 <code>index.html</code></li>
+        <li>全部<b>小寫英文</b></li>
+        <li><b>不要空格</b>，用 <code>-</code> 連接</li>
+        <li><b>不要中文</b>檔名</li>
+      </ol>
+      <p class="mini"><b>為什麼？</b>網站上線後住在別人的伺服器上，那裡把 <code>Logo.png</code> 和 <code>logo.png</code> 當成兩個不同的檔案。在自己電腦看得到，上線卻破圖，九成是這個原因（W15 會再遇到它）。</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-toc="11.6 跟做①：建立你的專案資料夾" data-n="11.6">
+  <div class="eyebrow"><span class="num">11.6</span><span class="kicker">B · Follow Along 1</span></div>
+  <h2 class="title">跟做①　建立你的專案資料夾</h2>
+  <p class="lead">請暫停影片，跟著做。</p>
+  <ul class="chk card mini">
+    <li>在「文件」裡新增資料夾 <code>my-site</code></li>
+    <li>把 W10 匯出的 Stitch 檔案放進去，<b>改名為 <code>index.html</code></b>（.zip 請先解壓縮）</li>
+    <li>新增 <code>images</code> 資料夾（有圖片就放進去）</li>
+    <li>VS Code → 檔案 → <b>開啟資料夾</b> → 選 <code>my-site</code></li>
+    <li>對 <code>index.html</code> 按右鍵 → Open with Live Server（或直接雙擊用瀏覽器開）</li>
+    <li>截圖左側的檔案總管（評量③要交）</li>
+  </ul>
+  <div class="note"><b>常見錯誤：</b>用「開啟檔案」而不是「開啟資料夾」。左側看不到資料夾結構，就是開錯了。</div>
+</section>
+
+<section class="slide" data-toc="11.7 起始檔上車點②" data-n="11.7">
+  <div class="eyebrow"><span class="num">11.7</span><span class="kicker">Starter File</span></div>
+  <h2 class="title">起始檔上車點②</h2>
+  <p class="lead">W7–W10 有幾週沒跟上？沒關係，從這裡上車。</p>
+  <div class="grid2">
+    <div class="card aicard"><div class="tag ai">起始檔給你什麼</div><p class="mini" style="margin-top:6px">一個 Stitch 切版完成的 <code>my-site</code> 資料夾，是你「本來應該做到的狀態」，不是完成品。到 TronClass 下載 zip。</p></div>
+    <div class="card brandcard"><div class="tag brand">你要做什麼</div><p class="mini" style="margin-top:6px">在 VS Code 按 <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+<span class="kbd">F</span> 搜尋 <code>TODO</code>，把每一處換成你自己的品牌內容。</p></div>
+  </div>
+  <div class="good"><b>使用起始檔不扣分。</b>它的用途是讓你接得上後面三週，不是認輸。</div>
+</section>
+
+<section class="slide" data-toc="11.8 中文為什麼怪：字型的點餐順序" data-n="11.8">
+  <div class="eyebrow"><span class="num">11.8</span><span class="kicker">Concept</span></div>
+  <h2 class="title">中文為什麼怪：字型的「點餐順序」</h2>
+  <p class="lead">打開 Stitch 頁面，英文很好看，中文卻粗細不一、像拼湊出來的。原因藏在 <code>font-family</code> 這個屬性裡。</p>
+  <div class="split">
+    <div class="flat">
+      <p class="mini"><code>font-family</code> 像點餐：「我要 A，沒有的話 B，再沒有就隨便」。</p>
+      <p class="mini">Stitch 只點了英文字型（例如 Inter）。英文字型裡<b>沒有中文字</b>，瀏覽器只好每個中文字都「隨便」，於是你看到的是系統臨時湊出來的字。</p>
+    </div>
+<pre class="code"><span class="c-prop">font-family</span>: <span class="c-val">"Inter"</span>, <span class="c-val">sans-serif</span>;
+<span class="c-cm">/* Inter：有英文、沒有中文
+   sans-serif：瀏覽器自己找一個「隨便」 */</span></pre>
+  </div>
+  <details class="check"><summary>如果看到的是「□□□」或「銝剜」這種真正的亂碼呢？</summary><p>那是編碼問題，不是字型問題。檢查 <code>&lt;head&gt;</code> 裡有沒有 <code>&lt;meta charset="UTF-8"&gt;</code>，存檔時編碼也要是 UTF-8（VS Code 右下角會顯示）。</p></details>
+</section>
+
+<section class="slide" data-toc="11.9 示範②：兩行修好中文" data-n="11.9">
+  <div class="eyebrow"><span class="num">11.9</span><span class="kicker">A · Demo 2</span></div>
+  <h2 class="title">示範②　一行載入、一行套用</h2>
+  <p class="lead">在 <code>index.html</code> 的 <code>&lt;/head&gt;</code> 正上方，貼上這兩行：</p>
+<pre class="code wrap"><span class="c-cm">&lt;!-- ① 向 Google Fonts 借思源黑體（Noto Sans TC） --&gt;</span>
+<span class="c-tag">&lt;link</span> <span class="c-attr">rel</span>=<span class="c-val">"stylesheet"</span> <span class="c-attr">href</span>=<span class="c-val">"https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&amp;display=swap"</span><span class="c-tag">&gt;</span>
+<span class="c-cm">&lt;!-- ② 點餐順序第一位改成思源黑體 --&gt;</span>
+<span class="c-tag">&lt;style&gt;</span><span class="c-sel">body</span>{<span class="c-prop">font-family</span>:<span class="c-val">"Noto Sans TC"</span>,<span class="c-val">sans-serif</span>;}<span class="c-tag">&lt;/style&gt;</span></pre>
+  <div class="ai-callout"><b>為什麼放在 &lt;/head&gt; 正上方：</b>CSS 是後寫的蓋掉先寫的（W5「樣式打架」）。放在最後面，你的設定最有機會贏。</div>
+</section>
+
+<section class="slide" data-toc="11.10 跟做②：修好並截前後圖" data-n="11.10">
+  <div class="eyebrow"><span class="num">11.10</span><span class="kicker">B · Follow Along 2</span></div>
+  <h2 class="title">跟做②　修好你的頁面，截前後對比</h2>
+  <ul class="chk card mini">
+    <li><b>修改前</b>先截圖（W10 已截過可沿用）</li>
+    <li>貼上 11.9 的兩行 → 存檔（<span class="kbd">Ctrl</span>+<span class="kbd">S</span>）→ 重新整理瀏覽器</li>
+    <li><b>修改後</b>截圖，兩張放在一起比對</li>
+  </ul>
+  <div class="grid2">
+    <div class="note"><b>有些標題還是舊字型？</b>那些元素身上有 Tailwind 的字型 class（例如 <code>font-display</code>），優先權比 body 高。把那一行貼給 Gemini，問「這個 class 在畫面上做什麼」。</div>
+    <div class="note"><b>圖示變成英文字（如 arrow_forward）？</b>你可能用了 <code>*{font-family:... !important}</code>，把圖示字型也蓋掉了。改回 11.9 的寫法，只設定 <code>body</code>。</div>
+  </div>
+</section>
+
+<section class="slide" data-toc="11.11 Gemini 換角色：從解釋器到產生器" data-n="11.11">
+  <div class="eyebrow"><span class="num">11.11</span><span class="kicker">AI Role</span></div>
+  <h2 class="title">Gemini 換角色：從解釋器到產生器</h2>
+  <p class="lead">W2–W5，Gemini 是幫你看懂程式的翻譯。從這週到 W14，它可以幫你<b>寫</b>程式了，但你要先看得懂它寫了什麼。</p>
+<pre class="code wrap"><span class="c-cm"># 請 Gemini 改程式的提問模板</span>
+<span class="c-attr">我的狀況</span>：用 Google Stitch 匯出的 index.html，在 VS Code 開啟。
+<span class="c-attr">我想要</span>：讓「營業時間」區塊的字再大一點。
+<span class="c-attr">相關程式碼</span>：（貼上那一段，不要貼整份檔案）
+<span class="c-attr">請你</span>：先說明這段程式碼在畫面上做什麼，
+      再告訴我要改哪裡、改成什麼。</pre>
+  <div class="note"><b>驗證三步：</b>改之前先存一份備份 → 一次只改 AI 建議的一處 → 存檔看畫面，跟你要的一樣才算數。</div>
+</section>
+
+<section class="slide" data-toc="11.12 本週任務：評量③" data-n="11.12">
+  <div class="eyebrow"><span class="num">11.12</span><span class="kicker">This Week's Task</span></div>
+  <h2 class="title">本週任務：評量③</h2>
+  <div class="ai-callout"><b>影片檢核點：</b>可以無限次重答，答對就通過，不扣分。</div>
+  <div class="card brandcard"><div class="tag brand">評量③ · Stitch 程式碼匯入 VS Code</div>
+    <ol style="margin-top:8px">
+      <li><b>VS Code 專案資料夾結構截圖</b>：左側檔案總管要看得到 <code>my-site</code>、<code>index.html</code></li>
+      <li><b>中文字型修正前／後對比截圖</b>：兩張，同一個區塊</li>
+    </ol></div>
+  <div class="good"><b>用起始檔的同學：</b>一樣繳這兩張圖，至少把首屏的 <code>TODO</code> 換成自己的內容再截。</div>
+</section>
+
+<section class="slide" data-toc="12 下週銜接" data-n="11.13">
+  <div class="eyebrow"><span class="num">11.13</span><span class="kicker">Next Up</span></div>
+  <h2 class="title">下週銜接</h2>
+  <div class="ai-callout"><b>第十二單元：</b>JavaScript 基礎與 AI Agent 排錯。不用寫 JS，學的是<b>讀懂它在做什麼、壞了怎麼找原因</b>。測驗③上線。</div>
+  <div class="good"><b>下週前先做一件事：</b>在你的 <code>index.html</code> 搜尋 <code>&lt;script</code>，數數看有幾個。</div>
+</section>

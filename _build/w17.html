@@ -1,0 +1,179 @@
+<!--META {"cn":"第十七單元"}-->
+<section class="slide cover" data-toc="封面" data-n="封面">
+  <div class="kicker">弘光科技大學 · 多媒體遊戲發展與應用系 · 115-1 進修部</div>
+  <h1 class="big">讓找你的人<br>找得到<em>你</em></h1>
+  <p class="lead">第十七單元｜網頁 SEO、社群標籤與 Web3D 趨勢。討論⑤：AI 時代設計師競爭力反思（併學生學習調查問卷）</p>
+  <dl class="meta">
+    <div><dt>Course</dt><dd>互動媒體製作（選課號 01544）</dd></div>
+    <div><dt>Class</dt><dd>進修四技多遊 4 年甲班 · G501</dd></div>
+    <div><dt>Week</dt><dd>01/04 – 01/10</dd></div>
+    <div><dt>Instructor</dt><dd>洪明顯</dd></div>
+    <div><dt>本週型態</dt><dd>影片 60 分＋面授 1 節</dd></div>
+    <div><dt>本週評量</dt><dd>討論⑤＋問卷</dd></div>
+  </dl>
+  <p class="lead" style="font-size:13.5px">操作方式：點下方「上一頁／下一頁」，或使用鍵盤 <span class="kbd">←</span> <span class="kbd">→</span> 翻頁。</p>
+</section>
+
+<section class="slide" data-toc="17.0 本單元目錄" data-n="17.0">
+  <div class="eyebrow"><span class="num">17.0</span><span class="kicker">Unit Map</span></div>
+  <h2 class="title">本單元目錄</h2>
+  <p class="lead">網站上線了，但沒人找得到、分享出去也沒人想點，就像開在沒有招牌的巷子裡。這週補上招牌和名片。</p>
+  <div class="toc" id="toc"></div>
+</section>
+
+<section class="slide" data-toc="17.1 本週學習目標" data-n="17.1">
+  <div class="eyebrow"><span class="num">17.1</span><span class="kicker">Goals</span></div>
+  <h2 class="title">看完這支影片，你能夠……</h2>
+  <div class="grid2">
+    <div class="flat"><span class="pill video">理解</span><p>說出 <b>SEO 四個基本檢查點</b> 各自在搜尋結果的哪裡出現</p></div>
+    <div class="flat"><span class="pill f2f">應用</span><p>修改自己頁面的 <b>title、description</b>，並補上圖片 <b>alt</b></p></div>
+    <div class="flat"><span class="pill f2f">應用</span><p>加入 <b>Open Graph 社群標籤</b>，讓分享預覽有圖有字</p></div>
+    <div class="flat"><span class="pill video">理解</span><p>認識 <b>Web3D</b> 的常見工具與應用情境</p></div>
+  </div>
+</section>
+
+<section class="slide" data-toc="17.2 開場：搜不到、分享出去沒人點" data-n="17.2">
+  <div class="eyebrow"><span class="num">17.2</span><span class="kicker">Scenario</span></div>
+  <h2 class="title">搜不到，分享出去也沒人點</h2>
+  <div class="grid2">
+    <div class="card brandcard"><h3 class="sec"><span>在 Google 搜尋</span></h3><p class="mini" style="margin-top:6px">朋友搜「台中 深夜 拉麵」，結果裡沒有你。就算有，標題寫的是 <code>Stitch Design</code>，看不出是拉麵店。</p></div>
+    <div class="card brandcard"><h3 class="sec"><span>在 LINE 分享</span></h3><p class="mini" style="margin-top:6px">你把網址丟到家族群組，只顯示一串 <code>https://…</code>，沒有圖、沒有店名，沒人點。</p></div>
+  </div>
+  <div class="ai-callout"><b>兩個問題，都藏在 &lt;head&gt; 裡。</b>畫面上看不到的那幾行，決定了別人在搜尋結果和聊天室裡看到什麼。</div>
+</section>
+
+<section class="slide" data-toc="17.3 SEO：店門口的招牌" data-n="17.3">
+  <div class="eyebrow"><span class="num">17.3</span><span class="kicker">Metaphor</span></div>
+  <h2 class="title">SEO：店門口的招牌和看板</h2>
+  <p class="lead">搜尋引擎像一個每天經過所有巷子的路人，他不會走進店裡，只看<b>招牌（title）</b>和<b>門口的看板（description）</b>，再決定要不要推薦給別人。</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>檢查點</th><th>出現在哪裡</th><th>寫法原則</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">&lt;title&gt;</td><td>搜尋結果的藍色大標、瀏覽器分頁</td><td>店名＋賣什麼＋在哪裡，30 字內</td></tr>
+        <tr><td class="mono">meta description</td><td>搜尋結果標題下方的灰字</td><td>一兩句話說清楚為什麼要來，80 字內</td></tr>
+        <tr><td class="mono">&lt;h1&gt;</td><td>頁面最大的標題</td><td>一頁只有一個，寫店名或主題</td></tr>
+        <tr><td class="mono">&lt;img alt&gt;</td><td>圖片搜尋、螢幕報讀器</td><td>描述圖片內容，不要寫「圖片1」</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="slide" data-toc="17.4 示範①：換掉 Stitch 的預設招牌" data-n="17.4">
+  <div class="eyebrow"><span class="num">17.4</span><span class="kicker">A · Demo 1</span></div>
+  <h2 class="title">示範①　換掉 Stitch 的預設招牌</h2>
+  <p class="lead">打開 <code>index.html</code>，在 <code>&lt;head&gt;</code> 裡找到 <code>&lt;title&gt;</code>，Stitch 給的通常是英文或預設名稱。</p>
+<pre class="code wrap"><span class="c-cm">&lt;!-- 改之前 --&gt;</span>
+<span class="c-tag">&lt;title&gt;</span>Stitch Design<span class="c-tag">&lt;/title&gt;</span>
+
+<span class="c-cm">&lt;!-- 改之後 --&gt;</span>
+<span class="c-tag">&lt;title&gt;</span>十二席拉麵｜台中深夜拉麵，營業到凌晨兩點<span class="c-tag">&lt;/title&gt;</span>
+<span class="c-tag">&lt;meta</span> <span class="c-attr">name</span>=<span class="c-val">"description"</span>
+      <span class="c-attr">content</span>=<span class="c-val">"台中巷弄裡只有 12 個座位的深夜拉麵店。21:00 開門，下班後的一碗濃厚豚骨，地圖與營業時間都在這裡。"</span><span class="c-tag">&gt;</span>
+
+<span class="c-cm">&lt;!-- 圖片補上 alt --&gt;</span>
+<span class="c-tag">&lt;img</span> <span class="c-attr">src</span>=<span class="c-val">"images/ramen-01.jpg"</span> <span class="c-attr">alt</span>=<span class="c-val">"十二席招牌豚骨拉麵，叉燒與溏心蛋"</span><span class="c-tag">&gt;</span></pre>
+  <div class="note"><b>搜尋排名不會馬上變：</b>Google 要一段時間才會重新看你的網站。這週的重點是「寫對」，不是「排第一」。</div>
+</section>
+
+<section class="slide" data-toc="17.5 跟做①：SEO 四點檢查" data-n="17.5">
+  <div class="eyebrow"><span class="num">17.5</span><span class="kicker">B · Follow Along 1</span></div>
+  <h2 class="title">跟做①　SEO 四點檢查</h2>
+  <ul class="chk card mini">
+    <li><code>&lt;title&gt;</code> 改成「品牌名｜賣什麼＋在哪裡」</li>
+    <li>加入 <code>meta description</code>，用你 W1 企劃書裡的一句話</li>
+    <li>搜尋 <code>&lt;h1</code>，確認整頁只有一個</li>
+    <li>每張 <code>&lt;img&gt;</code> 都有 <code>alt</code>，而且描述的是圖片內容</li>
+    <li>上傳到 GitHub → 等網站更新 → 看瀏覽器分頁的標題變了沒</li>
+  </ul>
+  <div class="ai-callout"><b>可以請 Gemini 幫忙寫 description：</b>貼上你的品牌企劃，請它「寫三個 80 字以內的版本」，<b>由你挑一個再修</b>。</div>
+</section>
+
+<section class="slide" data-toc="17.6 社群標籤：網站的名片" data-n="17.6">
+  <div class="eyebrow"><span class="num">17.6</span><span class="kicker">Open Graph</span></div>
+  <h2 class="title">社群標籤：網站的名片</h2>
+  <p class="lead">在 LINE、Facebook、Discord 分享網址時跳出來的預覽卡片，是讀 <b>Open Graph（og:）標籤</b>產生的。沒有這幾行，它只能顯示一串網址。</p>
+  <div class="split">
+<pre class="code wrap"><span class="c-tag">&lt;meta</span> <span class="c-attr">property</span>=<span class="c-val">"og:title"</span> <span class="c-attr">content</span>=<span class="c-val">"十二席拉麵｜台中深夜拉麵"</span><span class="c-tag">&gt;</span>
+<span class="c-tag">&lt;meta</span> <span class="c-attr">property</span>=<span class="c-val">"og:description"</span> <span class="c-attr">content</span>=<span class="c-val">"只有 12 個座位，21:00 開門。"</span><span class="c-tag">&gt;</span>
+<span class="c-tag">&lt;meta</span> <span class="c-attr">property</span>=<span class="c-val">"og:image"</span> <span class="c-attr">content</span>=<span class="c-val">"https://你的網址/images/og.jpg"</span><span class="c-tag">&gt;</span>
+<span class="c-tag">&lt;meta</span> <span class="c-attr">property</span>=<span class="c-val">"og:url"</span> <span class="c-attr">content</span>=<span class="c-val">"https://你的網址/"</span><span class="c-tag">&gt;</span>
+<span class="c-tag">&lt;meta</span> <span class="c-attr">property</span>=<span class="c-val">"og:type"</span> <span class="c-attr">content</span>=<span class="c-val">"website"</span><span class="c-tag">&gt;</span></pre>
+    <div class="flat">
+      <h3 class="sec"><span>og:image 三個重點</span></h3>
+      <ol class="mini">
+        <li>要寫<b>完整網址</b>（https:// 開頭），不能只寫 <code>images/og.jpg</code></li>
+        <li>建議尺寸 <b>1200 × 630</b></li>
+        <li>圖片要先上傳到 repo，網站更新後才拿得到</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-toc="17.7 示範②與跟做②：做出分享卡片" data-n="17.7">
+  <div class="eyebrow"><span class="num">17.7</span><span class="kicker">Demo 2 · Follow Along 2</span></div>
+  <h2 class="title">示範②＋跟做②　做出你的分享卡片</h2>
+  <div class="stepgrid five">
+    <div class="stepbox"><div class="sn">01</div><h4>做一張圖</h4><p>Canva 或 Figma，1200×630，存成 <code>og.jpg</code></p></div>
+    <div class="stepbox"><div class="sn">02</div><h4>放進 images</h4><p>檔名小寫，上傳到 repo</p></div>
+    <div class="stepbox"><div class="sn">03</div><h4>貼五行 og</h4><p>改成你的店名、網址，放進 <code>&lt;head&gt;</code></p></div>
+    <div class="stepbox"><div class="sn">04</div><h4>上傳、等更新</h4><p>路線 B 看 Deploys 有沒有成功</p></div>
+    <div class="stepbox"><div class="sn">05</div><h4>分享測試</h4><p>貼到 LINE 傳給自己，跟 W16 的截圖比較</p></div>
+  </div>
+  <div class="note"><b>預覽沒變？</b>LINE 和 Facebook 會記住舊的預覽一段時間。Facebook 可以用官方的「分享偵錯工具」（Sharing Debugger）重新抓取；LINE 可以在網址後面加 <code>?v=2</code> 再試。</div>
+</section>
+
+<section class="slide" data-toc="17.8 Web3D：網頁上的 3D" data-n="17.8">
+  <div class="eyebrow"><span class="num">17.8</span><span class="kicker">Trend</span></div>
+  <h2 class="title">Web3D：網頁上直接轉的 3D</h2>
+  <p class="lead">你們是遊戲系，3D 模型做得出來。現在不用裝 App，網頁就能直接放可以旋轉、縮放的 3D，甚至用手機看 AR。這部分<b>認識就好，不列入期末要求</b>。</p>
+  <div class="grid3">
+    <div class="card"><div class="tag brand">model-viewer</div><p class="mini" style="margin-top:6px">Google 出的網頁元件，一個標籤放一個 .glb 模型，手機可切 AR。最適合商品展示。</p></div>
+    <div class="card"><div class="tag brand">Spline</div><p class="mini" style="margin-top:6px">瀏覽器裡的 3D 設計工具，做好直接給嵌入碼，設計師最容易上手。</p></div>
+    <div class="card"><div class="tag brand">Three.js</div><p class="mini" style="margin-top:6px">寫程式控制 3D 的函式庫，彈性最大，網頁遊戲與互動展覽常用。</p></div>
+  </div>
+<pre class="code wrap"><span class="c-cm">&lt;!-- model-viewer 最小範例（選做） --&gt;</span>
+<span class="c-tag">&lt;script</span> <span class="c-attr">type</span>=<span class="c-val">"module"</span> <span class="c-attr">src</span>=<span class="c-val">"https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"</span><span class="c-tag">&gt;&lt;/script&gt;</span>
+<span class="c-tag">&lt;model-viewer</span> <span class="c-attr">src</span>=<span class="c-val">"images/bowl.glb"</span> <span class="c-attr">alt</span>=<span class="c-val">"十二席拉麵碗 3D 模型"</span> <span class="c-attr">camera-controls</span> <span class="c-attr">ar</span><span class="c-tag">&gt;&lt;/model-viewer&gt;</span></pre>
+</section>
+
+<section class="slide" data-toc="17.9 這學期，AI 做了什麼、你做了什麼" data-n="17.9">
+  <div class="eyebrow"><span class="num">17.9</span><span class="kicker">Reflection</span></div>
+  <h2 class="title">這學期，AI 做了什麼、你做了什麼</h2>
+  <p class="lead">討論⑤之前，先把這學期攤開來看。AI 確實做了很多事，但每一步，都有一件只有你能做的事。</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>週次</th><th>AI 做的</th><th>你做的</th></tr></thead>
+      <tbody>
+        <tr><td class="wk">W1–W2</td><td>產出企劃初稿</td><td>決定品牌是誰、給誰看</td></tr>
+        <tr><td class="wk">W3–W5</td><td>解釋程式碼</td><td>讀懂、判斷它說得對不對</td></tr>
+        <tr><td class="wk">W10</td><td>一分鐘畫一版</td><td>用五個看點挑出問題</td></tr>
+        <tr><td class="wk">W11–W13</td><td>給修改建議</td><td>驗證、只採用對的那一處</td></tr>
+        <tr><td class="wk">W14–W16</td><td>幫忙查錯</td><td>描述症狀、留下證據、說明理由</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="slide" data-toc="17.10 本週任務：討論⑤與問卷" data-n="17.10">
+  <div class="eyebrow"><span class="num">17.10</span><span class="kicker">This Week's Task</span></div>
+  <h2 class="title">本週任務：討論⑤＋學習調查問卷</h2>
+  <div class="ai-callout"><b>影片檢核點：</b>可以無限次重答，答對就通過，不扣分。</div>
+  <div class="card brandcard"><div class="tag brand">討論⑤ · AI 時代設計師競爭力反思</div>
+    <ol style="margin-top:8px">
+      <li><b>貼作品</b>：你的分享卡片截圖（17.7 改之前／改之後）</li>
+      <li><b>提出個人觀點</b>：舉一個這學期的具體時刻，說明「AI 做不到、而你做到了」的事</li>
+      <li><b>回應兩位同學</b>：補充一個例子或提出延伸提問</li>
+    </ol></div>
+  <div class="grid2">
+    <div class="note"><b>不要寫成心得作文：</b>「我覺得 AI 很方便但也要小心」不算觀點。要有週次、有畫面、有你的判斷。</div>
+    <div class="good"><b>學習調查問卷：</b>連結在課程平台公告，匿名填寫，約 5 分鐘。你的回答會用來調整下一屆的課程。</div>
+  </div>
+</section>
+
+<section class="slide" data-toc="18 下週銜接" data-n="17.11">
+  <div class="eyebrow"><span class="num">17.11</span><span class="kicker">Next Up</span></div>
+  <h2 class="title">下週銜接</h2>
+  <div class="ai-callout"><b>第十八單元（實體 3 小時）：</b>期末網站作品展示。把整學期講給大家聽。準備清單在第十八單元講義，<b>請提早一週看</b>。</div>
+  <div class="good"><b>下週前先做一件事：</b>用無痕視窗打開你的 Google Site 和上線網址，確認兩個都不用登入就看得到。</div>
+</section>

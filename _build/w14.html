@@ -1,0 +1,211 @@
+<!--META {"cn":"第十四單元"}-->
+<section class="slide cover" data-toc="封面" data-n="封面">
+  <div class="kicker">弘光科技大學 · 多媒體遊戲發展與應用系 · 115-1 進修部</div>
+  <h1 class="big">把一個資料夾<br>變成一個<em>網址</em></h1>
+  <p class="lead">第十四單元｜★GitHub Pages 靜態網頁雲端部署（提供起始檔）：GitHub Pages ／ GitHub＋Netlify 雙路線。評量④</p>
+  <dl class="meta">
+    <div><dt>Course</dt><dd>互動媒體製作（選課號 01544）</dd></div>
+    <div><dt>Class</dt><dd>進修四技多遊 4 年甲班 · G501</dd></div>
+    <div><dt>Week</dt><dd>12/14 – 12/20</dd></div>
+    <div><dt>Instructor</dt><dd>洪明顯</dd></div>
+    <div><dt>本週型態</dt><dd>影片 60 分＋面授 1 節</dd></div>
+    <div><dt>本週評量</dt><dd>評量④</dd></div>
+  </dl>
+  <p class="lead" style="font-size:13.5px">操作方式：點下方「上一頁／下一頁」，或使用鍵盤 <span class="kbd">←</span> <span class="kbd">→</span> 翻頁。</p>
+</section>
+
+<section class="slide" data-toc="14.0 本單元目錄" data-n="14.0">
+  <div class="eyebrow"><span class="num">14.0</span><span class="kicker">Unit Map</span></div>
+  <h2 class="title">本單元目錄</h2>
+  <p class="lead">這週是整學期最關鍵的一步：你的網頁要從「只有自己看得到」變成「任何人點網址都看得到」。</p>
+  <div class="toc" id="toc"></div>
+</section>
+
+<section class="slide" data-toc="14.1 本週學習目標" data-n="14.1">
+  <div class="eyebrow"><span class="num">14.1</span><span class="kicker">Goals</span></div>
+  <h2 class="title">看完這支影片，你能夠……</h2>
+  <div class="grid2">
+    <div class="flat"><span class="pill video">理解</span><p>說出 <b>repo、commit、部署</b> 三個詞的意思</p></div>
+    <div class="flat"><span class="pill f2f">應用</span><p>用 <b>template</b> 建立自己的 GitHub repo 並上傳網站</p></div>
+    <div class="flat"><span class="pill f2f">應用</span><p>用 <b>GitHub Pages 或 Netlify</b> 其中一條路線，讓網站上線</p></div>
+    <div class="flat"><span class="pill exam">評估</span><p>依自己的需求 <b>選擇路線</b>，並說得出理由</p></div>
+  </div>
+</section>
+
+<section class="slide" data-toc="14.2 開場：從家裡廚房搬到街上" data-n="14.2">
+  <div class="eyebrow"><span class="num">14.2</span><span class="kicker">Scenario</span></div>
+  <h2 class="title">從家裡的廚房，搬到街上開店</h2>
+  <p class="lead">到目前為止，你的網頁只在自己的電腦裡。就像在家裡廚房煮出一碗好拉麵，但客人進不來。</p>
+  <div class="flow">
+    <span>你的電腦<br><small>my-site 資料夾</small></span><i>→</i>
+    <span><b>GitHub</b><br><small>雲端倉庫（放食材）</small></span><i>→</i>
+    <span><b>Pages 或 Netlify</b><br><small>店面（端給客人）</small></span><i>→</i>
+    <span>一個網址<br><small>任何人都能點</small></span>
+  </div>
+  <div class="ai-callout"><b>「部署」就是這整段路。</b>這週你會發現：倉庫只有一個（GitHub），但開店的方式有兩種，而且可以同時開。</div>
+</section>
+
+<section class="slide" data-toc="14.3 三個新名詞：repo、commit、部署" data-n="14.3">
+  <div class="eyebrow"><span class="num">14.3</span><span class="kicker">Vocabulary</span></div>
+  <h2 class="title">三個新名詞</h2>
+  <div class="grid3">
+    <div class="card"><div class="tag brand">repo</div><p class="mini" style="margin-top:6px"><b>倉庫</b>。放在 GitHub 上的專案資料夾，就是雲端版的 <code>my-site</code>。</p></div>
+    <div class="card"><div class="tag brand">commit</div><p class="mini" style="margin-top:6px"><b>存檔＋留紀錄</b>。每次上傳都會記下「誰、什麼時候、改了什麼」，改壞了可以回頭找。</p></div>
+    <div class="card aicard"><div class="tag ai">部署</div><p class="mini" style="margin-top:6px"><b>開店</b>。把倉庫裡的檔案變成大家都看得到的網站，會得到一個網址。</p></div>
+  </div>
+  <div class="note"><b>template（範本）：</b>老師準備好的 repo。你按一下「Use this template」，就會複製一份<b>屬於你自己</b>的 repo，改了不會影響別人。</div>
+</section>
+
+<section class="slide" data-toc="14.4 兩條路線，怎麼選" data-n="14.4">
+  <div class="eyebrow"><span class="num">14.4</span><span class="kicker">Two Routes</span></div>
+  <h2 class="title">兩條路線，怎麼選</h2>
+  <div class="grid2">
+    <div class="route a"><span class="tag ai">路線 A · GitHub Pages</span><p class="mini">全部在 GitHub 裡完成，<b>只要一個帳號</b>。<br>網址：<code>帳號.github.io/repo名/</code></p></div>
+    <div class="route b"><span class="tag brand">路線 B · GitHub＋Netlify</span><p class="mini">GitHub 放檔案、Netlify 開店。<b>網址可以自己取名</b>，每次上線都有紀錄可看。<br>網址：<code>自訂名稱.netlify.app</code></p></div>
+  </div>
+  <div class="scroll">
+    <table>
+      <thead><tr><th></th><th>路線 A：GitHub Pages</th><th>路線 B：GitHub＋Netlify</th></tr></thead>
+      <tbody>
+        <tr><td>帳號</td><td>GitHub</td><td>GitHub（Netlify 用 GitHub 登入）</td></tr>
+        <tr><td>設定一次</td><td>自己的 repo 要<b>再開一次 Pages</b></td><td>匯入 repo，兩個欄位<b>留空</b></td></tr>
+        <tr><td>之後更新</td><td colspan="2" style="text-align:center">上傳到 GitHub 就自動更新</td></tr>
+        <tr><td>看得到上線紀錄</td><td>不太直觀</td><td>Deploys 頁面一目了然</td></tr>
+        <tr><td>限制</td><td>repo 要公開</td><td>免費每月約可上線 20 次</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="good"><b>選路建議：</b>想少記一個帳號 → 選 A；想要好記的網址、想看上線紀錄 → 選 B。<b>兩條都開也可以</b>，同一個 repo 不用重做。評分不分路線。</div>
+</section>
+
+<section class="slide" data-toc="14.5 示範①：建立你的 repo" data-n="14.5">
+  <div class="eyebrow"><span class="num">14.5</span><span class="kicker">A · Demo 1</span></div>
+  <h2 class="title">示範①　用 template 建立你的 repo</h2>
+  <div class="stepgrid five">
+    <div class="stepbox"><div class="sn">01</div><h4>開範本</h4><p>點 TronClass 公告的範本 repo 連結，登入 GitHub</p></div>
+    <div class="stepbox"><div class="sn">02</div><h4>Use this template</h4><p>綠色按鈕 → Create a new repository</p></div>
+    <div class="stepbox"><div class="sn">03</div><h4>取名、選 Public</h4><p>名稱用小寫英文，例：<code>ramen-site</code></p></div>
+    <div class="stepbox"><div class="sn">04</div><h4>上傳你的檔案</h4><p>Add file → Upload files → 把 <code>my-site</code> <b>裡面</b>的東西拖進去</p></div>
+    <div class="stepbox"><div class="sn">05</div><h4>Commit</h4><p>按 Commit changes，完成</p></div>
+  </div>
+  <div class="ai-callout"><b>一次拖一整批：</b>一次上傳十個檔案＝一次 commit。改了三個檔案就一起上傳，不要一個一個傳（路線 B 會用到這個習慣）。</div>
+</section>
+
+<section class="slide" data-toc="14.6 跟做①：index.html 要在最外層" data-n="14.6">
+  <div class="eyebrow"><span class="num">14.6</span><span class="kicker">B · Follow Along 1</span></div>
+  <h2 class="title">跟做①　建好 repo，確認 index.html 在最外層</h2>
+  <div class="split">
+    <ul class="chk card mini">
+      <li>用 template 建立自己的 repo（Public）</li>
+      <li>上傳 W11–W13 做好的檔案（或起始檔）</li>
+      <li>repo 首頁的檔案清單裡，<b>第一層就看得到 <code>index.html</code></b></li>
+      <li>複製 repo 網址存起來（評量④必繳）</li>
+    </ul>
+    <div class="compare" style="grid-template-columns:1fr">
+      <div class="card ok"><div class="tag" style="color:var(--ok)">○ 對</div><pre class="code">ramen-site/
+├── index.html
+└── images/</pre></div>
+      <div class="card bad"><div class="tag brand">✗ 多包了一層</div><pre class="code">ramen-site/
+└── my-site/
+    ├── index.html
+    └── images/</pre></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-toc="14.7 起始檔上車點③" data-n="14.7">
+  <div class="eyebrow"><span class="num">14.7</span><span class="kicker">Starter File</span></div>
+  <h2 class="title">起始檔上車點③</h2>
+  <p class="lead">W11–W13 沒跟上？老師的範本 repo 本身就是起始檔：已經有完整的網頁、JS 互動和自適應版面。</p>
+  <div class="grid2">
+    <div class="card aicard"><div class="tag ai">怎麼用</div><p class="mini" style="margin-top:6px">照 14.5 用 template 建好 repo 後，直接在 GitHub 網頁上點檔案 → 右上鉛筆圖示編輯，把 <code>TODO</code> 的地方換成你的品牌內容。</p></div>
+    <div class="card brandcard"><div class="tag brand">能拿到哪一級</div><p class="mini" style="margin-top:6px">成功上線＝最低 A 級。要到 B 級以上，需要替換成自己的原創內容並延伸。</p></div>
+  </div>
+  <div class="good"><b>使用起始檔不扣分。</b>能上線，你就趕上全班了。</div>
+</section>
+
+<section class="slide" data-toc="14.8 示範②-A：GitHub Pages" data-n="14.8">
+  <div class="eyebrow"><span class="num">14.8</span><span class="kicker">A · Demo 2 · Route A</span></div>
+  <h2 class="title">示範②-A　GitHub Pages</h2>
+  <div class="stepgrid">
+    <div class="stepbox"><div class="sn">01</div><h4>Settings</h4><p>在<b>自己的</b> repo 上方按 Settings</p></div>
+    <div class="stepbox"><div class="sn">02</div><h4>Pages</h4><p>左側選單找 Pages</p></div>
+    <div class="stepbox"><div class="sn">03</div><h4>選來源</h4><p>Deploy from a branch → <code>main</code> → <code>/(root)</code> → Save</p></div>
+    <div class="stepbox"><div class="sn">04</div><h4>等 1–2 分鐘</h4><p>重新整理，上方出現網址</p></div>
+  </div>
+  <div class="note"><b>最大卡點：</b>template 複製的是檔案，<b>不會複製 Pages 設定</b>。老師的範本開了 Pages，不代表你的也開了，一定要在自己的 repo 再開一次。</div>
+</section>
+
+<section class="slide" data-toc="14.9 示範②-B：GitHub＋Netlify" data-n="14.9">
+  <div class="eyebrow"><span class="num">14.9</span><span class="kicker">A · Demo 2 · Route B</span></div>
+  <h2 class="title">示範②-B　GitHub＋Netlify</h2>
+  <div class="stepgrid">
+    <div class="stepbox"><div class="sn">01</div><h4>用 GitHub 登入</h4><p>到 <code>netlify.com</code>，Sign up／Log in 選 GitHub</p></div>
+    <div class="stepbox"><div class="sn">02</div><h4>匯入專案</h4><p>Add new project（舊介面叫 Add new site）→ Import an existing project → GitHub</p></div>
+    <div class="stepbox"><div class="sn">03</div><h4>授權、選 repo</h4><p>按 Authorize，清單中選你的 repo</p></div>
+    <div class="stepbox"><div class="sn">04</div><h4>兩欄留空 → Deploy</h4><p>Branch：<code>main</code>；<b>Build command、Publish directory 都留空</b></p></div>
+  </div>
+  <div class="grid2">
+    <div class="flat"><h3 class="sec"><span>改一個好記的網址</span></h3><p class="mini">Project configuration → Change project name，例：<code>ramen12-s1234</code> → 網址變成 <code>ramen12-s1234.netlify.app</code></p></div>
+    <div class="flat"><h3 class="sec"><span>為什麼兩欄要留空</span></h3><p class="mini">那兩欄是給需要「先組裝」的網站用的（例如 React）。你的網站是現成的 HTML，不用組裝，Netlify 直接端出去就好。</p></div>
+  </div>
+</section>
+
+<section class="slide" data-toc="14.10 Netlify 的三條使用規則" data-n="14.10">
+  <div class="eyebrow"><span class="num">14.10</span><span class="kicker">Route B Rules</span></div>
+  <h2 class="title">走路線 B，記住三條規則</h2>
+  <div class="grid3">
+    <div class="card brandcard"><div class="tag brand">① 改好一批再上傳</div><p class="mini" style="margin-top:6px">每上傳（commit）一次，Netlify 就重新上線一次。免費方案每月大約 20 次，在 VS Code 確認好再一次傳。</p></div>
+    <div class="card brandcard"><div class="tag brand">② 有人填了就清空</div><p class="mini" style="margin-top:6px">如果 Build command 自動出現文字，清掉它，不然會上線失敗。</p></div>
+    <div class="card brandcard"><div class="tag brand">③ 被暫停就換路線</div><p class="mini" style="margin-top:6px">看到「production deploys are paused」：網站還在，但新改動上不去。直接在同一個 repo 開路線 A，交 Pages 網址。</p></div>
+  </div>
+  <div class="ai-callout"><b>Deploys 頁面是你的除錯證據：</b>每次上線成功或失敗都有紀錄。失敗時截圖存起來，W15 和期末「除錯歷程」用得到。</div>
+</section>
+
+<section class="slide" data-toc="14.11 跟做②：讓你的網站上線" data-n="14.11">
+  <div class="eyebrow"><span class="num">14.11</span><span class="kicker">B · Follow Along 2</span></div>
+  <h2 class="title">跟做②　讓你的網站上線</h2>
+  <ul class="chk card mini">
+    <li>選一條路線（14.4），照 14.8 或 14.9 完成</li>
+    <li>用<b>電腦</b>打開網址：畫面跟本機一樣嗎？</li>
+    <li>用<b>手機</b>打開網址：W13 修的地方還在嗎？</li>
+    <li>傳給一位朋友，請他點開（確認不是只有你看得到）</li>
+    <li>複製網址，和 repo 網址一起存好</li>
+  </ul>
+  <div class="note"><b>本機正常、上線破圖？</b>九成是檔名大小寫。<code>Logo.PNG</code> 和程式裡寫的 <code>logo.png</code> 在伺服器上是兩個檔案。W15 會專門處理。</div>
+</section>
+
+<section class="slide" data-toc="14.12 之後怎麼更新網站" data-n="14.12">
+  <div class="eyebrow"><span class="num">14.12</span><span class="kicker">Update Loop</span></div>
+  <h2 class="title">之後怎麼更新網站</h2>
+  <p class="lead">設定只做一次。之後每次修改，流程都一樣：</p>
+  <div class="flow">
+    <span>VS Code 修改</span><i>→</i><span>本機預覽確認</span><i>→</i><span>GitHub：Upload files<br><small>（同名檔案會被覆蓋）</small></span><i>→</i><span>Commit</span><i>→</i><span>1–2 分鐘後網站自動更新</span>
+  </div>
+  <div class="grid2">
+    <div class="flat"><h3 class="sec"><span>小改字也可以直接在 GitHub 改</span></h3><p class="mini">點檔案 → 鉛筆圖示 → 修改 → Commit changes。但改完記得把 VS Code 那份也同步，不然下次上傳會蓋回舊的。</p></div>
+    <div class="flat"><h3 class="sec"><span>樣式不見了？</span></h3><p class="mini">Stitch 的 Tailwind 是從網路載入的（W10 那一行 <code>&lt;script&gt;</code>），沒有網路時樣式會消失，這是正常的。</p></div>
+  </div>
+</section>
+
+<section class="slide" data-toc="14.13 本週任務：評量④" data-n="14.13">
+  <div class="eyebrow"><span class="num">14.13</span><span class="kicker">This Week's Task</span></div>
+  <h2 class="title">本週任務：評量④</h2>
+  <div class="ai-callout"><b>影片檢核點：</b>可以無限次重答，答對就通過，不扣分。</div>
+  <div class="card brandcard"><div class="tag brand">評量④ · 繳交網址</div>
+    <ol style="margin-top:8px">
+      <li><b>GitHub repo 網址</b>（必繳）：<code>https://github.com/帳號/repo名</code></li>
+      <li><b>公開網站網址</b>（擇一）：GitHub Pages 或 Netlify。兩個都有的話，註明哪一個是主網址</li>
+    </ol></div>
+  <div class="grid2">
+    <div class="good"><b>繳交前自我檢查：</b>用無痕視窗打開網站網址，確認不用登入就看得到。</div>
+    <div class="note"><b>真的上不了線？</b>W15 面授就是部署除錯，帶著 repo 網址和錯誤截圖來，現場一起處理。</div>
+  </div>
+</section>
+
+<section class="slide" data-toc="15 下週銜接" data-n="14.14">
+  <div class="eyebrow"><span class="num">14.14</span><span class="kicker">Next Up</span></div>
+  <h2 class="title">下週銜接</h2>
+  <div class="ai-callout"><b>第十五單元（面授）：</b>部署除錯與期末專案診斷。兩兩互換網址用手機測試，找出問題、修好、留下修正前後的證據。12/25 行憲紀念日，本週沒有非同步課程。</div>
+  <div class="good"><b>下週帶來：</b>你的 repo 網址、網站網址、手機（充好電）。</div>
+</section>

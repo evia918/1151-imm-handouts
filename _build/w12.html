@@ -1,0 +1,219 @@
+<!--META {"cn":"第十二單元"}-->
+<section class="slide cover" data-toc="封面" data-n="封面">
+  <div class="kicker">弘光科技大學 · 多媒體遊戲發展與應用系 · 115-1 進修部</div>
+  <h1 class="big">看得懂開關<br>就修得好<em>燈</em></h1>
+  <p class="lead">第十二單元｜JavaScript 基礎與 AI Agent 排錯。測驗③</p>
+  <dl class="meta">
+    <div><dt>Course</dt><dd>互動媒體製作（選課號 01544）</dd></div>
+    <div><dt>Class</dt><dd>進修四技多遊 4 年甲班 · G501</dd></div>
+    <div><dt>Week</dt><dd>11/30 – 12/06</dd></div>
+    <div><dt>Instructor</dt><dd>洪明顯</dd></div>
+    <div><dt>本週型態</dt><dd>影片 60 分＋面授 1 節</dd></div>
+    <div><dt>本週評量</dt><dd>測驗③</dd></div>
+  </dl>
+  <p class="lead" style="font-size:13.5px">操作方式：點下方「上一頁／下一頁」，或使用鍵盤 <span class="kbd">←</span> <span class="kbd">→</span> 翻頁。</p>
+</section>
+
+<section class="slide" data-toc="12.0 本單元目錄" data-n="12.0">
+  <div class="eyebrow"><span class="num">12.0</span><span class="kicker">Unit Map</span></div>
+  <h2 class="title">本單元目錄</h2>
+  <p class="lead">這週<b>不寫</b> JavaScript。你要學的是兩件事：讀懂它在做什麼、壞掉時知道去哪裡找原因。</p>
+  <div class="toc" id="toc"></div>
+</section>
+
+<section class="slide" data-toc="12.1 本週學習目標" data-n="12.1">
+  <div class="eyebrow"><span class="num">12.1</span><span class="kicker">Goals</span></div>
+  <h2 class="title">看完這支影片，你能夠……</h2>
+  <div class="grid2">
+    <div class="flat"><span class="pill video">理解</span><p>用「房子」比喻說出 <b>HTML、CSS、JS 的分工</b></p></div>
+    <div class="flat"><span class="pill video">理解</span><p>用 <b>三個問題</b>（抓誰、等什麼、做什麼）讀懂一段 JS</p></div>
+    <div class="flat"><span class="pill f2f">分析</span><p>打開 <b>Console</b>，從紅字看出是哪一行、哪一種錯</p></div>
+    <div class="flat"><span class="pill exam">評估</span><p>判斷 Gemini 的修改建議 <b>能不能照用</b></p></div>
+  </div>
+</section>
+
+<section class="slide" data-toc="12.2 開場：凌晨三點還在「營業中」" data-n="12.2">
+  <div class="eyebrow"><span class="num">12.2</span><span class="kicker">Scenario</span></div>
+  <h2 class="title">凌晨三點，網站還說「營業中」</h2>
+  <p class="lead">十二席拉麵凌晨兩點打烊。一位客人三點看到網站寫「營業中」，騎車過去，鐵門是拉下來的。</p>
+  <div class="grid2">
+    <div class="card brandcard"><h3 class="sec"><span>HTML 沒錯</span></h3><p class="mini" style="margin-top:6px">標籤都在、結構正確。</p></div>
+    <div class="card brandcard"><h3 class="sec"><span>CSS 沒錯</span></h3><p class="mini" style="margin-top:6px">顏色漂亮、排版正常。</p></div>
+  </div>
+  <div class="ai-callout"><b>錯的是「判斷時間」的那幾行 JavaScript。</b>這週學的，就是怎麼找到這幾行、看懂它、讓 Gemini 幫你修，而且確認修對了。</div>
+</section>
+
+<section class="slide" data-toc="12.3 三兄弟：骨架、裝潢、水電" data-n="12.3">
+  <div class="eyebrow"><span class="num">12.3</span><span class="kicker">Metaphor</span></div>
+  <h2 class="title">三兄弟：骨架、裝潢、水電</h2>
+  <div class="grid3">
+    <div class="card"><div class="tag brand">HTML · 骨架</div><p class="mini" style="margin-top:6px">哪裡是門、哪裡是牆、哪裡是窗。<br>「這裡有一個按鈕」。</p></div>
+    <div class="card"><div class="tag brand">CSS · 裝潢</div><p class="mini" style="margin-top:6px">牆刷什麼顏色、門多寬。<br>「按鈕是橘色、圓角」。</p></div>
+    <div class="card aicard"><div class="tag ai">JS · 水電開關</div><p class="mini" style="margin-top:6px">按下開關，燈會亮。<br>「按了按鈕，選單會打開」。</p></div>
+  </div>
+  <div class="note"><b>所以判斷原則是：</b>畫面「長得不對」→ 先看 CSS；畫面「按了沒反應、內容不對」→ 先看 JS。</div>
+</section>
+
+<section class="slide" data-toc="12.4 JS 在網頁上常做的四件事" data-n="12.4">
+  <div class="eyebrow"><span class="num">12.4</span><span class="kicker">What JS Does</span></div>
+  <h2 class="title">JS 在網頁上常做的四件事</h2>
+  <p class="lead">打開你 Stitch 匯出的檔案，裡面的 <code>&lt;script&gt;</code> 多半就是做下面其中一件。</p>
+  <div class="grid4">
+    <div class="flat"><span class="pn">01</span><h3 class="sec"><span>顯示／隱藏</span></h3><p class="mini">手機選單 ☰ 按了展開</p></div>
+    <div class="flat"><span class="pn">02</span><h3 class="sec"><span>依條件改內容</span></h3><p class="mini">依時間顯示營業中／休息中</p></div>
+    <div class="flat"><span class="pn">03</span><h3 class="sec"><span>回應點擊</span></h3><p class="mini">點「看更多」展開說明</p></div>
+    <div class="flat"><span class="pn">04</span><h3 class="sec"><span>檢查輸入</span></h3><p class="mini">訂位表單沒填電話會提醒</p></div>
+  </div>
+</section>
+
+<section class="slide" data-toc="12.5 讀 JS 的三個問題" data-n="12.5">
+  <div class="eyebrow"><span class="num">12.5</span><span class="kicker">Read Method</span></div>
+  <h2 class="title">讀 JS 只要問三個問題</h2>
+  <p class="lead">就像看電燈開關的配線：這條線<b>接到哪盞燈</b>？<b>按下哪個開關</b>才會動？<b>動了之後</b>發生什麼事？</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>問題</th><th>程式碼長相</th><th>白話</th></tr></thead>
+      <tbody>
+        <tr><td>① 抓誰</td><td class="mono">document.getElementById('menu')</td><td>找到 id 是 menu 的那個元素</td></tr>
+        <tr><td>② 等什麼</td><td class="mono">addEventListener('click', …)</td><td>等它被點擊</td></tr>
+        <tr><td>③ 做什麼</td><td class="mono">classList.toggle('hidden')<br>textContent = '休息中'</td><td>切換顯示／隱藏<br>把文字換掉</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="slide" data-toc="12.6 示範①：讀懂手機選單按鈕" data-n="12.6">
+  <div class="eyebrow"><span class="num">12.6</span><span class="kicker">A · Demo 1</span></div>
+  <h2 class="title">示範①　讀懂手機選單按鈕</h2>
+  <div class="split">
+<pre class="code"><span class="c-tag">&lt;button</span> <span class="c-attr">id</span>=<span class="c-val">"menuBtn"</span><span class="c-tag">&gt;</span>☰<span class="c-tag">&lt;/button&gt;</span>
+<span class="c-tag">&lt;nav</span> <span class="c-attr">id</span>=<span class="c-val">"menu"</span> <span class="c-attr">class</span>=<span class="c-val">"hidden"</span><span class="c-tag">&gt;</span>…<span class="c-tag">&lt;/nav&gt;</span>
+
+<span class="c-tag">&lt;script&gt;</span>
+  <span class="c-cm">// ① 抓誰：按鈕和選單</span>
+  <span class="c-prop">const</span> btn  = document.getElementById(<span class="c-val">'menuBtn'</span>);
+  <span class="c-prop">const</span> menu = document.getElementById(<span class="c-val">'menu'</span>);
+  <span class="c-cm">// ② 等什麼：按鈕被點擊</span>
+  btn.addEventListener(<span class="c-val">'click'</span>, <span class="c-prop">function</span> () {
+    <span class="c-cm">// ③ 做什麼：選單的 hidden 有就拿掉、沒有就加上</span>
+    menu.classList.toggle(<span class="c-val">'hidden'</span>);
+  });
+<span class="c-tag">&lt;/script&gt;</span></pre>
+    <div class="flat">
+      <p class="mini"><code>hidden</code> 是 Tailwind 的 class，等於 CSS 的 <code>display:none</code>（W5 解碼表）。</p>
+      <p class="mini">所以這段程式的白話是：<b>按一下 ☰，選單出現；再按一下，選單消失。</b></p>
+      <p class="mini">注意 JS 和 HTML 靠 <b>id 對上</b>。id 拼錯一個字母，開關就接不到燈。</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-toc="12.7 跟做①：讀懂營業中標籤" data-n="12.7">
+  <div class="eyebrow"><span class="num">12.7</span><span class="kicker">B · Follow Along 1</span></div>
+  <h2 class="title">跟做①　讀懂「營業中」標籤</h2>
+  <p class="lead">請暫停影片，用三個問題讀這段程式，再展開答案對照。</p>
+<pre class="code"><span class="c-prop">const</span> badge = document.getElementById(<span class="c-val">'status'</span>);
+<span class="c-prop">const</span> hour  = <span class="c-prop">new</span> Date().getHours();   <span class="c-cm">// 現在幾點（0–23）</span>
+
+<span class="c-prop">if</span> (hour &gt;= <span class="c-val">21</span> || hour &lt; <span class="c-val">2</span>) {
+  badge.textContent = <span class="c-val">'營業中'</span>;
+} <span class="c-prop">else</span> {
+  badge.textContent = <span class="c-val">'休息中'</span>;
+}</pre>
+  <details class="check"><summary>展開參考答案</summary>
+    <ul>
+      <li><b>抓誰</b>：id 是 <code>status</code> 的標籤</li>
+      <li><b>等什麼</b>：不用等，網頁一打開就執行一次</li>
+      <li><b>做什麼</b>：21 點以後或凌晨 2 點前顯示「營業中」，其他時間「休息中」</li>
+      <li><code>||</code> 讀作「或」：兩個條件只要成立一個就算數</li>
+    </ul>
+  </details>
+</section>
+
+<section class="slide" data-toc="12.8 Console：錯誤的報案單" data-n="12.8">
+  <div class="eyebrow"><span class="num">12.8</span><span class="kicker">Console</span></div>
+  <h2 class="title">Console：瀏覽器幫你寫好的報案單</h2>
+  <p class="lead">JS 壞掉時，畫面通常什麼都不說，只是「沒反應」。但瀏覽器在後台已經寫好一張報案單了。</p>
+  <div class="stepgrid">
+    <div class="stepbox"><div class="sn">01</div><h4>按 F12</h4><p>W5 學過的開發者工具</p></div>
+    <div class="stepbox"><div class="sn">02</div><h4>切到 Console</h4><p>上方分頁「主控台」</p></div>
+    <div class="stepbox"><div class="sn">03</div><h4>找紅字</h4><p>紅字＝錯誤，黃字＝警告</p></div>
+    <div class="stepbox"><div class="sn">04</div><h4>看最右邊</h4><p><code>index.html:42</code>＝第 42 行</p></div>
+  </div>
+<pre class="code"><span class="c-sel">Uncaught TypeError</span>: Cannot set properties of null (setting 'textContent')
+    at <span class="c-val">index.html:42</span>
+<span class="c-cm">// 白話：第 42 行想改一個「不存在的東西」的文字</span></pre>
+</section>
+
+<section class="slide" data-toc="12.9 三種最常見的壞法" data-n="12.9">
+  <div class="eyebrow"><span class="num">12.9</span><span class="kicker">Common Errors</span></div>
+  <h2 class="title">三種最常見的壞法</h2>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Console 說</th><th>白話</th><th>第一步檢查</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">Cannot set properties of null</td><td>開關接不到燈：抓的東西不存在</td><td>id 拼字、大小寫；<code>&lt;script&gt;</code> 是不是放在元素<b>前面</b>（在 head 裡）</td></tr>
+        <tr><td class="mono">… is not defined</td><td>叫了一個不存在的名字</td><td>變數或函式名稱拼錯</td></tr>
+        <tr><td>（沒有紅字，但結果不對）</td><td>配線沒斷，邏輯錯了</td><td>條件判斷：時間範圍、<code>"false"</code> 字串不等於 false</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note"><b>第三種最難找：</b>沒有報案單，只能自己讀程式。12.2 的凌晨三點事件就是這一種。</div>
+</section>
+
+<section class="slide" data-toc="12.10 示範②：用 Gemini 排錯四步" data-n="12.10">
+  <div class="eyebrow"><span class="num">12.10</span><span class="kicker">A · Demo 2</span></div>
+  <h2 class="title">示範②　用 Gemini 排錯四步</h2>
+  <div class="stepgrid">
+    <div class="stepbox"><div class="sn">01 · 帶證據</div><h4>複製紅字</h4><p>整行錯誤訊息，含行號</p></div>
+    <div class="stepbox"><div class="sn">02 · 帶現場</div><h4>貼相關程式</h4><p>出錯那段＋它要抓的 HTML</p></div>
+    <div class="stepbox"><div class="sn">03 · 講期待</div><h4>預期 vs 實際</h4><p>「應該 X，但現在 Y」</p></div>
+    <div class="stepbox"><div class="sn">04 · 先懂再改</div><h4>要它先解釋</h4><p>說明錯在哪，再給修改</p></div>
+  </div>
+<pre class="code wrap"><span class="c-attr">錯誤訊息</span>：Cannot set properties of null (setting 'textContent') at index.html:42
+<span class="c-attr">相關程式</span>：（貼上第 38–46 行，以及 id="status" 那一行 HTML）
+<span class="c-attr">預期</span>：首屏顯示「營業中／休息中」　<span class="c-attr">實際</span>：標籤是空的
+<span class="c-attr">請你</span>：用沒學過程式的人聽得懂的話，先說錯在哪，再告訴我只要改哪一行。</pre>
+</section>
+
+<section class="slide" data-toc="12.11 跟做②：找出壞掉的那一個字" data-n="12.11">
+  <div class="eyebrow"><span class="num">12.11</span><span class="kicker">B · Follow Along 2</span></div>
+  <h2 class="title">跟做②　找出壞掉的那一個字</h2>
+  <p class="lead">下面這段程式，Console 顯示 <code>Cannot set properties of null</code>。先自己找，找不到再問 Gemini。</p>
+<pre class="code"><span class="c-tag">&lt;span</span> <span class="c-attr">id</span>=<span class="c-val">"status"</span><span class="c-tag">&gt;&lt;/span&gt;</span>
+
+<span class="c-tag">&lt;script&gt;</span>
+  <span class="c-prop">const</span> badge = document.getElementById(<span class="c-val">'Status'</span>);
+  badge.textContent = <span class="c-val">'營業中'</span>;
+<span class="c-tag">&lt;/script&gt;</span></pre>
+  <details class="check"><summary>展開參考答案</summary>
+    <p><code>'Status'</code> 的 S 是大寫，HTML 裡是小寫 <code>status</code>。JS 分大小寫，所以抓到 <code>null</code>（空的），第二行就壞了。<b>這跟 W11 檔名要全小寫是同一個道理。</b></p>
+  </details>
+</section>
+
+<section class="slide" data-toc="12.12 AI 的建議要驗證" data-n="12.12">
+  <div class="eyebrow"><span class="num">12.12</span><span class="kicker">Verify</span></div>
+  <h2 class="title">AI 的建議，你負責驗證</h2>
+  <p class="lead">Gemini 很會修，但它看不到你的畫面，有時候會「修好一個、弄壞兩個」。</p>
+  <div class="compare">
+    <div class="card bad"><div class="tag brand">✗ 這種建議先別照用</div><p>「建議你把整份檔案改成以下版本……」（貼回 300 行）<br>它可能順手把你的配色、文字也換掉了。</p></div>
+    <div class="card ok"><div class="tag" style="color:var(--ok)">○ 這種比較安全</div><p>「第 42 行的 <code>'Status'</code> 改成 <code>'status'</code>。」<br>改一處、看得懂為什麼、改完可以馬上驗證。</p></div>
+  </div>
+  <div class="good"><b>驗證就是 W11 的三步：</b>先備份 → 只改一處 → 存檔看畫面，Console 紅字消失、結果正確才算數。</div>
+</section>
+
+<section class="slide" data-toc="12.13 本週任務與測驗③" data-n="12.13">
+  <div class="eyebrow"><span class="num">12.13</span><span class="kicker">This Week's Task</span></div>
+  <h2 class="title">本週任務與測驗③</h2>
+  <div class="ai-callout"><b>影片檢核點：</b>可以無限次重答，答對就通過，不扣分。</div>
+  <div class="card brandcard"><div class="tag brand">測驗③ · JavaScript「壞在哪」</div>
+    <p class="mini" style="margin-top:6px">8 題單選，<b>不用寫程式</b>。題目會給你一段程式碼或 Console 訊息，問你「壞在哪」、「下一步該做什麼」、「AI 這樣建議能不能照用」。</p></div>
+  <div class="flat"><h3 class="sec"><span>練習（不計分，建議做）</span></h3>
+    <p class="mini">在自己的頁面加一個簡單互動（例如 12.6 的選單或 12.7 的營業標籤），請 Gemini 依你的 id 改好給你，<b>用三個問題寫下它在做什麼</b>。</p></div>
+</section>
+
+<section class="slide" data-toc="13 下週銜接" data-n="12.14">
+  <div class="eyebrow"><span class="num">12.14</span><span class="kicker">Next Up</span></div>
+  <h2 class="title">下週銜接</h2>
+  <div class="ai-callout"><b>第十三單元：</b>Figma 與自適應版面微調。同一頁在手機和電腦上長得不一樣，你要學會<b>看懂斷點</b>，說出它在哪裡變形。討論④上線。</div>
+  <div class="good"><b>下週前先做一件事：</b>用手機打開你的頁面，截一張圖。</div>
+</section>

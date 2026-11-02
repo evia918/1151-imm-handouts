@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>互動媒體製作 第十五單元</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,500;0,600;0,700;0,800;1,500&family=IBM+Plex+Mono:wght@400;600&family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
+<style>
+:root{
+  --paper:#F3EEE4; --surface:#FFFFFF; --surface-2:#F8F4EA;
+  --ink:#211C15; --ink-2:#5A5044; --ink-3:#8B806E;
+  --line:#DCD3C0; --line-soft:#EAE2D2;
+  --brand:#C1502E; --brand-soft:#F7E3D8;
+  --ai:#2B6E63; --ai-soft:#DEEBE7;
+  --ok:#2F7D4F; --ok-soft:#E4F2E9;
+  --warn:#9C6B14; --warn-soft:#F7ECD9;
+  --shadow:0 1px 2px rgba(33,28,21,.06),0 8px 24px rgba(33,28,21,.08);
+  --f-zh:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  --f-la:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-mo:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#181510; --surface:#211C16; --surface-2:#28221B;
+    --ink:#ECE6DA; --ink-2:#B8AD9B; --ink-3:#8C8171;
+    --line:#3A3327; --line-soft:#2E281F;
+    --brand:#E8845F; --brand-soft:#3A2419;
+    --ai:#68B3A2; --ai-soft:#173029;
+    --ok:#7EC495; --ok-soft:#163224;
+    --warn:#E1B35D; --warn-soft:#332715;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#181510; --surface:#211C16; --surface-2:#28221B;
+  --ink:#ECE6DA; --ink-2:#B8AD9B; --ink-3:#8C8171;
+  --line:#3A3327; --line-soft:#2E281F;
+  --brand:#E8845F; --brand-soft:#3A2419;
+  --ai:#68B3A2; --ai-soft:#173029;
+  --ok:#7EC495; --ok-soft:#163224;
+  --warn:#E1B35D; --warn-soft:#332715;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--f-zh);font-size:15px;line-height:1.72;
+  display:flex;flex-direction:column;overflow:hidden;
+}
+h1,h2,h3,h4,p,ul,ol{margin:0}
+ul,ol{padding-left:1.15em}
+li{margin-block:.4em}
+strong{font-weight:700}
+code{font-family:var(--f-mo);font-size:.86em;background:var(--surface-2);
+  border:1px solid var(--line-soft);border-radius:4px;padding:.08em .38em}
+
+.topbar{
+  flex:0 0 auto;display:flex;align-items:center;gap:12px;
+  padding:10px 20px;padding-top:calc(10px + env(safe-area-inset-top,0px));
+  background:var(--surface);border-bottom:1px solid var(--line);
+}
+.brand{font-family:var(--f-zh);font-weight:900;font-size:14px;white-space:nowrap}
+.brand span{color:var(--brand)}
+.lockchip{
+  font-family:var(--f-mo);font-size:11px;font-weight:600;
+  color:var(--ai);background:var(--ai-soft);border:1px solid color-mix(in srgb,var(--ai) 35%,transparent);
+  border-radius:99px;padding:3px 10px;white-space:nowrap;
+}
+.topbar .sp{flex:1 1 auto}
+.tbtn{
+  appearance:none;border:1px solid var(--line);background:var(--surface-2);color:var(--ink-2);
+  font-family:var(--f-mo);font-size:11px;border-radius:8px;padding:5px 10px;cursor:pointer;white-space:nowrap;
+}
+.tbtn:hover{color:var(--ink);border-color:var(--ink-3)}
+.progress{flex:0 0 auto;height:3px;background:var(--line-soft)}
+.progress i{display:block;height:100%;background:var(--brand);width:0;transition:width .25s ease}
+
+.stage{flex:1 1 auto;overflow-y:auto;overflow-x:hidden}
+.slide{max-width:1000px;margin:0 auto;padding:32px 20px 46px;display:flex;flex-direction:column;gap:18px}
+@media(prefers-reduced-motion:no-preference){.slide{animation:rise .28s ease both}}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.navbar{
+  flex:0 0 auto;display:flex;align-items:center;gap:10px;
+  padding:10px 20px;padding-bottom:calc(10px + env(safe-area-inset-bottom,0px));
+  background:var(--surface);border-top:1px solid var(--line);
+}
+.navbtn{
+  appearance:none;cursor:pointer;font-family:var(--f-zh);font-weight:700;font-size:13px;
+  border:1px solid var(--line);background:var(--surface-2);color:var(--ink);
+  border-radius:10px;padding:9px 15px;white-space:nowrap;
+}
+.navbtn:hover:not(:disabled){border-color:var(--brand);color:var(--brand)}
+.navbtn:disabled{opacity:.35;cursor:not-allowed}
+.navbtn:focus-visible,.tbtn:focus-visible,select:focus-visible,.toc button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.counter{flex:1 1 auto;text-align:center;font-family:var(--f-mo);font-size:12px;color:var(--ink-3);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.counter b{color:var(--ink);font-weight:600}
+.jump{font-family:var(--f-zh);font-size:12px;max-width:min(40vw,250px);
+  border:1px solid var(--line);background:var(--surface-2);color:var(--ink-2);border-radius:8px;padding:6px 8px}
+
+.eyebrow{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.num{font-family:var(--f-mo);font-weight:600;font-size:13px;letter-spacing:.06em;
+  color:var(--brand);background:var(--brand-soft);border-radius:6px;padding:3px 9px}
+.kicker{font-family:var(--f-mo);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+h2.title{font-family:var(--f-zh);font-weight:900;font-size:clamp(23px,4.2vw,33px);line-height:1.3;text-wrap:balance}
+.lead{font-family:var(--f-zh);font-size:15.5px;color:var(--ink-2);max-width:68ch}
+h3.sec{font-family:var(--f-zh);font-weight:700;font-size:15.5px;display:flex;align-items:flex-start;gap:9px}
+h3.sec::before{content:"";width:4px;height:17px;background:var(--brand);border-radius:2px;flex:0 0 auto;margin-top:4px}
+
+.card{background:var(--surface);border:1px solid var(--line-soft);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.flat{background:var(--surface-2);border:1px solid var(--line-soft);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.brandcard{border-top:3px solid var(--brand)}
+.aicard{border-top:3px solid var(--ai)}
+.tag{font-family:var(--f-mo);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.tag.brand{color:var(--brand)} .tag.ai{color:var(--ai)}
+
+.note{border-left:3px solid var(--warn);background:var(--warn-soft);border-radius:0 10px 10px 0;padding:12px 16px;font-size:14px}
+.note b{color:var(--warn)}
+.good{border-left:3px solid var(--ok);background:var(--ok-soft);border-radius:0 10px 10px 0;padding:12px 16px;font-size:14px}
+.good b{color:var(--ok)}
+.ai-callout{border-left:3px solid var(--ai);background:var(--ai-soft);border-radius:0 10px 10px 0;padding:12px 16px;font-size:14px}
+.ai-callout b{color:var(--ai)}
+
+.scroll{overflow-x:auto;border:1px solid var(--line-soft);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:13.5px}
+th,td{padding:10px 13px;text-align:left;border-bottom:1px solid var(--line-soft);vertical-align:top}
+thead th{background:var(--surface-2);font-family:var(--f-zh);font-weight:700;font-size:12.5px;
+  color:var(--ink-2);white-space:nowrap}
+tbody tr:last-child td{border-bottom:none}
+td.mono,th.mono{font-family:var(--f-mo);font-variant-numeric:tabular-nums}
+.wk{font-family:var(--f-mo);font-size:12px;color:var(--ink-3);white-space:nowrap}
+tr.hl td{background:color-mix(in srgb,var(--brand-soft) 55%,transparent)}
+
+.toc{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:10px}
+.toc button{text-align:left;cursor:pointer;font:inherit;font-family:var(--f-zh);
+  background:var(--surface);border:1px solid var(--line-soft);border-radius:11px;
+  padding:12px 14px;color:var(--ink);display:flex;gap:11px;align-items:flex-start}
+.toc button:hover{border-color:var(--brand)}
+.toc b{font-family:var(--f-mo);font-size:12px;color:var(--brand);font-weight:600;flex:0 0 auto;margin-top:2px}
+.toc span{font-size:14px;font-weight:500}
+.toc small{display:block;color:var(--ink-3);font-size:11.5px;font-weight:400;margin-top:2px}
+
+.cover{gap:24px;padding-top:50px}
+.cover .big{font-family:var(--f-zh);font-weight:900;font-size:clamp(28px,6vw,48px);line-height:1.2;letter-spacing:-.01em}
+.cover .big em{font-style:normal;color:var(--brand)}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.meta div{background:var(--surface);border:1px solid var(--line-soft);border-radius:11px;padding:11px 14px}
+.meta dt{font-family:var(--f-mo);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.meta dd{margin:2px 0 0;font-family:var(--f-zh);font-weight:700;font-size:14px}
+.kbd{font-family:var(--f-mo);font-size:11px;border:1px solid var(--line);border-bottom-width:2px;
+  border-radius:5px;padding:1px 5px;color:var(--ink-2);background:var(--surface-2)}
+
+.stepgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:640px){.stepgrid{grid-template-columns:repeat(2,1fr)}}
+.stepbox{background:var(--surface);border:1px solid var(--line-soft);border-radius:12px;padding:14px;box-shadow:var(--shadow);position:relative}
+.stepbox .sn{font-family:var(--f-mo);font-size:11px;color:var(--ai);font-weight:700;letter-spacing:.06em}
+.stepbox h4{font-family:var(--f-zh);font-weight:700;font-size:14.5px;margin:6px 0 4px}
+.stepbox p{font-size:12.5px;color:var(--ink-2);margin:0}
+
+.pill{display:inline-block;font-family:var(--f-mo);font-size:10.5px;font-weight:600;border-radius:99px;
+  padding:2px 9px;border:1px solid var(--line)}
+.pill.video{color:var(--ai);background:var(--ai-soft);border-color:transparent}
+.pill.f2f{color:var(--brand);background:var(--brand-soft);border-color:transparent}
+.pill.exam{color:var(--warn);background:var(--warn-soft);border-color:transparent}
+
+@media(max-width:640px){
+  .slide{padding:24px 16px 38px}
+  .jump{display:none}
+  .lockchip{display:none}
+}
+
+/* ===== W05 v2 擴充樣式 ===== */
+.mini{font-size:13px;color:var(--ink-2)}
+.warn-tx{color:var(--warn)} .ok-tx{color:var(--ok)}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;align-items:start}
+
+/* 程式碼區塊：兩種主題都用深底，配色與字色固定 */
+pre.code{margin:0;font-family:var(--f-mo);font-size:12.5px;line-height:1.65;
+  background:#1E1B16;color:#ECE6DA;border-radius:10px;padding:12px 14px;
+  overflow-x:auto;white-space:pre;tab-size:2}
+pre.code.big{font-size:clamp(14px,2.4vw,18px);padding:16px 20px}
+.card pre.code{margin:8px 0}
+.c-sel,.c-tag{color:#F09A76;font-weight:600}
+.c-prop{color:#ECE6DA}
+.c-val{color:#8FD3C2}
+.c-attr{color:#E6C07B}
+.c-cm{color:#8C8171}
+.pill.sel{color:#C1502E;background:#F7E3D8;border-color:transparent}
+.pill.prop{color:var(--ink-2);background:var(--surface);}
+.pill.val{color:var(--ai);background:var(--ai-soft);border-color:transparent}
+.flat .pn{align-self:flex-start;font-weight:600;color:var(--brand)}
+
+/* 示範框 */
+.demo-wrap{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface)}
+.demo-bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:10px 12px;border-bottom:1px solid var(--line-soft);background:var(--surface-2)}
+.demo-state{font-size:12.5px;color:var(--ink-3)}
+.tbtn[aria-pressed="true"]{color:var(--brand);border-color:var(--brand);background:var(--brand-soft)}
+
+/* 拉麵頁：未套用 CSS 時模擬瀏覽器預設樣式 */
+.demo-ramen{background:#FFFFFF;color:#000000;font-family:"Times New Roman",serif;font-size:16px;line-height:normal;padding:8px 16px 16px}
+.demo-ramen h1{font-size:2em;font-weight:700;margin:.67em 0}
+.demo-ramen p{margin:1em 0}
+.demo-ramen a{color:#0000EE;text-decoration:underline}
+/* 拉麵頁：套用 CSS（摘自第 3 週 index.html，僅作用於示範框） */
+.demo-ramen.on{background:#111820;color:#E8DDC7;font-family:var(--f-zh);line-height:1.6;padding:24px 20px}
+.demo-ramen.on .brand-title{font-weight:700;font-size:2rem;margin:0 0 16px;color:#E8DDC7}
+.demo-ramen.on .status-badge{display:inline-block;background-color:#E05A33;color:#111820;font-weight:700;padding:6px 12px;border-radius:4px;font-size:.9rem;margin-bottom:12px}
+.demo-ramen.on .mono-text{font-family:var(--f-mo);font-size:1rem;color:#E8DDC7;margin:4px 0}
+.demo-ramen.on .sub-text{color:#8C949B;font-size:.85rem;margin:4px 0 20px}
+.demo-ramen.on .btn{display:inline-block;width:100%;max-width:440px;padding:14px 0;background-color:#E05A33;color:#111820;text-align:center;text-decoration:none;font-weight:700;border-radius:4px;box-sizing:border-box}
+.demo-ramen.mini-demo{border-radius:12px;padding:18px 20px}
+.demo-ramen.mini-demo .status-badge{margin-bottom:0}
+
+/* 圖片 */
+.fig{margin:0;background:var(--surface);border:1px solid var(--line-soft);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+.fig img{display:block;width:100%;height:auto;max-height:420px;object-fit:contain;background:#FFFFFF}
+.fig figcaption{padding:10px 14px;font-size:13px;color:var(--ink-2);border-top:1px solid var(--line-soft)}
+
+/* 檢核點 */
+details.check{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:0 16px}
+details.check summary{cursor:pointer;padding:12px 0;font-weight:700;font-size:14px;color:var(--brand);list-style:none}
+details.check summary::-webkit-details-marker{display:none}
+details.check summary::after{content:"展開 ▾";float:right;font-family:var(--f-mo);font-size:11px;color:var(--ink-3);font-weight:400;margin-top:3px}
+details.check[open] summary::after{content:"收合 ▴"}
+details.check > *:not(summary){padding-bottom:12px;font-size:14px}
+details.check ul{padding-bottom:12px}
+
+.stepgrid.five{grid-template-columns:repeat(5,1fr)}
+@media(max-width:820px){.stepgrid.five{grid-template-columns:repeat(2,1fr)}}
+
+/* 盒模型卡牌圖 */
+.bm-chips{display:flex;flex-wrap:wrap;gap:8px}
+.bm-chip{appearance:none;cursor:pointer;font-family:var(--f-zh);font-size:13px;font-weight:700;
+  border:1px solid var(--line);background:var(--surface);color:var(--ink-2);border-radius:99px;padding:6px 14px}
+.bm-chip[aria-pressed="true"]{color:var(--surface);background:var(--ink);border-color:var(--ink)}
+.bm-chip.c-margin[aria-pressed="true"]{background:var(--warn);border-color:var(--warn)}
+.bm-chip.c-border[aria-pressed="true"]{background:var(--brand);border-color:var(--brand)}
+.bm-chip.c-padding[aria-pressed="true"]{background:var(--ok);border-color:var(--ok)}
+.bm-chip.c-content[aria-pressed="true"]{background:var(--ai);border-color:var(--ai)}
+.bm-chip:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.bm-stage{background:var(--surface);border:1px solid var(--line-soft);border-radius:14px;padding:10px;box-shadow:var(--shadow)}
+#bmSvg{display:block;width:100%;height:auto;font-family:var(--f-zh)}
+#bmSvg .card-face{stroke:#211C15;stroke-width:8}
+:root[data-theme="dark"] #bmSvg .card-face{stroke:#ECE6DA}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #bmSvg .card-face{stroke:#ECE6DA}}
+#bmSvg .f1{fill:#D2492F} #bmSvg .f2{fill:#2E66A8} #bmSvg .f3{fill:#C98A12}
+#bmSvg .num-tx{fill:#FFFFFF;font-family:var(--f-la);font-weight:800;font-size:96px}
+#bmSvg .hatch-bg{fill:var(--warn-soft)} #bmSvg .hatch-ln{stroke:var(--warn);stroke-width:2;opacity:.55}
+#bmSvg .ah{fill:var(--ink-2)}
+#bmSvg .lb{font-size:14px;font-weight:700}
+#bmSvg .lb-margin{fill:var(--warn)} #bmSvg .lb-border{fill:var(--brand)} #bmSvg .lb-padding{fill:var(--ok)} #bmSvg .lb-content{fill:var(--ai)}
+#bmSvg .ln-margin{stroke:var(--warn);stroke-width:2}
+#bmSvg .ln-border{stroke:var(--brand);stroke-width:2}
+#bmSvg .ln-padding{stroke:#FFFFFF;stroke-width:2}
+#bmSvg .ln-padding-top{stroke:var(--ok);stroke-width:2}
+#bmSvg .ln-content{stroke:var(--ai);stroke-width:2}
+#bmSvg .pad-ln{stroke:#9BE0B0;stroke-width:4;opacity:.75}
+#bmSvg .ct-box{fill:#2E66A8}
+#bmSvg .ct-box{stroke:#FFFFFF;stroke-width:3;stroke-dasharray:6 5}
+#bmSvg .bd-hl{fill:none;stroke:var(--brand);stroke-width:5;stroke-dasharray:14 8}
+#bmSvg .ann{transition:opacity .2s ease}
+#bmSvg[data-hl="margin"]  .ann:not(.a-margin),
+#bmSvg[data-hl="border"]  .ann:not(.a-border),
+#bmSvg[data-hl="padding"] .ann:not(.a-padding),
+#bmSvg[data-hl="content"] .ann:not(.a-content){opacity:0}
+.bm-legend.l-content{border-top:3px solid var(--ai)}
+.bm-legend.l-padding{border-top:3px solid var(--ok)}
+.bm-legend.l-border{border-top:3px solid var(--brand)}
+.bm-legend.l-margin{border-top:3px solid var(--warn)}
+
+/* border-box 長條圖 */
+.bar-wrap{position:relative;margin:14px 0 10px;padding-top:22px}
+.bar-limit{position:absolute;z-index:1;top:0;left:0;bottom:0;border:2px dashed var(--ink-3);border-radius:6px;pointer-events:none}
+.bar-limit span{position:absolute;top:2px;left:8px;font-family:var(--f-mo);font-size:11px;color:var(--ink-3)}
+.bar{display:flex;height:44px;border-radius:4px;overflow:hidden;position:relative}
+.bar i{display:flex;align-items:center;justify-content:center;font-style:normal;font-family:var(--f-mo);font-size:12px;font-weight:600;min-width:0}
+.bar .b-bd{background:var(--ink)}
+.bar .b-pd{background:#A9D8B6}
+.bar .b-ct{background:#B7D3F2;color:#1E2761}
+
+/* Flex 示範 */
+.flex-demo-wrap{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}
+.flex-demo{display:flex;gap:12px;padding:16px;background:#111820;min-height:190px;align-items:flex-start}
+.flex-demo span{background:#E05A33;color:#111820;font-weight:700;font-size:13px;padding:10px 16px;border-radius:4px;white-space:nowrap}
+
+/* 跟做表格與連連看 */
+table.fill{min-width:420px}
+td.ex{color:var(--ink-3);font-size:12.5px}
+td.tw{color:var(--ai);font-weight:600}
+.match{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+.match > div{display:flex;flex-direction:column;gap:8px}
+.match code{display:block;padding:8px 10px;font-size:12.5px}
+.match span{display:block;padding:8px 10px;font-size:13px;background:var(--surface-2);border:1px solid var(--line-soft);border-radius:6px}
+@media(max-width:640px){.match{grid-template-columns:1fr}}
+
+.shot-box{position:relative;background:#FFFFFF}
+.shot-box img{max-height:none;cursor:zoom-in}
+.pin{position:absolute;transform:translate(-50%,-50%);width:28px;height:28px;border-radius:50%;
+  background:var(--brand);color:#FFFFFF;font-family:var(--f-mo);font-weight:700;font-size:14px;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 3px #FFFFFF,0 2px 6px rgba(0,0,0,.35);pointer-events:none}
+@media(max-width:640px){.pin{width:20px;height:20px;font-size:11px;box-shadow:0 0 0 2px #FFFFFF}}
+
+/* ===== W10–W18 擴充 ===== */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:640px){.compare{grid-template-columns:1fr}}
+.compare .bad{border-top:3px solid var(--brand)} .compare .ok{border-top:3px solid var(--ok)}
+.compare p{font-size:13.5px;color:var(--ink-2);margin-top:6px}
+.stat{font-family:var(--f-la);font-weight:800;font-size:clamp(34px,6vw,52px);color:var(--brand);line-height:1}
+pre.code.wrap{white-space:pre-wrap;word-break:break-all}
+.route{border-radius:14px;padding:16px 18px;background:var(--surface);border:1px solid var(--line-soft);box-shadow:var(--shadow)}
+.route.a{border-top:3px solid var(--ai)} .route.b{border-top:3px solid var(--brand)}
+.route .tag{display:block;margin-bottom:6px}
+.chk{list-style:none;padding-left:0}
+.chk li{padding-left:1.6em;position:relative}
+.chk li::before{content:"□";position:absolute;left:0;color:var(--brand);font-family:var(--f-mo)}
+.big-num{font-family:var(--f-la);font-weight:800;font-size:clamp(28px,5vw,40px);color:var(--brand);line-height:1}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13.5px}
+.flow span{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
+.flow i{font-style:normal;color:var(--ink-3);font-family:var(--f-mo)}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">互動媒體製作 · <span>第十五單元</span></div>
+  <div class="lockchip">分段交付制 · AI Agent 協作</div>
+  <div class="sp"></div>
+  <a class="tbtn" href="index.html" style="text-decoration:none">目錄</a>
+  <button class="tbtn" id="themebtn" type="button">◐</button>
+</header>
+<div class="progress"><i id="bar"></i></div>
+
+<main class="stage" id="stage" tabindex="-1">
+<section class="slide cover" data-toc="封面" data-n="封面">
+  <div class="kicker">弘光科技大學 · 多媒體遊戲發展與應用系 · 115-1 進修部</div>
+  <h1 class="big">上線不是終點<br>是第一次被客人<em>看見</em></h1>
+  <p class="lead">第十五單元｜部署除錯與期末專案診斷（面授）</p>
+  <dl class="meta">
+    <div><dt>Course</dt><dd>互動媒體製作（選課號 01544）</dd></div>
+    <div><dt>Class</dt><dd>進修四技多遊 4 年甲班 · G501</dd></div>
+    <div><dt>Week</dt><dd>12/21 – 12/27</dd></div>
+    <div><dt>Instructor</dt><dd>洪明顯</dd></div>
+    <div><dt>本週型態</dt><dd>面授工作坊（12/25 無非同步）</dd></div>
+    <div><dt>本週任務</dt><dd>問題清單＋修正證據</dd></div>
+  </dl>
+  <p class="lead" style="font-size:13.5px">操作方式：點下方「上一頁／下一頁」，或使用鍵盤 <span class="kbd">←</span> <span class="kbd">→</span> 翻頁。</p>
+</section>
+
+<section class="slide" data-toc="15.0 本單元目錄" data-n="15.0">
+  <div class="eyebrow"><span class="num">15.0</span><span class="kicker">Unit Map</span></div>
+  <h2 class="title">本單元目錄</h2>
+  <p class="lead">今天帶著手機和網址來。上完這堂課，你的網站至少要修好一個問題，而且留下證據。</p>
+  <div class="toc" id="toc"></div>
+</section>
+
+<section class="slide" data-toc="15.1 今天的流程" data-n="15.1">
+  <div class="eyebrow"><span class="num">15.1</span><span class="kicker">Agenda</span></div>
+  <h2 class="title">今天的流程</h2>
+  <div class="stepgrid">
+    <div class="stepbox"><div class="sn">10 分</div><h4>自我檢查</h4><p>用 15.3–15.5 的清單，先檢查自己的網站</p></div>
+    <div class="stepbox"><div class="sn">20 分</div><h4>互換測試</h4><p>兩兩交換網址，手機＋電腦各看一次</p></div>
+    <div class="stepbox"><div class="sn">15 分</div><h4>修一項</h4><p>挑一個問題修好，截修正前後</p></div>
+    <div class="stepbox"><div class="sn">5 分</div><h4>期末診斷</h4><p>對照期末配分，確認還缺什麼</p></div>
+  </div>
+  <div class="note"><b>還沒上線的同學：</b>先舉手。老師會先處理上線問題，這比其他事都重要。</div>
+</section>
+
+<section class="slide" data-toc="15.2 除錯像看醫生" data-n="15.2">
+  <div class="eyebrow"><span class="num">15.2</span><span class="kicker">Mindset</span></div>
+  <h2 class="title">除錯像看醫生：先問症狀，再開藥</h2>
+  <p class="lead">網站壞了，最常見的反應是「整個重做」或「把整份檔案丟給 AI」。這就像頭痛就去開刀。</p>
+  <div class="grid3">
+    <div class="card"><div class="tag brand">① 描述症狀</div><p class="mini" style="margin-top:6px">哪一頁、哪個區塊、手機還是電腦、看到什麼。</p></div>
+    <div class="card"><div class="tag brand">② 查最可能的原因</div><p class="mini" style="margin-top:6px">照下面的清單，<b>從第一項往下查</b>，常見的先排除。</p></div>
+    <div class="card aicard"><div class="tag ai">③ 一次只開一種藥</div><p class="mini" style="margin-top:6px">一次只改一處，上傳後確認。好了就停，沒好再換下一個原因。</p></div>
+  </div>
+</section>
+
+<section class="slide" data-toc="15.3 除錯清單：兩條路線共通" data-n="15.3">
+  <div class="eyebrow"><span class="num">15.3</span><span class="kicker">Checklist · Common</span></div>
+  <h2 class="title">除錯清單：兩條路線共通</h2>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>症狀</th><th>第一步檢查</th></tr></thead>
+      <tbody>
+        <tr><td>404／找不到頁面</td><td><code>index.html</code> 是否在 repo 最外層、檔名是否全小寫</td></tr>
+        <tr><td>圖片破圖</td><td>檔名大小寫是否一致（<code>Logo.PNG</code> ≠ <code>logo.png</code>）；有沒有殘留 <code>C:\Users\…</code> 這種本機路徑</td></tr>
+        <tr><td>沒有樣式（白底黑字）</td><td>Tailwind 那行 <code>&lt;script&gt;</code> 還在嗎？網路正常嗎？</td></tr>
+        <tr><td>中文字型又變回怪怪的</td><td>W11 的兩行（Noto Sans TC）還在嗎？是不是上傳了舊版檔案？</td></tr>
+        <tr><td>真正的亂碼（□□、銝剜）</td><td><code>&lt;meta charset="UTF-8"&gt;</code> 是否存在</td></tr>
+        <tr><td>按了沒反應</td><td>F12 → Console 有沒有紅字（W12）</td></tr>
+        <tr><td>改了但網站沒變</td><td>等 1–2 分鐘；<span class="kbd">Ctrl</span>+<span class="kbd">F5</span> 強制重新整理；確認 commit 成功</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="slide" data-toc="15.4 路線 A：GitHub Pages 專屬" data-n="15.4">
+  <div class="eyebrow"><span class="num">15.4</span><span class="kicker">Checklist · Route A</span></div>
+  <h2 class="title">路線 A：GitHub Pages 專屬</h2>
+  <div class="route a">
+    <span class="tag ai">GitHub Pages</span>
+    <div class="scroll" style="border:none">
+      <table>
+        <thead><tr><th>症狀</th><th>第一步檢查</th></tr></thead>
+        <tbody>
+          <tr><td>網址打不開</td><td>自己的 repo › Settings › Pages 有沒有開（template 不會複製這個設定）</td></tr>
+          <tr><td>404</td><td>網址有沒有少了 <code>/repo名/</code>；分支是否選 <code>main</code>、資料夾 <code>/(root)</code></td></tr>
+          <tr><td>Pages 選項是灰的</td><td>repo 是不是設成 Private（免費帳號要 Public）</td></tr>
+          <tr><td>想看上線有沒有成功</td><td>repo 上方 Actions 分頁，綠勾＝成功、紅叉＝失敗</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-toc="15.5 路線 B：Netlify 專屬" data-n="15.5">
+  <div class="eyebrow"><span class="num">15.5</span><span class="kicker">Checklist · Route B</span></div>
+  <h2 class="title">路線 B：Netlify 專屬</h2>
+  <div class="route b">
+    <span class="tag brand">GitHub＋Netlify</span>
+    <div class="scroll" style="border:none">
+      <table>
+        <thead><tr><th>症狀</th><th>第一步檢查</th></tr></thead>
+        <tbody>
+          <tr><td>Deploy failed（紅色）</td><td>Deploys → 點那一次紀錄看 log；多半是 Build command 被填了東西 → 清空後重新部署</td></tr>
+          <tr><td>網站空白或 404</td><td>Publish directory 是否指到 <code>index.html</code> 所在的資料夾（在最外層就留空）</td></tr>
+          <tr><td>production deploys are paused</td><td>當月額度用完或平台問題。網站仍在線，<b>改用路線 A 交網址</b>，截圖存證</td></tr>
+          <tr><td>上傳了但沒有新的部署紀錄</td><td>Netlify 連結的是不是這個 repo、這個分支</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="ai-callout"><b>Deploy log 是現成的除錯證據：</b>失敗那次和修好那次各截一張，就是期末「除錯歷程」最好的素材。</div>
+</section>
+
+<section class="slide" data-toc="15.6 互換測試：當彼此的第一位客人" data-n="15.6">
+  <div class="eyebrow"><span class="num">15.6</span><span class="kicker">Pair Test</span></div>
+  <h2 class="title">互換測試：當彼此的第一位客人</h2>
+  <p class="lead">自己的網站自己最熟，所以最看不出問題。交換網址，用「第一次來的客人」的眼睛看。</p>
+  <div class="split">
+    <ul class="chk card mini">
+      <li>用<b>手機</b>打開對方網址，給自己一個任務（例：「查營業時間」）</li>
+      <li>數數看用了幾步、哪一步卡住</li>
+      <li>換<b>電腦</b>再看一次，比較兩者差在哪</li>
+      <li>寫下<b>至少 2 個問題</b>，交給對方</li>
+    </ul>
+<pre class="code wrap"><span class="c-cm"># 問題清單格式（一個問題一行）</span>
+<span class="c-attr">在哪裡</span>：手機版，首屏
+<span class="c-attr">看到什麼</span>：「開啟地圖」按鈕在畫面外，要往下滑
+<span class="c-attr">屬於哪一類</span>：W6 看點③ 首屏三問
+<span class="c-attr">建議</span>：按鈕移到店名下方</pre>
+  </div>
+  <div class="note"><b>不能寫「還不錯」「怪怪的」：</b>要說出位置、現象，最好用上 W6 的看點名稱。</div>
+</section>
+
+<section class="slide" data-toc="15.7 修一項，留下證據" data-n="15.7">
+  <div class="eyebrow"><span class="num">15.7</span><span class="kicker">Fix &amp; Evidence</span></div>
+  <h2 class="title">修一項，留下證據</h2>
+  <p class="lead">期末「除錯歷程」佔 6 分。評的不是你有沒有犯錯，是你<b>怎麼找到、怎麼修好</b>。</p>
+  <div class="grid4">
+    <div class="flat"><span class="pn">01</span><h3 class="sec"><span>修正前截圖</span></h3><p class="mini">問題出現的畫面</p></div>
+    <div class="flat"><span class="pn">02</span><h3 class="sec"><span>原因</span></h3><p class="mini">一句話寫你查到的原因</p></div>
+    <div class="flat"><span class="pn">03</span><h3 class="sec"><span>做法</span></h3><p class="mini">改了哪一行；有問 Gemini 就附對話截圖</p></div>
+    <div class="flat"><span class="pn">04</span><h3 class="sec"><span>修正後截圖</span></h3><p class="mini">路線 B 加附 Deploy log</p></div>
+  </div>
+  <div class="good"><b>建一個資料夾叫「除錯歷程」：</b>今天的四樣東西都丟進去，期末直接用。</div>
+</section>
+
+<section class="slide" data-toc="15.8 期末專案診斷" data-n="15.8">
+  <div class="eyebrow"><span class="num">15.8</span><span class="kicker">Final Check</span></div>
+  <h2 class="title">期末專案診斷：還缺什麼？</h2>
+  <p class="lead">離期末展示還有三週。對照期末配分，勾一勾，沒勾到的就是接下來的功課。</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>期末項目</th><th class="mono">配分</th><th>現在有了嗎</th></tr></thead>
+      <tbody>
+        <tr><td>成品：Google Site 主體＋一頁上線的網頁</td><td class="mono">12</td><td>□ Google Site　□ 上線網址</td></tr>
+        <tr><td>改動說明：從 Stitch 第一版到現在改了什麼</td><td class="mono">8</td><td>□ W10 第一版截圖　□ 改動紀錄</td></tr>
+        <tr><td>除錯歷程：遇到什麼問題、怎麼修</td><td class="mono">6</td><td>□ 至少一組修正前後證據</td></tr>
+        <tr><td>UI/UX 論述：為什麼這樣設計</td><td class="mono">4</td><td>□ 能用 W6 看點說明一個設計決定</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="slide" data-toc="15.9 本週任務" data-n="15.9">
+  <div class="eyebrow"><span class="num">15.9</span><span class="kicker">This Week's Task</span></div>
+  <h2 class="title">本週任務</h2>
+  <div class="card brandcard"><div class="tag brand">W15 練習（討論與期末素材）</div>
+    <ol style="margin-top:8px">
+      <li><b>網站問題清單</b>：同學給你的，或你自己找到的，至少 2 項</li>
+      <li><b>修好其中一項</b>：保留修正前／後截圖（Netlify 路線附 Deploy log）</li>
+    </ol></div>
+  <div class="note"><b>缺席的同學：</b>一週內線上補交自己的問題清單與修正截圖，計為該次的 70%。</div>
+</section>
+
+<section class="slide" data-toc="16 下週銜接" data-n="15.10">
+  <div class="eyebrow"><span class="num">15.10</span><span class="kicker">Next Up</span></div>
+  <h2 class="title">下週銜接</h2>
+  <div class="ai-callout"><b>第十六單元（面授）：</b>專案優化與同儕互評。用一張互評表，替同學的網站打分、給建議，也收回自己的。1/1 元旦，本週沒有非同步課程。</div>
+  <div class="good"><b>下週前先做一件事：</b>把今天修不完的第二個問題修好。</div>
+</section>
+</main>
+
+<nav class="navbar">
+  <button class="navbtn" id="prevBtn" type="button">← 上一頁</button>
+  <div class="counter"><b id="curNo">1</b> / <span id="totNo">1</span>　<span id="curLabel"></span></div>
+  <select class="jump" id="jump" aria-label="跳到指定頁面"></select>
+  <button class="navbtn" id="nextBtn" type="button">下一頁 →</button>
+</nav>
+
+<script>
+(function(){
+  var stage=document.getElementById('stage');
+  var slides=Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var bar=document.getElementById('bar');
+  var curNo=document.getElementById('curNo'), totNo=document.getElementById('totNo'), curLabel=document.getElementById('curLabel');
+  var prevBtn=document.getElementById('prevBtn'), nextBtn=document.getElementById('nextBtn');
+  var jump=document.getElementById('jump'), tocEl=document.getElementById('toc'), themebtn=document.getElementById('themebtn');
+  var idx=0;
+  totNo.textContent=slides.length;
+
+  slides.forEach(function(s,i){
+    var opt=document.createElement('option');
+    opt.value=i; opt.textContent=(i+1)+'　'+s.getAttribute('data-toc');
+    jump.appendChild(opt);
+  });
+
+  function buildToc(){
+    tocEl.innerHTML='';
+    slides.forEach(function(s,i){
+      if(i===0) return;
+      var b=document.createElement('button');
+      b.type='button'; b.dataset.go=i;
+      b.innerHTML='<b>'+s.getAttribute('data-n')+'</b><span>'+s.getAttribute('data-toc').replace(/^\S+\s/,'')+'</span>';
+      b.addEventListener('click',function(){show(i);});
+      tocEl.appendChild(b);
+    });
+  }
+  buildToc();
+
+  function show(i){
+    idx=Math.max(0,Math.min(slides.length-1,i));
+    slides.forEach(function(s,j){s.style.display=(j===idx)?'':'none';});
+    stage.scrollTop=0; stage.focus({preventScroll:true});
+    bar.style.width=((idx+1)/slides.length*100)+'%';
+    curNo.textContent=idx+1; curLabel.textContent=slides[idx].getAttribute('data-toc');
+    jump.value=idx;
+    prevBtn.disabled=(idx===0); nextBtn.disabled=(idx===slides.length-1);
+  }
+  prevBtn.addEventListener('click',function(){show(idx-1);});
+  nextBtn.addEventListener('click',function(){show(idx+1);});
+  jump.addEventListener('change',function(){show(parseInt(jump.value,10));});
+  document.addEventListener('keydown',function(e){
+    if(e.target.tagName==='SELECT') return;
+    if(e.key==='ArrowRight') show(idx+1);
+    if(e.key==='ArrowLeft') show(idx-1);
+  });
+  window.addEventListener('click',function(e){
+    var go=e.target.closest('[data-go]');
+    if(go) show(parseInt(go.dataset.go,10));
+  });
+
+  themebtn.addEventListener('click',function(){
+    var root=document.documentElement;
+    var cur=root.getAttribute('data-theme');
+    var sysDark=window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var next = cur==='dark' ? 'light' : (cur==='light' ? (sysDark?'dark':'light') : (sysDark?'light':'dark'));
+    root.setAttribute('data-theme',next);
+    try{localStorage.setItem('imm-theme',next);}catch(e){}
+  });
+  try{
+    var saved=localStorage.getItem('imm-theme');
+    if(saved) document.documentElement.setAttribute('data-theme',saved);
+  }catch(e){}
+
+  show(0);
+})();
+</script>
+</body>
+</html>

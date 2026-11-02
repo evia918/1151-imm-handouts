@@ -1,0 +1,171 @@
+<!--META {"cn":"第十五單元"}-->
+<section class="slide cover" data-toc="封面" data-n="封面">
+  <div class="kicker">弘光科技大學 · 多媒體遊戲發展與應用系 · 115-1 進修部</div>
+  <h1 class="big">上線不是終點<br>是第一次被客人<em>看見</em></h1>
+  <p class="lead">第十五單元｜部署除錯與期末專案診斷（面授）</p>
+  <dl class="meta">
+    <div><dt>Course</dt><dd>互動媒體製作（選課號 01544）</dd></div>
+    <div><dt>Class</dt><dd>進修四技多遊 4 年甲班 · G501</dd></div>
+    <div><dt>Week</dt><dd>12/21 – 12/27</dd></div>
+    <div><dt>Instructor</dt><dd>洪明顯</dd></div>
+    <div><dt>本週型態</dt><dd>面授工作坊（12/25 無非同步）</dd></div>
+    <div><dt>本週任務</dt><dd>問題清單＋修正證據</dd></div>
+  </dl>
+  <p class="lead" style="font-size:13.5px">操作方式：點下方「上一頁／下一頁」，或使用鍵盤 <span class="kbd">←</span> <span class="kbd">→</span> 翻頁。</p>
+</section>
+
+<section class="slide" data-toc="15.0 本單元目錄" data-n="15.0">
+  <div class="eyebrow"><span class="num">15.0</span><span class="kicker">Unit Map</span></div>
+  <h2 class="title">本單元目錄</h2>
+  <p class="lead">今天帶著手機和網址來。上完這堂課，你的網站至少要修好一個問題，而且留下證據。</p>
+  <div class="toc" id="toc"></div>
+</section>
+
+<section class="slide" data-toc="15.1 今天的流程" data-n="15.1">
+  <div class="eyebrow"><span class="num">15.1</span><span class="kicker">Agenda</span></div>
+  <h2 class="title">今天的流程</h2>
+  <div class="stepgrid">
+    <div class="stepbox"><div class="sn">10 分</div><h4>自我檢查</h4><p>用 15.3–15.5 的清單，先檢查自己的網站</p></div>
+    <div class="stepbox"><div class="sn">20 分</div><h4>互換測試</h4><p>兩兩交換網址，手機＋電腦各看一次</p></div>
+    <div class="stepbox"><div class="sn">15 分</div><h4>修一項</h4><p>挑一個問題修好，截修正前後</p></div>
+    <div class="stepbox"><div class="sn">5 分</div><h4>期末診斷</h4><p>對照期末配分，確認還缺什麼</p></div>
+  </div>
+  <div class="note"><b>還沒上線的同學：</b>先舉手。老師會先處理上線問題，這比其他事都重要。</div>
+</section>
+
+<section class="slide" data-toc="15.2 除錯像看醫生" data-n="15.2">
+  <div class="eyebrow"><span class="num">15.2</span><span class="kicker">Mindset</span></div>
+  <h2 class="title">除錯像看醫生：先問症狀，再開藥</h2>
+  <p class="lead">網站壞了，最常見的反應是「整個重做」或「把整份檔案丟給 AI」。這就像頭痛就去開刀。</p>
+  <div class="grid3">
+    <div class="card"><div class="tag brand">① 描述症狀</div><p class="mini" style="margin-top:6px">哪一頁、哪個區塊、手機還是電腦、看到什麼。</p></div>
+    <div class="card"><div class="tag brand">② 查最可能的原因</div><p class="mini" style="margin-top:6px">照下面的清單，<b>從第一項往下查</b>，常見的先排除。</p></div>
+    <div class="card aicard"><div class="tag ai">③ 一次只開一種藥</div><p class="mini" style="margin-top:6px">一次只改一處，上傳後確認。好了就停，沒好再換下一個原因。</p></div>
+  </div>
+</section>
+
+<section class="slide" data-toc="15.3 除錯清單：兩條路線共通" data-n="15.3">
+  <div class="eyebrow"><span class="num">15.3</span><span class="kicker">Checklist · Common</span></div>
+  <h2 class="title">除錯清單：兩條路線共通</h2>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>症狀</th><th>第一步檢查</th></tr></thead>
+      <tbody>
+        <tr><td>404／找不到頁面</td><td><code>index.html</code> 是否在 repo 最外層、檔名是否全小寫</td></tr>
+        <tr><td>圖片破圖</td><td>檔名大小寫是否一致（<code>Logo.PNG</code> ≠ <code>logo.png</code>）；有沒有殘留 <code>C:\Users\…</code> 這種本機路徑</td></tr>
+        <tr><td>沒有樣式（白底黑字）</td><td>Tailwind 那行 <code>&lt;script&gt;</code> 還在嗎？網路正常嗎？</td></tr>
+        <tr><td>中文字型又變回怪怪的</td><td>W11 的兩行（Noto Sans TC）還在嗎？是不是上傳了舊版檔案？</td></tr>
+        <tr><td>真正的亂碼（□□、銝剜）</td><td><code>&lt;meta charset="UTF-8"&gt;</code> 是否存在</td></tr>
+        <tr><td>按了沒反應</td><td>F12 → Console 有沒有紅字（W12）</td></tr>
+        <tr><td>改了但網站沒變</td><td>等 1–2 分鐘；<span class="kbd">Ctrl</span>+<span class="kbd">F5</span> 強制重新整理；確認 commit 成功</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="slide" data-toc="15.4 路線 A：GitHub Pages 專屬" data-n="15.4">
+  <div class="eyebrow"><span class="num">15.4</span><span class="kicker">Checklist · Route A</span></div>
+  <h2 class="title">路線 A：GitHub Pages 專屬</h2>
+  <div class="route a">
+    <span class="tag ai">GitHub Pages</span>
+    <div class="scroll" style="border:none">
+      <table>
+        <thead><tr><th>症狀</th><th>第一步檢查</th></tr></thead>
+        <tbody>
+          <tr><td>網址打不開</td><td>自己的 repo › Settings › Pages 有沒有開（template 不會複製這個設定）</td></tr>
+          <tr><td>404</td><td>網址有沒有少了 <code>/repo名/</code>；分支是否選 <code>main</code>、資料夾 <code>/(root)</code></td></tr>
+          <tr><td>Pages 選項是灰的</td><td>repo 是不是設成 Private（免費帳號要 Public）</td></tr>
+          <tr><td>想看上線有沒有成功</td><td>repo 上方 Actions 分頁，綠勾＝成功、紅叉＝失敗</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-toc="15.5 路線 B：Netlify 專屬" data-n="15.5">
+  <div class="eyebrow"><span class="num">15.5</span><span class="kicker">Checklist · Route B</span></div>
+  <h2 class="title">路線 B：Netlify 專屬</h2>
+  <div class="route b">
+    <span class="tag brand">GitHub＋Netlify</span>
+    <div class="scroll" style="border:none">
+      <table>
+        <thead><tr><th>症狀</th><th>第一步檢查</th></tr></thead>
+        <tbody>
+          <tr><td>Deploy failed（紅色）</td><td>Deploys → 點那一次紀錄看 log；多半是 Build command 被填了東西 → 清空後重新部署</td></tr>
+          <tr><td>網站空白或 404</td><td>Publish directory 是否指到 <code>index.html</code> 所在的資料夾（在最外層就留空）</td></tr>
+          <tr><td>production deploys are paused</td><td>當月額度用完或平台問題。網站仍在線，<b>改用路線 A 交網址</b>，截圖存證</td></tr>
+          <tr><td>上傳了但沒有新的部署紀錄</td><td>Netlify 連結的是不是這個 repo、這個分支</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="ai-callout"><b>Deploy log 是現成的除錯證據：</b>失敗那次和修好那次各截一張，就是期末「除錯歷程」最好的素材。</div>
+</section>
+
+<section class="slide" data-toc="15.6 互換測試：當彼此的第一位客人" data-n="15.6">
+  <div class="eyebrow"><span class="num">15.6</span><span class="kicker">Pair Test</span></div>
+  <h2 class="title">互換測試：當彼此的第一位客人</h2>
+  <p class="lead">自己的網站自己最熟，所以最看不出問題。交換網址，用「第一次來的客人」的眼睛看。</p>
+  <div class="split">
+    <ul class="chk card mini">
+      <li>用<b>手機</b>打開對方網址，給自己一個任務（例：「查營業時間」）</li>
+      <li>數數看用了幾步、哪一步卡住</li>
+      <li>換<b>電腦</b>再看一次，比較兩者差在哪</li>
+      <li>寫下<b>至少 2 個問題</b>，交給對方</li>
+    </ul>
+<pre class="code wrap"><span class="c-cm"># 問題清單格式（一個問題一行）</span>
+<span class="c-attr">在哪裡</span>：手機版，首屏
+<span class="c-attr">看到什麼</span>：「開啟地圖」按鈕在畫面外，要往下滑
+<span class="c-attr">屬於哪一類</span>：W6 看點③ 首屏三問
+<span class="c-attr">建議</span>：按鈕移到店名下方</pre>
+  </div>
+  <div class="note"><b>不能寫「還不錯」「怪怪的」：</b>要說出位置、現象，最好用上 W6 的看點名稱。</div>
+</section>
+
+<section class="slide" data-toc="15.7 修一項，留下證據" data-n="15.7">
+  <div class="eyebrow"><span class="num">15.7</span><span class="kicker">Fix &amp; Evidence</span></div>
+  <h2 class="title">修一項，留下證據</h2>
+  <p class="lead">期末「除錯歷程」佔 6 分。評的不是你有沒有犯錯，是你<b>怎麼找到、怎麼修好</b>。</p>
+  <div class="grid4">
+    <div class="flat"><span class="pn">01</span><h3 class="sec"><span>修正前截圖</span></h3><p class="mini">問題出現的畫面</p></div>
+    <div class="flat"><span class="pn">02</span><h3 class="sec"><span>原因</span></h3><p class="mini">一句話寫你查到的原因</p></div>
+    <div class="flat"><span class="pn">03</span><h3 class="sec"><span>做法</span></h3><p class="mini">改了哪一行；有問 Gemini 就附對話截圖</p></div>
+    <div class="flat"><span class="pn">04</span><h3 class="sec"><span>修正後截圖</span></h3><p class="mini">路線 B 加附 Deploy log</p></div>
+  </div>
+  <div class="good"><b>建一個資料夾叫「除錯歷程」：</b>今天的四樣東西都丟進去，期末直接用。</div>
+</section>
+
+<section class="slide" data-toc="15.8 期末專案診斷" data-n="15.8">
+  <div class="eyebrow"><span class="num">15.8</span><span class="kicker">Final Check</span></div>
+  <h2 class="title">期末專案診斷：還缺什麼？</h2>
+  <p class="lead">離期末展示還有三週。對照期末配分，勾一勾，沒勾到的就是接下來的功課。</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>期末項目</th><th class="mono">配分</th><th>現在有了嗎</th></tr></thead>
+      <tbody>
+        <tr><td>成品：Google Site 主體＋一頁上線的網頁</td><td class="mono">12</td><td>□ Google Site　□ 上線網址</td></tr>
+        <tr><td>改動說明：從 Stitch 第一版到現在改了什麼</td><td class="mono">8</td><td>□ W10 第一版截圖　□ 改動紀錄</td></tr>
+        <tr><td>除錯歷程：遇到什麼問題、怎麼修</td><td class="mono">6</td><td>□ 至少一組修正前後證據</td></tr>
+        <tr><td>UI/UX 論述：為什麼這樣設計</td><td class="mono">4</td><td>□ 能用 W6 看點說明一個設計決定</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="slide" data-toc="15.9 本週任務" data-n="15.9">
+  <div class="eyebrow"><span class="num">15.9</span><span class="kicker">This Week's Task</span></div>
+  <h2 class="title">本週任務</h2>
+  <div class="card brandcard"><div class="tag brand">W15 練習（討論與期末素材）</div>
+    <ol style="margin-top:8px">
+      <li><b>網站問題清單</b>：同學給你的，或你自己找到的，至少 2 項</li>
+      <li><b>修好其中一項</b>：保留修正前／後截圖（Netlify 路線附 Deploy log）</li>
+    </ol></div>
+  <div class="note"><b>缺席的同學：</b>一週內線上補交自己的問題清單與修正截圖，計為該次的 70%。</div>
+</section>
+
+<section class="slide" data-toc="16 下週銜接" data-n="15.10">
+  <div class="eyebrow"><span class="num">15.10</span><span class="kicker">Next Up</span></div>
+  <h2 class="title">下週銜接</h2>
+  <div class="ai-callout"><b>第十六單元（面授）：</b>專案優化與同儕互評。用一張互評表，替同學的網站打分、給建議，也收回自己的。1/1 元旦，本週沒有非同步課程。</div>
+  <div class="good"><b>下週前先做一件事：</b>把今天修不完的第二個問題修好。</div>
+</section>

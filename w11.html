@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>互動媒體製作 第十一單元</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,500;0,600;0,700;0,800;1,500&family=IBM+Plex+Mono:wght@400;600&family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
+<style>
+:root{
+  --paper:#F3EEE4; --surface:#FFFFFF; --surface-2:#F8F4EA;
+  --ink:#211C15; --ink-2:#5A5044; --ink-3:#8B806E;
+  --line:#DCD3C0; --line-soft:#EAE2D2;
+  --brand:#C1502E; --brand-soft:#F7E3D8;
+  --ai:#2B6E63; --ai-soft:#DEEBE7;
+  --ok:#2F7D4F; --ok-soft:#E4F2E9;
+  --warn:#9C6B14; --warn-soft:#F7ECD9;
+  --shadow:0 1px 2px rgba(33,28,21,.06),0 8px 24px rgba(33,28,21,.08);
+  --f-zh:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  --f-la:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-mo:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#181510; --surface:#211C16; --surface-2:#28221B;
+    --ink:#ECE6DA; --ink-2:#B8AD9B; --ink-3:#8C8171;
+    --line:#3A3327; --line-soft:#2E281F;
+    --brand:#E8845F; --brand-soft:#3A2419;
+    --ai:#68B3A2; --ai-soft:#173029;
+    --ok:#7EC495; --ok-soft:#163224;
+    --warn:#E1B35D; --warn-soft:#332715;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#181510; --surface:#211C16; --surface-2:#28221B;
+  --ink:#ECE6DA; --ink-2:#B8AD9B; --ink-3:#8C8171;
+  --line:#3A3327; --line-soft:#2E281F;
+  --brand:#E8845F; --brand-soft:#3A2419;
+  --ai:#68B3A2; --ai-soft:#173029;
+  --ok:#7EC495; --ok-soft:#163224;
+  --warn:#E1B35D; --warn-soft:#332715;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--f-zh);font-size:15px;line-height:1.72;
+  display:flex;flex-direction:column;overflow:hidden;
+}
+h1,h2,h3,h4,p,ul,ol{margin:0}
+ul,ol{padding-left:1.15em}
+li{margin-block:.4em}
+strong{font-weight:700}
+code{font-family:var(--f-mo);font-size:.86em;background:var(--surface-2);
+  border:1px solid var(--line-soft);border-radius:4px;padding:.08em .38em}
+
+.topbar{
+  flex:0 0 auto;display:flex;align-items:center;gap:12px;
+  padding:10px 20px;padding-top:calc(10px + env(safe-area-inset-top,0px));
+  background:var(--surface);border-bottom:1px solid var(--line);
+}
+.brand{font-family:var(--f-zh);font-weight:900;font-size:14px;white-space:nowrap}
+.brand span{color:var(--brand)}
+.lockchip{
+  font-family:var(--f-mo);font-size:11px;font-weight:600;
+  color:var(--ai);background:var(--ai-soft);border:1px solid color-mix(in srgb,var(--ai) 35%,transparent);
+  border-radius:99px;padding:3px 10px;white-space:nowrap;
+}
+.topbar .sp{flex:1 1 auto}
+.tbtn{
+  appearance:none;border:1px solid var(--line);background:var(--surface-2);color:var(--ink-2);
+  font-family:var(--f-mo);font-size:11px;border-radius:8px;padding:5px 10px;cursor:pointer;white-space:nowrap;
+}
+.tbtn:hover{color:var(--ink);border-color:var(--ink-3)}
+.progress{flex:0 0 auto;height:3px;background:var(--line-soft)}
+.progress i{display:block;height:100%;background:var(--brand);width:0;transition:width .25s ease}
+
+.stage{flex:1 1 auto;overflow-y:auto;overflow-x:hidden}
+.slide{max-width:1000px;margin:0 auto;padding:32px 20px 46px;display:flex;flex-direction:column;gap:18px}
+@media(prefers-reduced-motion:no-preference){.slide{animation:rise .28s ease both}}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.navbar{
+  flex:0 0 auto;display:flex;align-items:center;gap:10px;
+  padding:10px 20px;padding-bottom:calc(10px + env(safe-area-inset-bottom,0px));
+  background:var(--surface);border-top:1px solid var(--line);
+}
+.navbtn{
+  appearance:none;cursor:pointer;font-family:var(--f-zh);font-weight:700;font-size:13px;
+  border:1px solid var(--line);background:var(--surface-2);color:var(--ink);
+  border-radius:10px;padding:9px 15px;white-space:nowrap;
+}
+.navbtn:hover:not(:disabled){border-color:var(--brand);color:var(--brand)}
+.navbtn:disabled{opacity:.35;cursor:not-allowed}
+.navbtn:focus-visible,.tbtn:focus-visible,select:focus-visible,.toc button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.counter{flex:1 1 auto;text-align:center;font-family:var(--f-mo);font-size:12px;color:var(--ink-3);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.counter b{color:var(--ink);font-weight:600}
+.jump{font-family:var(--f-zh);font-size:12px;max-width:min(40vw,250px);
+  border:1px solid var(--line);background:var(--surface-2);color:var(--ink-2);border-radius:8px;padding:6px 8px}
+
+.eyebrow{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.num{font-family:var(--f-mo);font-weight:600;font-size:13px;letter-spacing:.06em;
+  color:var(--brand);background:var(--brand-soft);border-radius:6px;padding:3px 9px}
+.kicker{font-family:var(--f-mo);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+h2.title{font-family:var(--f-zh);font-weight:900;font-size:clamp(23px,4.2vw,33px);line-height:1.3;text-wrap:balance}
+.lead{font-family:var(--f-zh);font-size:15.5px;color:var(--ink-2);max-width:68ch}
+h3.sec{font-family:var(--f-zh);font-weight:700;font-size:15.5px;display:flex;align-items:flex-start;gap:9px}
+h3.sec::before{content:"";width:4px;height:17px;background:var(--brand);border-radius:2px;flex:0 0 auto;margin-top:4px}
+
+.card{background:var(--surface);border:1px solid var(--line-soft);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.flat{background:var(--surface-2);border:1px solid var(--line-soft);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.brandcard{border-top:3px solid var(--brand)}
+.aicard{border-top:3px solid var(--ai)}
+.tag{font-family:var(--f-mo);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.tag.brand{color:var(--brand)} .tag.ai{color:var(--ai)}
+
+.note{border-left:3px solid var(--warn);background:var(--warn-soft);border-radius:0 10px 10px 0;padding:12px 16px;font-size:14px}
+.note b{color:var(--warn)}
+.good{border-left:3px solid var(--ok);background:var(--ok-soft);border-radius:0 10px 10px 0;padding:12px 16px;font-size:14px}
+.good b{color:var(--ok)}
+.ai-callout{border-left:3px solid var(--ai);background:var(--ai-soft);border-radius:0 10px 10px 0;padding:12px 16px;font-size:14px}
+.ai-callout b{color:var(--ai)}
+
+.scroll{overflow-x:auto;border:1px solid var(--line-soft);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:13.5px}
+th,td{padding:10px 13px;text-align:left;border-bottom:1px solid var(--line-soft);vertical-align:top}
+thead th{background:var(--surface-2);font-family:var(--f-zh);font-weight:700;font-size:12.5px;
+  color:var(--ink-2);white-space:nowrap}
+tbody tr:last-child td{border-bottom:none}
+td.mono,th.mono{font-family:var(--f-mo);font-variant-numeric:tabular-nums}
+.wk{font-family:var(--f-mo);font-size:12px;color:var(--ink-3);white-space:nowrap}
+tr.hl td{background:color-mix(in srgb,var(--brand-soft) 55%,transparent)}
+
+.toc{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:10px}
+.toc button{text-align:left;cursor:pointer;font:inherit;font-family:var(--f-zh);
+  background:var(--surface);border:1px solid var(--line-soft);border-radius:11px;
+  padding:12px 14px;color:var(--ink);display:flex;gap:11px;align-items:flex-start}
+.toc button:hover{border-color:var(--brand)}
+.toc b{font-family:var(--f-mo);font-size:12px;color:var(--brand);font-weight:600;flex:0 0 auto;margin-top:2px}
+.toc span{font-size:14px;font-weight:500}
+.toc small{display:block;color:var(--ink-3);font-size:11.5px;font-weight:400;margin-top:2px}
+
+.cover{gap:24px;padding-top:50px}
+.cover .big{font-family:var(--f-zh);font-weight:900;font-size:clamp(28px,6vw,48px);line-height:1.2;letter-spacing:-.01em}
+.cover .big em{font-style:normal;color:var(--brand)}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.meta div{background:var(--surface);border:1px solid var(--line-soft);border-radius:11px;padding:11px 14px}
+.meta dt{font-family:var(--f-mo);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.meta dd{margin:2px 0 0;font-family:var(--f-zh);font-weight:700;font-size:14px}
+.kbd{font-family:var(--f-mo);font-size:11px;border:1px solid var(--line);border-bottom-width:2px;
+  border-radius:5px;padding:1px 5px;color:var(--ink-2);background:var(--surface-2)}
+
+.stepgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:640px){.stepgrid{grid-template-columns:repeat(2,1fr)}}
+.stepbox{background:var(--surface);border:1px solid var(--line-soft);border-radius:12px;padding:14px;box-shadow:var(--shadow);position:relative}
+.stepbox .sn{font-family:var(--f-mo);font-size:11px;color:var(--ai);font-weight:700;letter-spacing:.06em}
+.stepbox h4{font-family:var(--f-zh);font-weight:700;font-size:14.5px;margin:6px 0 4px}
+.stepbox p{font-size:12.5px;color:var(--ink-2);margin:0}
+
+.pill{display:inline-block;font-family:var(--f-mo);font-size:10.5px;font-weight:600;border-radius:99px;
+  padding:2px 9px;border:1px solid var(--line)}
+.pill.video{color:var(--ai);background:var(--ai-soft);border-color:transparent}
+.pill.f2f{color:var(--brand);background:var(--brand-soft);border-color:transparent}
+.pill.exam{color:var(--warn);background:var(--warn-soft);border-color:transparent}
+
+@media(max-width:640px){
+  .slide{padding:24px 16px 38px}
+  .jump{display:none}
+  .lockchip{display:none}
+}
+
+/* ===== W05 v2 擴充樣式 ===== */
+.mini{font-size:13px;color:var(--ink-2)}
+.warn-tx{color:var(--warn)} .ok-tx{color:var(--ok)}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;align-items:start}
+
+/* 程式碼區塊：兩種主題都用深底，配色與字色固定 */
+pre.code{margin:0;font-family:var(--f-mo);font-size:12.5px;line-height:1.65;
+  background:#1E1B16;color:#ECE6DA;border-radius:10px;padding:12px 14px;
+  overflow-x:auto;white-space:pre;tab-size:2}
+pre.code.big{font-size:clamp(14px,2.4vw,18px);padding:16px 20px}
+.card pre.code{margin:8px 0}
+.c-sel,.c-tag{color:#F09A76;font-weight:600}
+.c-prop{color:#ECE6DA}
+.c-val{color:#8FD3C2}
+.c-attr{color:#E6C07B}
+.c-cm{color:#8C8171}
+.pill.sel{color:#C1502E;background:#F7E3D8;border-color:transparent}
+.pill.prop{color:var(--ink-2);background:var(--surface);}
+.pill.val{color:var(--ai);background:var(--ai-soft);border-color:transparent}
+.flat .pn{align-self:flex-start;font-weight:600;color:var(--brand)}
+
+/* 示範框 */
+.demo-wrap{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface)}
+.demo-bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:10px 12px;border-bottom:1px solid var(--line-soft);background:var(--surface-2)}
+.demo-state{font-size:12.5px;color:var(--ink-3)}
+.tbtn[aria-pressed="true"]{color:var(--brand);border-color:var(--brand);background:var(--brand-soft)}
+
+/* 拉麵頁：未套用 CSS 時模擬瀏覽器預設樣式 */
+.demo-ramen{background:#FFFFFF;color:#000000;font-family:"Times New Roman",serif;font-size:16px;line-height:normal;padding:8px 16px 16px}
+.demo-ramen h1{font-size:2em;font-weight:700;margin:.67em 0}
+.demo-ramen p{margin:1em 0}
+.demo-ramen a{color:#0000EE;text-decoration:underline}
+/* 拉麵頁：套用 CSS（摘自第 3 週 index.html，僅作用於示範框） */
+.demo-ramen.on{background:#111820;color:#E8DDC7;font-family:var(--f-zh);line-height:1.6;padding:24px 20px}
+.demo-ramen.on .brand-title{font-weight:700;font-size:2rem;margin:0 0 16px;color:#E8DDC7}
+.demo-ramen.on .status-badge{display:inline-block;background-color:#E05A33;color:#111820;font-weight:700;padding:6px 12px;border-radius:4px;font-size:.9rem;margin-bottom:12px}
+.demo-ramen.on .mono-text{font-family:var(--f-mo);font-size:1rem;color:#E8DDC7;margin:4px 0}
+.demo-ramen.on .sub-text{color:#8C949B;font-size:.85rem;margin:4px 0 20px}
+.demo-ramen.on .btn{display:inline-block;width:100%;max-width:440px;padding:14px 0;background-color:#E05A33;color:#111820;text-align:center;text-decoration:none;font-weight:700;border-radius:4px;box-sizing:border-box}
+.demo-ramen.mini-demo{border-radius:12px;padding:18px 20px}
+.demo-ramen.mini-demo .status-badge{margin-bottom:0}
+
+/* 圖片 */
+.fig{margin:0;background:var(--surface);border:1px solid var(--line-soft);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+.fig img{display:block;width:100%;height:auto;max-height:420px;object-fit:contain;background:#FFFFFF}
+.fig figcaption{padding:10px 14px;font-size:13px;color:var(--ink-2);border-top:1px solid var(--line-soft)}
+
+/* 檢核點 */
+details.check{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:0 16px}
+details.check summary{cursor:pointer;padding:12px 0;font-weight:700;font-size:14px;color:var(--brand);list-style:none}
+details.check summary::-webkit-details-marker{display:none}
+details.check summary::after{content:"展開 ▾";float:right;font-family:var(--f-mo);font-size:11px;color:var(--ink-3);font-weight:400;margin-top:3px}
+details.check[open] summary::after{content:"收合 ▴"}
+details.check > *:not(summary){padding-bottom:12px;font-size:14px}
+details.check ul{padding-bottom:12px}
+
+.stepgrid.five{grid-template-columns:repeat(5,1fr)}
+@media(max-width:820px){.stepgrid.five{grid-template-columns:repeat(2,1fr)}}
+
+/* 盒模型卡牌圖 */
+.bm-chips{display:flex;flex-wrap:wrap;gap:8px}
+.bm-chip{appearance:none;cursor:pointer;font-family:var(--f-zh);font-size:13px;font-weight:700;
+  border:1px solid var(--line);background:var(--surface);color:var(--ink-2);border-radius:99px;padding:6px 14px}
+.bm-chip[aria-pressed="true"]{color:var(--surface);background:var(--ink);border-color:var(--ink)}
+.bm-chip.c-margin[aria-pressed="true"]{background:var(--warn);border-color:var(--warn)}
+.bm-chip.c-border[aria-pressed="true"]{background:var(--brand);border-color:var(--brand)}
+.bm-chip.c-padding[aria-pressed="true"]{background:var(--ok);border-color:var(--ok)}
+.bm-chip.c-content[aria-pressed="true"]{background:var(--ai);border-color:var(--ai)}
+.bm-chip:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.bm-stage{background:var(--surface);border:1px solid var(--line-soft);border-radius:14px;padding:10px;box-shadow:var(--shadow)}
+#bmSvg{display:block;width:100%;height:auto;font-family:var(--f-zh)}
+#bmSvg .card-face{stroke:#211C15;stroke-width:8}
+:root[data-theme="dark"] #bmSvg .card-face{stroke:#ECE6DA}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #bmSvg .card-face{stroke:#ECE6DA}}
+#bmSvg .f1{fill:#D2492F} #bmSvg .f2{fill:#2E66A8} #bmSvg .f3{fill:#C98A12}
+#bmSvg .num-tx{fill:#FFFFFF;font-family:var(--f-la);font-weight:800;font-size:96px}
+#bmSvg .hatch-bg{fill:var(--warn-soft)} #bmSvg .hatch-ln{stroke:var(--warn);stroke-width:2;opacity:.55}
+#bmSvg .ah{fill:var(--ink-2)}
+#bmSvg .lb{font-size:14px;font-weight:700}
+#bmSvg .lb-margin{fill:var(--warn)} #bmSvg .lb-border{fill:var(--brand)} #bmSvg .lb-padding{fill:var(--ok)} #bmSvg .lb-content{fill:var(--ai)}
+#bmSvg .ln-margin{stroke:var(--warn);stroke-width:2}
+#bmSvg .ln-border{stroke:var(--brand);stroke-width:2}
+#bmSvg .ln-padding{stroke:#FFFFFF;stroke-width:2}
+#bmSvg .ln-padding-top{stroke:var(--ok);stroke-width:2}
+#bmSvg .ln-content{stroke:var(--ai);stroke-width:2}
+#bmSvg .pad-ln{stroke:#9BE0B0;stroke-width:4;opacity:.75}
+#bmSvg .ct-box{fill:#2E66A8}
+#bmSvg .ct-box{stroke:#FFFFFF;stroke-width:3;stroke-dasharray:6 5}
+#bmSvg .bd-hl{fill:none;stroke:var(--brand);stroke-width:5;stroke-dasharray:14 8}
+#bmSvg .ann{transition:opacity .2s ease}
+#bmSvg[data-hl="margin"]  .ann:not(.a-margin),
+#bmSvg[data-hl="border"]  .ann:not(.a-border),
+#bmSvg[data-hl="padding"] .ann:not(.a-padding),
+#bmSvg[data-hl="content"] .ann:not(.a-content){opacity:0}
+.bm-legend.l-content{border-top:3px solid var(--ai)}
+.bm-legend.l-padding{border-top:3px solid var(--ok)}
+.bm-legend.l-border{border-top:3px solid var(--brand)}
+.bm-legend.l-margin{border-top:3px solid var(--warn)}
+
+/* border-box 長條圖 */
+.bar-wrap{position:relative;margin:14px 0 10px;padding-top:22px}
+.bar-limit{position:absolute;z-index:1;top:0;left:0;bottom:0;border:2px dashed var(--ink-3);border-radius:6px;pointer-events:none}
+.bar-limit span{position:absolute;top:2px;left:8px;font-family:var(--f-mo);font-size:11px;color:var(--ink-3)}
+.bar{display:flex;height:44px;border-radius:4px;overflow:hidden;position:relative}
+.bar i{display:flex;align-items:center;justify-content:center;font-style:normal;font-family:var(--f-mo);font-size:12px;font-weight:600;min-width:0}
+.bar .b-bd{background:var(--ink)}
+.bar .b-pd{background:#A9D8B6}
+.bar .b-ct{background:#B7D3F2;color:#1E2761}
+
+/* Flex 示範 */
+.flex-demo-wrap{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}
+.flex-demo{display:flex;gap:12px;padding:16px;background:#111820;min-height:190px;align-items:flex-start}
+.flex-demo span{background:#E05A33;color:#111820;font-weight:700;font-size:13px;padding:10px 16px;border-radius:4px;white-space:nowrap}
+
+/* 跟做表格與連連看 */
+table.fill{min-width:420px}
+td.ex{color:var(--ink-3);font-size:12.5px}
+td.tw{color:var(--ai);font-weight:600}
+.match{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+.match > div{display:flex;flex-direction:column;gap:8px}
+.match code{display:block;padding:8px 10px;font-size:12.5px}
+.match span{display:block;padding:8px 10px;font-size:13px;background:var(--surface-2);border:1px solid var(--line-soft);border-radius:6px}
+@media(max-width:640px){.match{grid-template-columns:1fr}}
+
+.shot-box{position:relative;background:#FFFFFF}
+.shot-box img{max-height:none;cursor:zoom-in}
+.pin{position:absolute;transform:translate(-50%,-50%);width:28px;height:28px;border-radius:50%;
+  background:var(--brand);color:#FFFFFF;font-family:var(--f-mo);font-weight:700;font-size:14px;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 3px #FFFFFF,0 2px 6px rgba(0,0,0,.35);pointer-events:none}
+@media(max-width:640px){.pin{width:20px;height:20px;font-size:11px;box-shadow:0 0 0 2px #FFFFFF}}
+
+/* ===== W10–W18 擴充 ===== */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:640px){.compare{grid-template-columns:1fr}}
+.compare .bad{border-top:3px solid var(--brand)} .compare .ok{border-top:3px solid var(--ok)}
+.compare p{font-size:13.5px;color:var(--ink-2);margin-top:6px}
+.stat{font-family:var(--f-la);font-weight:800;font-size:clamp(34px,6vw,52px);color:var(--brand);line-height:1}
+pre.code.wrap{white-space:pre-wrap;word-break:break-all}
+.route{border-radius:14px;padding:16px 18px;background:var(--surface);border:1px solid var(--line-soft);box-shadow:var(--shadow)}
+.route.a{border-top:3px solid var(--ai)} .route.b{border-top:3px solid var(--brand)}
+.route .tag{display:block;margin-bottom:6px}
+.chk{list-style:none;padding-left:0}
+.chk li{padding-left:1.6em;position:relative}
+.chk li::before{content:"□";position:absolute;left:0;color:var(--brand);font-family:var(--f-mo)}
+.big-num{font-family:var(--f-la);font-weight:800;font-size:clamp(28px,5vw,40px);color:var(--brand);line-height:1}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13.5px}
+.flow span{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
+.flow i{font-style:normal;color:var(--ink-3);font-family:var(--f-mo)}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">互動媒體製作 · <span>第十一單元</span></div>
+  <div class="lockchip">分段交付制 · AI Agent 協作</div>
+  <div class="sp"></div>
+  <a class="tbtn" href="index.html" style="text-decoration:none">目錄</a>
+  <button class="tbtn" id="themebtn" type="button">◐</button>
+</header>
+<div class="progress"><i id="bar"></i></div>
+
+<main class="stage" id="stage" tabindex="-1">
+<section class="slide cover" data-toc="封面" data-n="封面">
+  <div class="kicker">弘光科技大學 · 多媒體遊戲發展與應用系 · 115-1 進修部</div>
+  <h1 class="big">從一份檔案<br>變成一個<em>專案</em></h1>
+  <p class="lead">第十一單元｜★桌面版 VS Code 環境建置與專案化檔案管理（提供起始檔）。評量③：Stitch 程式碼匯入 VS Code</p>
+  <dl class="meta">
+    <div><dt>Course</dt><dd>互動媒體製作（選課號 01544）</dd></div>
+    <div><dt>Class</dt><dd>進修四技多遊 4 年甲班 · G501</dd></div>
+    <div><dt>Week</dt><dd>11/23 – 11/29</dd></div>
+    <div><dt>Instructor</dt><dd>洪明顯</dd></div>
+    <div><dt>本週型態</dt><dd>影片 60 分＋面授 1 節</dd></div>
+    <div><dt>本週評量</dt><dd>評量③</dd></div>
+  </dl>
+  <p class="lead" style="font-size:13.5px">操作方式：點下方「上一頁／下一頁」，或使用鍵盤 <span class="kbd">←</span> <span class="kbd">→</span> 翻頁。</p>
+</section>
+
+<section class="slide" data-toc="11.0 本單元目錄" data-n="11.0">
+  <div class="eyebrow"><span class="num">11.0</span><span class="kicker">Unit Map</span></div>
+  <h2 class="title">本單元目錄</h2>
+  <p class="lead">這週做兩件事：把散落的檔案整理成專案資料夾，再用一行 CSS 修好中文字型。</p>
+  <div class="toc" id="toc"></div>
+</section>
+
+<section class="slide" data-toc="11.1 本週學習目標" data-n="11.1">
+  <div class="eyebrow"><span class="num">11.1</span><span class="kicker">Goals</span></div>
+  <h2 class="title">看完這支影片，你能夠……</h2>
+  <div class="grid2">
+    <div class="flat"><span class="pill f2f">應用</span><p>安裝桌面版 VS Code，用 <b>開啟資料夾</b> 的方式管理網站</p></div>
+    <div class="flat"><span class="pill video">理解</span><p>說出專案資料夾的 <b>命名規則</b>，以及為什麼要這樣命名</p></div>
+    <div class="flat"><span class="pill video">理解</span><p>用「點餐順序」解釋 <b>font-family</b> 為什麼會讓中文變怪</p></div>
+    <div class="flat"><span class="pill f2f">應用</span><p>加入 <b>兩行程式碼</b>，修好 Stitch 頁面的中文字型</p></div>
+  </div>
+</section>
+
+<section class="slide" data-toc="11.2 開場：下載資料夾裡的第三份檔案" data-n="11.2">
+  <div class="eyebrow"><span class="num">11.2</span><span class="kicker">Scenario</span></div>
+  <h2 class="title">下載資料夾裡的 <code>stitch_export (3).html</code></h2>
+  <p class="lead">上週匯出的檔案，現在躺在「下載」資料夾，旁邊是發票 PDF、手機照片，還有 <code>(1)</code>、<code>(2)</code>、<code>(3)</code> 三個版本。哪一個才是最新的？</p>
+  <div class="grid2">
+    <div class="card brandcard"><div class="tag brand">散在桌上的文件</div><p class="mini" style="margin-top:6px">每次要用都要翻找，圖片跟網頁分開放，網頁一搬家圖片就破掉。</p></div>
+    <div class="card aicard"><div class="tag ai">歸好檔的資料夾</div><p class="mini" style="margin-top:6px">一個網站＝一個資料夾。網頁、圖片都在裡面，整包搬走也不會壞。<b>W14 上線就是整包上傳。</b></p></div>
+  </div>
+  <div class="ai-callout"><b>「專案化」只有一個意思：</b>一個網站所需要的所有東西，都放在同一個資料夾裡。</div>
+</section>
+
+<section class="slide" data-toc="11.3 為什麼現在才裝桌面版" data-n="11.3">
+  <div class="eyebrow"><span class="num">11.3</span><span class="kicker">Why Now</span></div>
+  <h2 class="title">為什麼現在才裝桌面版</h2>
+  <p class="lead">W3–W5 用的 vscode.dev 是「借來的工作台」，打開網頁就能用，但它不擅長管理整個資料夾。現在你有了自己的專案，該換一張自己的桌子了。</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th></th><th>vscode.dev（W3–W5）</th><th>桌面版 VS Code（W11 起）</th></tr></thead>
+      <tbody>
+        <tr><td>安裝</td><td>不用</td><td>要，約 5 分鐘</td></tr>
+        <tr><td>介面</td><td colspan="2" style="text-align:center">幾乎一模一樣，所以<b>不是學新工具</b></td></tr>
+        <tr><td>管理整個資料夾</td><td>可以，但每次要重新授權</td><td>開一次，之後都記得</td></tr>
+        <tr><td>即時預覽</td><td>有限</td><td>可裝擴充套件 Live Server</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="slide" data-toc="11.4 示範①：安裝 VS Code" data-n="11.4">
+  <div class="eyebrow"><span class="num">11.4</span><span class="kicker">A · Demo 1</span></div>
+  <h2 class="title">示範①　安裝 VS Code</h2>
+  <div class="stepgrid">
+    <div class="stepbox"><div class="sn">01</div><h4>下載</h4><p>到 <code>code.visualstudio.com</code>，按 Download（Windows）</p></div>
+    <div class="stepbox"><div class="sn">02</div><h4>安裝時勾兩個</h4><p>「新增至 PATH」＋「將『以 Code 開啟』加入檔案總管右鍵選單」</p></div>
+    <div class="stepbox"><div class="sn">03</div><h4>中文介面（可選）</h4><p>左側擴充套件搜尋 <code>Chinese (Traditional)</code> 安裝，重開</p></div>
+    <div class="stepbox"><div class="sn">04</div><h4>預覽工具（建議）</h4><p>擴充套件搜尋 <code>Live Server</code> 安裝</p></div>
+  </div>
+  <div class="note"><b>學校電腦裝不了？</b>繼續用 vscode.dev 完成本週作業，評量③一樣可以繳交。差別只在每次都要重新開啟資料夾。</div>
+</section>
+
+<section class="slide" data-toc="11.5 專案資料夾長這樣" data-n="11.5">
+  <div class="eyebrow"><span class="num">11.5</span><span class="kicker">Folder</span></div>
+  <h2 class="title">專案資料夾長這樣</h2>
+  <div class="split">
+<pre class="code"><span class="c-sel">my-site/</span>              <span class="c-cm">← 整個網站就是這個資料夾</span>
+├── <span class="c-tag">index.html</span>        <span class="c-cm">← 首頁，名字固定是這個</span>
+├── <span class="c-tag">menu.html</span>         <span class="c-cm">← 第二頁（期末那「一頁」）</span>
+└── <span class="c-sel">images/</span>
+    ├── <span class="c-val">logo.png</span>
+    └── <span class="c-val">ramen-01.jpg</span></pre>
+    <div class="flat">
+      <h3 class="sec"><span>命名四規則</span></h3>
+      <ol class="mini">
+        <li>首頁一定叫 <code>index.html</code></li>
+        <li>全部<b>小寫英文</b></li>
+        <li><b>不要空格</b>，用 <code>-</code> 連接</li>
+        <li><b>不要中文</b>檔名</li>
+      </ol>
+      <p class="mini"><b>為什麼？</b>網站上線後住在別人的伺服器上，那裡把 <code>Logo.png</code> 和 <code>logo.png</code> 當成兩個不同的檔案。在自己電腦看得到，上線卻破圖，九成是這個原因（W15 會再遇到它）。</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-toc="11.6 跟做①：建立你的專案資料夾" data-n="11.6">
+  <div class="eyebrow"><span class="num">11.6</span><span class="kicker">B · Follow Along 1</span></div>
+  <h2 class="title">跟做①　建立你的專案資料夾</h2>
+  <p class="lead">請暫停影片，跟著做。</p>
+  <ul class="chk card mini">
+    <li>在「文件」裡新增資料夾 <code>my-site</code></li>
+    <li>把 W10 匯出的 Stitch 檔案放進去，<b>改名為 <code>index.html</code></b>（.zip 請先解壓縮）</li>
+    <li>新增 <code>images</code> 資料夾（有圖片就放進去）</li>
+    <li>VS Code → 檔案 → <b>開啟資料夾</b> → 選 <code>my-site</code></li>
+    <li>對 <code>index.html</code> 按右鍵 → Open with Live Server（或直接雙擊用瀏覽器開）</li>
+    <li>截圖左側的檔案總管（評量③要交）</li>
+  </ul>
+  <div class="note"><b>常見錯誤：</b>用「開啟檔案」而不是「開啟資料夾」。左側看不到資料夾結構，就是開錯了。</div>
+</section>
+
+<section class="slide" data-toc="11.7 起始檔上車點②" data-n="11.7">
+  <div class="eyebrow"><span class="num">11.7</span><span class="kicker">Starter File</span></div>
+  <h2 class="title">起始檔上車點②</h2>
+  <p class="lead">W7–W10 有幾週沒跟上？沒關係，從這裡上車。</p>
+  <div class="grid2">
+    <div class="card aicard"><div class="tag ai">起始檔給你什麼</div><p class="mini" style="margin-top:6px">一個 Stitch 切版完成的 <code>my-site</code> 資料夾，是你「本來應該做到的狀態」，不是完成品。到 TronClass 下載 zip。</p></div>
+    <div class="card brandcard"><div class="tag brand">你要做什麼</div><p class="mini" style="margin-top:6px">在 VS Code 按 <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+<span class="kbd">F</span> 搜尋 <code>TODO</code>，把每一處換成你自己的品牌內容。</p></div>
+  </div>
+  <div class="good"><b>使用起始檔不扣分。</b>它的用途是讓你接得上後面三週，不是認輸。</div>
+</section>
+
+<section class="slide" data-toc="11.8 中文為什麼怪：字型的點餐順序" data-n="11.8">
+  <div class="eyebrow"><span class="num">11.8</span><span class="kicker">Concept</span></div>
+  <h2 class="title">中文為什麼怪：字型的「點餐順序」</h2>
+  <p class="lead">打開 Stitch 頁面，英文很好看，中文卻粗細不一、像拼湊出來的。原因藏在 <code>font-family</code> 這個屬性裡。</p>
+  <div class="split">
+    <div class="flat">
+      <p class="mini"><code>font-family</code> 像點餐：「我要 A，沒有的話 B，再沒有就隨便」。</p>
+      <p class="mini">Stitch 只點了英文字型（例如 Inter）。英文字型裡<b>沒有中文字</b>，瀏覽器只好每個中文字都「隨便」，於是你看到的是系統臨時湊出來的字。</p>
+    </div>
+<pre class="code"><span class="c-prop">font-family</span>: <span class="c-val">"Inter"</span>, <span class="c-val">sans-serif</span>;
+<span class="c-cm">/* Inter：有英文、沒有中文
+   sans-serif：瀏覽器自己找一個「隨便」 */</span></pre>
+  </div>
+  <details class="check"><summary>如果看到的是「□□□」或「銝剜」這種真正的亂碼呢？</summary><p>那是編碼問題，不是字型問題。檢查 <code>&lt;head&gt;</code> 裡有沒有 <code>&lt;meta charset="UTF-8"&gt;</code>，存檔時編碼也要是 UTF-8（VS Code 右下角會顯示）。</p></details>
+</section>
+
+<section class="slide" data-toc="11.9 示範②：兩行修好中文" data-n="11.9">
+  <div class="eyebrow"><span class="num">11.9</span><span class="kicker">A · Demo 2</span></div>
+  <h2 class="title">示範②　一行載入、一行套用</h2>
+  <p class="lead">在 <code>index.html</code> 的 <code>&lt;/head&gt;</code> 正上方，貼上這兩行：</p>
+<pre class="code wrap"><span class="c-cm">&lt;!-- ① 向 Google Fonts 借思源黑體（Noto Sans TC） --&gt;</span>
+<span class="c-tag">&lt;link</span> <span class="c-attr">rel</span>=<span class="c-val">"stylesheet"</span> <span class="c-attr">href</span>=<span class="c-val">"https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&amp;display=swap"</span><span class="c-tag">&gt;</span>
+<span class="c-cm">&lt;!-- ② 點餐順序第一位改成思源黑體 --&gt;</span>
+<span class="c-tag">&lt;style&gt;</span><span class="c-sel">body</span>{<span class="c-prop">font-family</span>:<span class="c-val">"Noto Sans TC"</span>,<span class="c-val">sans-serif</span>;}<span class="c-tag">&lt;/style&gt;</span></pre>
+  <div class="ai-callout"><b>為什麼放在 &lt;/head&gt; 正上方：</b>CSS 是後寫的蓋掉先寫的（W5「樣式打架」）。放在最後面，你的設定最有機會贏。</div>
+</section>
+
+<section class="slide" data-toc="11.10 跟做②：修好並截前後圖" data-n="11.10">
+  <div class="eyebrow"><span class="num">11.10</span><span class="kicker">B · Follow Along 2</span></div>
+  <h2 class="title">跟做②　修好你的頁面，截前後對比</h2>
+  <ul class="chk card mini">
+    <li><b>修改前</b>先截圖（W10 已截過可沿用）</li>
+    <li>貼上 11.9 的兩行 → 存檔（<span class="kbd">Ctrl</span>+<span class="kbd">S</span>）→ 重新整理瀏覽器</li>
+    <li><b>修改後</b>截圖，兩張放在一起比對</li>
+  </ul>
+  <div class="grid2">
+    <div class="note"><b>有些標題還是舊字型？</b>那些元素身上有 Tailwind 的字型 class（例如 <code>font-display</code>），優先權比 body 高。把那一行貼給 Gemini，問「這個 class 在畫面上做什麼」。</div>
+    <div class="note"><b>圖示變成英文字（如 arrow_forward）？</b>你可能用了 <code>*{font-family:... !important}</code>，把圖示字型也蓋掉了。改回 11.9 的寫法，只設定 <code>body</code>。</div>
+  </div>
+</section>
+
+<section class="slide" data-toc="11.11 Gemini 換角色：從解釋器到產生器" data-n="11.11">
+  <div class="eyebrow"><span class="num">11.11</span><span class="kicker">AI Role</span></div>
+  <h2 class="title">Gemini 換角色：從解釋器到產生器</h2>
+  <p class="lead">W2–W5，Gemini 是幫你看懂程式的翻譯。從這週到 W14，它可以幫你<b>寫</b>程式了，但你要先看得懂它寫了什麼。</p>
+<pre class="code wrap"><span class="c-cm"># 請 Gemini 改程式的提問模板</span>
+<span class="c-attr">我的狀況</span>：用 Google Stitch 匯出的 index.html，在 VS Code 開啟。
+<span class="c-attr">我想要</span>：讓「營業時間」區塊的字再大一點。
+<span class="c-attr">相關程式碼</span>：（貼上那一段，不要貼整份檔案）
+<span class="c-attr">請你</span>：先說明這段程式碼在畫面上做什麼，
+      再告訴我要改哪裡、改成什麼。</pre>
+  <div class="note"><b>驗證三步：</b>改之前先存一份備份 → 一次只改 AI 建議的一處 → 存檔看畫面，跟你要的一樣才算數。</div>
+</section>
+
+<section class="slide" data-toc="11.12 本週任務：評量③" data-n="11.12">
+  <div class="eyebrow"><span class="num">11.12</span><span class="kicker">This Week's Task</span></div>
+  <h2 class="title">本週任務：評量③</h2>
+  <div class="ai-callout"><b>影片檢核點：</b>可以無限次重答，答對就通過，不扣分。</div>
+  <div class="card brandcard"><div class="tag brand">評量③ · Stitch 程式碼匯入 VS Code</div>
+    <ol style="margin-top:8px">
+      <li><b>VS Code 專案資料夾結構截圖</b>：左側檔案總管要看得到 <code>my-site</code>、<code>index.html</code></li>
+      <li><b>中文字型修正前／後對比截圖</b>：兩張，同一個區塊</li>
+    </ol></div>
+  <div class="good"><b>用起始檔的同學：</b>一樣繳這兩張圖，至少把首屏的 <code>TODO</code> 換成自己的內容再截。</div>
+</section>
+
+<section class="slide" data-toc="12 下週銜接" data-n="11.13">
+  <div class="eyebrow"><span class="num">11.13</span><span class="kicker">Next Up</span></div>
+  <h2 class="title">下週銜接</h2>
+  <div class="ai-callout"><b>第十二單元：</b>JavaScript 基礎與 AI Agent 排錯。不用寫 JS，學的是<b>讀懂它在做什麼、壞了怎麼找原因</b>。測驗③上線。</div>
+  <div class="good"><b>下週前先做一件事：</b>在你的 <code>index.html</code> 搜尋 <code>&lt;script</code>，數數看有幾個。</div>
+</section>
+</main>
+
+<nav class="navbar">
+  <button class="navbtn" id="prevBtn" type="button">← 上一頁</button>
+  <div class="counter"><b id="curNo">1</b> / <span id="totNo">1</span>　<span id="curLabel"></span></div>
+  <select class="jump" id="jump" aria-label="跳到指定頁面"></select>
+  <button class="navbtn" id="nextBtn" type="button">下一頁 →</button>
+</nav>
+
+<script>
+(function(){
+  var stage=document.getElementById('stage');
+  var slides=Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var bar=document.getElementById('bar');
+  var curNo=document.getElementById('curNo'), totNo=document.getElementById('totNo'), curLabel=document.getElementById('curLabel');
+  var prevBtn=document.getElementById('prevBtn'), nextBtn=document.getElementById('nextBtn');
+  var jump=document.getElementById('jump'), tocEl=document.getElementById('toc'), themebtn=document.getElementById('themebtn');
+  var idx=0;
+  totNo.textContent=slides.length;
+
+  slides.forEach(function(s,i){
+    var opt=document.createElement('option');
+    opt.value=i; opt.textContent=(i+1)+'　'+s.getAttribute('data-toc');
+    jump.appendChild(opt);
+  });
+
+  function buildToc(){
+    tocEl.innerHTML='';
+    slides.forEach(function(s,i){
+      if(i===0) return;
+      var b=document.createElement('button');
+      b.type='button'; b.dataset.go=i;
+      b.innerHTML='<b>'+s.getAttribute('data-n')+'</b><span>'+s.getAttribute('data-toc').replace(/^\S+\s/,'')+'</span>';
+      b.addEventListener('click',function(){show(i);});
+      tocEl.appendChild(b);
+    });
+  }
+  buildToc();
+
+  function show(i){
+    idx=Math.max(0,Math.min(slides.length-1,i));
+    slides.forEach(function(s,j){s.style.display=(j===idx)?'':'none';});
+    stage.scrollTop=0; stage.focus({preventScroll:true});
+    bar.style.width=((idx+1)/slides.length*100)+'%';
+    curNo.textContent=idx+1; curLabel.textContent=slides[idx].getAttribute('data-toc');
+    jump.value=idx;
+    prevBtn.disabled=(idx===0); nextBtn.disabled=(idx===slides.length-1);
+  }
+  prevBtn.addEventListener('click',function(){show(idx-1);});
+  nextBtn.addEventListener('click',function(){show(idx+1);});
+  jump.addEventListener('change',function(){show(parseInt(jump.value,10));});
+  document.addEventListener('keydown',function(e){
+    if(e.target.tagName==='SELECT') return;
+    if(e.key==='ArrowRight') show(idx+1);
+    if(e.key==='ArrowLeft') show(idx-1);
+  });
+  window.addEventListener('click',function(e){
+    var go=e.target.closest('[data-go]');
+    if(go) show(parseInt(go.dataset.go,10));
+  });
+
+  themebtn.addEventListener('click',function(){
+    var root=document.documentElement;
+    var cur=root.getAttribute('data-theme');
+    var sysDark=window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var next = cur==='dark' ? 'light' : (cur==='light' ? (sysDark?'dark':'light') : (sysDark?'light':'dark'));
+    root.setAttribute('data-theme',next);
+    try{localStorage.setItem('imm-theme',next);}catch(e){}
+  });
+  try{
+    var saved=localStorage.getItem('imm-theme');
+    if(saved) document.documentElement.setAttribute('data-theme',saved);
+  }catch(e){}
+
+  show(0);
+})();
+</script>
+</body>
+</html>

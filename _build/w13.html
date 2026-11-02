@@ -1,0 +1,186 @@
+<!--META {"cn":"第十三單元"}-->
+<section class="slide cover" data-toc="封面" data-n="封面">
+  <div class="kicker">弘光科技大學 · 多媒體遊戲發展與應用系 · 115-1 進修部</div>
+  <h1 class="big">同一碗湯<br>倒進不同的<em>碗</em></h1>
+  <p class="lead">第十三單元｜Figma 與自適應版面微調。討論④：自適應網頁的視覺痛點</p>
+  <dl class="meta">
+    <div><dt>Course</dt><dd>互動媒體製作（選課號 01544）</dd></div>
+    <div><dt>Class</dt><dd>進修四技多遊 4 年甲班 · G501</dd></div>
+    <div><dt>Week</dt><dd>12/07 – 12/13</dd></div>
+    <div><dt>Instructor</dt><dd>洪明顯</dd></div>
+    <div><dt>本週型態</dt><dd>影片 60 分＋面授 1 節</dd></div>
+    <div><dt>本週評量</dt><dd>討論④</dd></div>
+  </dl>
+  <p class="lead" style="font-size:13.5px">操作方式：點下方「上一頁／下一頁」，或使用鍵盤 <span class="kbd">←</span> <span class="kbd">→</span> 翻頁。</p>
+</section>
+
+<section class="slide" data-toc="13.0 本單元目錄" data-n="13.0">
+  <div class="eyebrow"><span class="num">13.0</span><span class="kicker">Unit Map</span></div>
+  <h2 class="title">本單元目錄</h2>
+  <p class="lead">這週不寫 media query。你要學會的是：<b>看得懂斷點</b>、說得出畫面在哪裡變形、知道該請 Gemini 改哪個 class。</p>
+  <div class="toc" id="toc"></div>
+</section>
+
+<section class="slide" data-toc="13.1 本週學習目標" data-n="13.1">
+  <div class="eyebrow"><span class="num">13.1</span><span class="kicker">Goals</span></div>
+  <h2 class="title">看完這支影片，你能夠……</h2>
+  <div class="grid2">
+    <div class="flat"><span class="pill video">理解</span><p>說出 <b>自適應</b> 與 <b>斷點</b> 是什麼</p></div>
+    <div class="flat"><span class="pill video">理解</span><p>讀懂 Tailwind 的 <b>sm: md: lg:</b> 前綴</p></div>
+    <div class="flat"><span class="pill f2f">應用</span><p>用瀏覽器 <b>裝置模式</b> 找出自己頁面的斷點</p></div>
+    <div class="flat"><span class="pill f2f">分析</span><p>用 Figma 做 <b>手機／桌機對照板</b>，標出視覺痛點</p></div>
+  </div>
+</section>
+
+<section class="slide" data-toc="13.2 開場：手機上的菜單擠成一團" data-n="13.2">
+  <div class="eyebrow"><span class="num">13.2</span><span class="kicker">Scenario</span></div>
+  <h2 class="title">手機上的菜單，擠成一團</h2>
+  <p class="lead">你在電腦上做好的頁面，三道招牌拉麵並排，很好看。老闆用手機打開，三張卡片擠在一排，字小到要放大才看得到，「開啟地圖」按鈕小到按不準。</p>
+  <div class="grid2">
+    <div class="card"><div class="big-num">7 成</div><p class="mini" style="margin-top:8px">餐飲類網站的訪客多半用手機。在公車站、在路邊，單手滑。</p></div>
+    <div class="card"><h3 class="sec"><span>電腦上沒問題，不代表做好了</span></h3><p class="mini" style="margin-top:6px">這週要學的，是讓同一頁在不同螢幕上都「好用」。</p></div>
+  </div>
+</section>
+
+<section class="slide" data-toc="13.3 自適應：湯倒進不同的碗" data-n="13.3">
+  <div class="eyebrow"><span class="num">13.3</span><span class="kicker">Metaphor</span></div>
+  <h2 class="title">自適應：同一碗湯，倒進不同的碗</h2>
+  <p class="lead">湯不變，碗變了，湯的形狀就跟著變。網頁的內容不變，螢幕寬度變了，排版就跟著變。</p>
+  <div class="grid2">
+    <div class="flat"><h3 class="sec"><span>自適應（RWD）</span></h3><p class="mini">同一份 HTML，在手機、平板、電腦上自動換排版。不是做三個網站。</p></div>
+    <div class="flat"><h3 class="sec"><span>斷點（breakpoint）</span></h3><p class="mini">「換碗」的那一刻。例如寬度到 768px 時，卡片從一欄變成三欄。</p></div>
+  </div>
+  <div class="ai-callout"><b>手機優先：</b>Tailwind 的習慣是先寫手機版，再寫「螢幕夠寬時要改成什麼」。所以沒有前綴的 class＝手機版。</div>
+</section>
+
+<section class="slide" data-toc="13.4 Tailwind 斷點前綴解碼" data-n="13.4">
+  <div class="eyebrow"><span class="num">13.4</span><span class="kicker">Decode</span></div>
+  <h2 class="title">Tailwind 斷點前綴解碼</h2>
+  <div class="split">
+    <div class="scroll">
+      <table style="min-width:0">
+        <thead><tr><th>前綴</th><th>意思</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">（沒有）</td><td>所有寬度，從手機開始</td></tr>
+          <tr><td class="mono">sm:</td><td>寬度 ≥ 640px 時</td></tr>
+          <tr class="hl"><td class="mono">md:</td><td>寬度 ≥ 768px 時（最常見）</td></tr>
+          <tr><td class="mono">lg:</td><td>寬度 ≥ 1024px 時</td></tr>
+          <tr><td class="mono">xl:</td><td>寬度 ≥ 1280px 時</td></tr>
+        </tbody>
+      </table>
+    </div>
+<pre class="code"><span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-val">"grid grid-cols-1 md:grid-cols-3 gap-4"</span><span class="c-tag">&gt;</span>
+  <span class="c-cm">&lt;!-- 三張拉麵卡片 --&gt;</span>
+<span class="c-tag">&lt;/div&gt;</span>
+
+<span class="c-cm">白話：
+  手機：一欄，三張卡片上下排
+  768px 以上：三欄，左右並排</span></pre>
+  </div>
+  <details class="check"><summary>小測：<code>text-sm md:text-base</code> 是什麼意思？</summary><p>手機上用小字（text-sm），寬度 768px 以上換成一般大小（text-base）。</p></details>
+</section>
+
+<section class="slide" data-toc="13.5 示範①：瀏覽器的裝置模式" data-n="13.5">
+  <div class="eyebrow"><span class="num">13.5</span><span class="kicker">A · Demo 1</span></div>
+  <h2 class="title">示範①　不用手機也能看手機版</h2>
+  <div class="stepgrid">
+    <div class="stepbox"><div class="sn">01</div><h4>F12</h4><p>打開開發者工具</p></div>
+    <div class="stepbox"><div class="sn">02</div><h4>裝置模式</h4><p>按 <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+<span class="kbd">M</span>（或左上角手機圖示）</p></div>
+    <div class="stepbox"><div class="sn">03</div><h4>選機型</h4><p>上方下拉選 iPhone 或任一手機</p></div>
+    <div class="stepbox"><div class="sn">04</div><h4>拉寬度</h4><p>改成「Responsive」，慢慢拖右邊的邊，看排版在哪一刻變</p></div>
+  </div>
+  <div class="note"><b>裝置模式不是萬能：</b>它模擬寬度，但手指的大小模擬不出來。按鈕好不好按，最後還是要用真的手機試。</div>
+</section>
+
+<section class="slide" data-toc="13.6 跟做①：找出你頁面的斷點" data-n="13.6">
+  <div class="eyebrow"><span class="num">13.6</span><span class="kicker">B · Follow Along 1</span></div>
+  <h2 class="title">跟做①　找出你頁面的斷點</h2>
+  <p class="lead">打開 W11 修好字型的頁面，用裝置模式從窄拖到寬，填下面這張表。</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>寬度大約在</th><th>哪個區塊變了</th><th>怎麼變</th><th>對應的 class（找得到再填）</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">768px</td><td>（範例）菜單卡片</td><td>一欄 → 三欄</td><td class="mono">md:grid-cols-3</td></tr>
+        <tr><td>＿＿＿</td><td>＿＿＿＿</td><td>＿＿＿＿</td><td>＿＿＿＿</td></tr>
+        <tr><td>＿＿＿</td><td>＿＿＿＿</td><td>＿＿＿＿</td><td>＿＿＿＿</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="good"><b>找 class 的方法：</b>在畫面上對那個區塊按右鍵 →「檢查」，開發者工具會直接跳到那一行 HTML。</div>
+</section>
+
+<section class="slide" data-toc="13.7 Figma 在這裡當對照板" data-n="13.7">
+  <div class="eyebrow"><span class="num">13.7</span><span class="kicker">Figma's Role</span></div>
+  <h2 class="title">Figma 在這裡當「對照板」</h2>
+  <p class="lead">Figma 是設計師畫介面的工具，功能很多。這門課只用它最簡單的一招：把手機版和桌機版<b>並排貼上、直接畫記號</b>。</p>
+  <div class="grid2">
+    <div class="flat"><h3 class="sec"><span>為什麼不直接看網頁？</span></h3><p class="mini">網頁一次只能看一種寬度。並排之後，哪裡跑掉、哪裡變小，一眼就看得出來，也方便貼到討論區給同學看。</p></div>
+    <div class="flat"><h3 class="sec"><span>Stitch 也能送到 Figma</span></h3><p class="mini">Stitch 的匯出選單有 Figma 選項，貼過來是可編輯的圖層。有興趣可以試，但本課不要求。</p></div>
+  </div>
+</section>
+
+<section class="slide" data-toc="13.8 示範②：做一張對照板" data-n="13.8">
+  <div class="eyebrow"><span class="num">13.8</span><span class="kicker">A · Demo 2</span></div>
+  <h2 class="title">示範②　做一張手機／桌機對照板</h2>
+  <div class="stepgrid five">
+    <div class="stepbox"><div class="sn">01</div><h4>開 Figma</h4><p><code>figma.com</code> 免費註冊，新增 Design 檔</p></div>
+    <div class="stepbox"><div class="sn">02</div><h4>兩個畫框</h4><p>按 <span class="kbd">F</span>，右側選手機尺寸一個、桌機尺寸一個</p></div>
+    <div class="stepbox"><div class="sn">03</div><h4>貼截圖</h4><p>把兩張截圖拖進各自的畫框</p></div>
+    <div class="stepbox"><div class="sn">04</div><h4>畫記號</h4><p>用矩形框起問題處，按 <span class="kbd">T</span> 打字說明</p></div>
+    <div class="stepbox"><div class="sn">05</div><h4>匯出</h4><p>選畫框 → 右下 Export → PNG</p></div>
+  </div>
+  <div class="note"><b>截整頁的方法：</b>裝置模式下，右上角「⋮」→「擷取完整大小的螢幕截圖」，一次截下整個長頁面。</div>
+</section>
+
+<section class="slide" data-toc="13.9 五種常見的視覺痛點" data-n="13.9">
+  <div class="eyebrow"><span class="num">13.9</span><span class="kicker">Pain Points</span></div>
+  <h2 class="title">五種常見的視覺痛點</h2>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>痛點</th><th>手機上的樣子</th><th>請 Gemini 怎麼改</th></tr></thead>
+      <tbody>
+        <tr><td>① 欄位擠</td><td>三欄硬塞在手機上</td><td>「手機一欄、md 以上三欄」</td></tr>
+        <tr><td>② 字太小</td><td>要用兩指放大才看得到</td><td>「手機字級至少 text-base」</td></tr>
+        <tr><td>③ 按鈕太小</td><td>拇指按不準，常按到旁邊</td><td>「按鈕高度至少 44px，手機版滿版寬」</td></tr>
+        <tr><td>④ 圖被切</td><td>拉麵照只剩半碗</td><td>「圖片在手機上完整顯示，不要裁切」</td></tr>
+        <tr><td>⑤ 橫向捲軸</td><td>畫面可以左右滑</td><td>「找出哪個元素寬度超出手機螢幕」</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="ai-callout"><b>問 Gemini 時記得附上：</b>那一段 HTML（含 class）＋手機截圖的文字描述＋你想要的樣子。改完用裝置模式驗證。</div>
+</section>
+
+<section class="slide" data-toc="13.10 跟做②：標出你的兩個痛點" data-n="13.10">
+  <div class="eyebrow"><span class="num">13.10</span><span class="kicker">B · Follow Along 2</span></div>
+  <h2 class="title">跟做②　標出你的兩個痛點</h2>
+  <ul class="chk card mini">
+    <li>截手機版（寬 390 左右）與桌機版（寬 1440 左右）整頁截圖</li>
+    <li>在 Figma 做對照板，用 13.9 的五種痛點，<b>至少標出兩處</b></li>
+    <li>挑一處請 Gemini 改，改完再截一次手機版</li>
+    <li>匯出對照板 PNG（討論④要貼）</li>
+  </ul>
+  <div class="good"><b>改不好也沒關係：</b>討論④重點是「說得出哪裡變形、為什麼」。改不成功的過程，正好是 W15 除錯歷程的素材。</div>
+</section>
+
+<section class="slide" data-toc="13.11 本週任務與討論④" data-n="13.11">
+  <div class="eyebrow"><span class="num">13.11</span><span class="kicker">This Week's Task</span></div>
+  <h2 class="title">本週任務與討論④</h2>
+  <div class="ai-callout"><b>影片檢核點：</b>可以無限次重答，答對就通過，不扣分。</div>
+  <div class="card brandcard"><div class="tag brand">討論④ · 自適應網頁的視覺痛點</div>
+    <ol style="margin-top:8px">
+      <li><b>貼作品</b>：手機／桌機對照板（標好兩個痛點）</li>
+      <li><b>提出具體問題</b>：哪個斷點、哪個區塊、怎麼變形，你試過什麼</li>
+      <li><b>回應兩位同學</b>：給一個可以執行的建議或延伸提問</li>
+    </ol></div>
+  <div class="compare">
+    <div class="card bad"><div class="tag brand">✗ 這樣不夠</div><p>我的網站手機版有點跑版，不知道怎麼改。</p></div>
+    <div class="card ok"><div class="tag" style="color:var(--ok)">○ 這樣就對了</div><p>寬度小於 768px 時，菜單三張卡片沒有變一欄，class 是 <code>grid-cols-3</code>，沒有 <code>md:</code>。我請 Gemini 改成 <code>grid-cols-1 md:grid-cols-3</code> 後卡片正常了，<b>但按鈕還是太小</b>。請問按鈕要改哪個 class？</p></div>
+  </div>
+</section>
+
+<section class="slide" data-toc="14 下週銜接" data-n="13.12">
+  <div class="eyebrow"><span class="num">13.12</span><span class="kicker">Next Up</span></div>
+  <h2 class="title">下週銜接</h2>
+  <div class="ai-callout"><b>第十四單元：</b>★讓你的網頁上線。兩條正式路線：<b>GitHub Pages</b> 或 <b>GitHub＋Netlify</b>，都從同一個 GitHub repo 出發。評量④，並提供起始檔上車點③。</div>
+  <div class="good"><b>下週前先做一件事：</b>到 <code>github.com</code> 註冊帳號（用學校信箱或常用信箱都可以），記好帳號名稱。</div>
+</section>
