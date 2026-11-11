@@ -394,7 +394,7 @@ pre.code.wrap{white-space:pre-wrap;word-break:break-all}
         <tr><td>版面自由度</td><td>只能用平台提供的區塊</td><td>想改什麼都可以（前提是看得懂）</td></tr>
         <tr><td>上手速度</td><td>最快，拖拉就好</td><td>快，但要會寫提示、會挑</td></tr>
         <tr><td>上線方式</td><td>按「發布」</td><td>要自己部署（W14：GitHub Pages／Netlify）</td></tr>
-        <tr><td>常見問題</td><td>長得跟別人很像</td><td>風格跨頁不一致、中文字型怪怪的</td></tr>
+        <tr><td>常見問題</td><td>長得跟別人很像</td><td>風格跨頁不一致、字型只能從清單裡選</td></tr>
       </tbody>
     </table>
   </div>
@@ -416,7 +416,7 @@ pre.code.wrap{white-space:pre-wrap;word-break:break-all}
     <div class="card brandcard"><div class="tag brand">✗ 不擅長</div>
       <ul class="mini" style="margin-top:6px">
         <li><b>多頁風格一致</b>：第二頁常常換了配色或字型</li>
-        <li><b>中文字型</b>：英文字型套在中文上，筆畫會怪（W11 修）</li>
+        <li><b>字型選擇有限</b>：只能用內建清單裡的字型。Noto Sans TC 有，<b>芫荽（Iansui）</b>這類手寫風中文字型沒有，要改程式碼才能用（W11）</li>
         <li>真正的功能（訂位、付款）：它只畫「樣子」</li>
       </ul></div>
   </div>
@@ -648,7 +648,7 @@ A website for a late-night ramen shop.</pre></div>
         <tr class="hl"><td class="mono">4</td><td class="mono">Seed Color</td><td>種子色</td><td>輸入<b>一個</b>品牌主色，Stitch 自動推算整套配色 → 填 <code>#E05A33</code></td></tr>
         <tr><td class="mono">5</td><td class="mono">Color theme</td><td>配色方案</td><td>內建的配色組合；自己改過色票就會顯示 <code>Custom</code>（自訂）</td></tr>
         <tr class="hl"><td class="mono">6</td><td class="mono">Color Palette：Primary ／ Secondary ／ Tertiary ／ Neutral</td><td>主色 ／ 輔色 ／ 第三色 ／ 中性色</td><td>主色＝按鈕與強調 <code>#E05A33</code>；輔色＝米白文字 <code>#E8DDC7</code>；中性色＝深色底 <code>#111820</code></td></tr>
-        <tr><td class="mono">7</td><td class="mono">Font</td><td>字型</td><td>標題、內文、標籤用的字型。中文字型的問題 W11 再修</td></tr>
+        <tr><td class="mono">7</td><td class="mono">Font</td><td>字型</td><td>標題、內文、標籤用的字型。中文選 <b>Noto Sans TC</b> 就能正常顯示；清單裡沒有的字型（如芫荽）W11 用程式碼換</td></tr>
         <tr class="hl"><td class="mono">8</td><td class="mono">Save ／ Save &amp; Apply</td><td>儲存 ／ 儲存並套用</td><td>Save 只存主題；<b>Save &amp; Apply 才會把新主題套到畫面上</b></td></tr>
       </tbody>
     </table>
@@ -813,7 +813,7 @@ A website for a late-night ramen shop.</pre></div>
       <li>找到 Tailwind 的 <code>&lt;script&gt;</code> 那一行</li>
       <li>找到首屏區塊（通常是第一個 <code>&lt;section&gt;</code> 或 <code>&lt;header&gt;</code>）</li>
       <li>找一個按鈕，抄下它的 class，用 W5 的 Tailwind 解碼表翻成白話</li>
-      <li>用瀏覽器打開，看中文字是不是怪怪的（先記下來，<b>W11 再修</b>）</li>
+      <li>找到設定字型的地方：<code>fonts.googleapis.com</code> 那行 <code>&lt;link&gt;</code>，以及寫著字型名稱的 <code>font-family</code>（或 <code>fontFamily</code>）。<b>W11 就是改這兩處</b></li>
     </ol>
 <pre class="code"><span class="c-tag">&lt;a</span> <span class="c-attr">class</span>=<span class="c-val">"bg-[#E05A33] text-white px-6 py-3 rounded"</span><span class="c-tag">&gt;</span>開啟地圖<span class="c-tag">&lt;/a&gt;</span>
 <span class="c-cm">&lt;!-- bg-[...]  底色
@@ -821,7 +821,7 @@ A website for a late-night ramen shop.</pre></div>
      px-6 / py-3 左右、上下內距
      rounded     圓角 --&gt;</span></pre>
   </div>
-  <details class="check"><summary>為什麼中文先不修？</summary><p>字型問題要在檔案裡加一行 CSS，桌面版 VS Code 比較好操作。W11 的核心示範就是「一行修好它」，現在先記下修改前的樣子，下週對比會很有感。</p></details>
+  <details class="check"><summary>檢核點：Stitch 字型清單裡沒有芫荽，還能用嗎？</summary><p>可以。芫荽在 Google Fonts 上找得到，只要在程式碼裡 ① 加一行載入字型的 <code>&lt;link&gt;</code> ② 把 <code>font-family</code> 改成 <code>'Iansui'</code>。兩處都要改：只載入、沒指定，畫面不會變。這就是 W11 的核心示範，現在先截一張修改前的圖，下週對比。</p></details>
 </section>
 
 <section class="slide" data-toc="10.21 為什麼只要主頁＋一頁" data-n="10.21">
@@ -830,7 +830,7 @@ A website for a late-night ramen shop.</pre></div>
   <p class="lead">Stitch 每畫一頁都像換了一位設計師：第一頁米白字，第二頁可能變成純白字、按鈕變圓。</p>
   <div class="grid2">
     <div class="flat"><h3 class="sec"><span>主頁</span></h3><p class="mini">用 Stitch 產出，這週完成。期末展示的主體仍是 Google Site。</p></div>
-    <div class="flat"><h3 class="sec"><span>一頁手改的網頁</span></h3><p class="mini">W11 匯入 VS Code 修字型 → W12–W13 微調 → W14 部署上線。</p></div>
+    <div class="flat"><h3 class="sec"><span>一頁手改的網頁</span></h3><p class="mini">W11 匯入 VS Code 換字型 → W12–W13 微調 → W14 部署上線。</p></div>
   </div>
   <div class="good"><b>做少一點、做好一點：</b>一頁風格一致、能上線的網頁，比五頁風格亂掉的網站有說服力。</div>
 </section>
@@ -855,7 +855,7 @@ A website for a late-night ramen shop.</pre></div>
 <section class="slide" data-toc="10.23 下週銜接" data-n="10.23">
   <div class="eyebrow"><span class="num">10.23</span><span class="kicker">Next Up</span></div>
   <h2 class="title">下週銜接</h2>
-  <div class="ai-callout"><b>第十一單元：</b>★安裝桌面版 VS Code，把這週的 Stitch 檔案變成一個「專案資料夾」，並用<b>一行 CSS</b>修好中文字型。沒跟上的同學可以從起始檔上車。</div>
+  <div class="ai-callout"><b>第十一單元：</b>★安裝桌面版 VS Code，把這週的 Stitch 檔案變成一個「專案資料夾」，並改兩處程式碼，換成 Stitch 清單裡沒有的<b>芫荽字體</b>。沒跟上的同學可以從起始檔上車。</div>
   <div class="good"><b>下週前先做一件事：</b>確認你找得到這週匯出的檔案，並記住它存在哪裡。</div>
 </section>
 </main>
