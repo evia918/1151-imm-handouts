@@ -502,8 +502,136 @@ pre.code.wrap{white-space:pre-wrap;word-break:break-all}
   <div class="ai-callout"><b>為什麼一次只改一件：</b>一次改五件，AI 會順手把你喜歡的地方也改掉，你就分不清是哪一句造成的。</div>
 </section>
 
-<section class="slide" data-toc="10.9 示範②：匯出，選對格式" data-n="10.9">
-  <div class="eyebrow"><span class="num">10.9</span><span class="kicker">A · Demo 2</span></div>
+<section class="slide" data-toc="10.9 提示詞指南①：先粗後細、形容詞定調" data-n="10.9">
+  <div class="eyebrow"><span class="num">10.9</span><span class="kicker">Prompt Guide · 1</span></div>
+  <h2 class="title">Stitch 提示詞指南①　先粗後細，用形容詞定調</h2>
+  <p class="lead">Stitch 介面全英文，但它真正的「操作介面」其實是提示詞框。Google 官方論壇整理過一份寫法指南，這一段把重點換成中文、套進十二席拉麵。</p>
+  <div class="grid2">
+    <div class="card aicard"><div class="tag ai">起手式 A · 先粗</div>
+      <p class="mini" style="margin-top:6px">一句話說「這是什麼網站」，讓 Stitch 先給整體骨架。適合<b>還沒想清楚</b>或<b>頁面很多</b>的專案，之後再一頁一頁細修。</p>
+<pre class="code wrap"><span class="c-cm"># 先粗</span>
+一個深夜拉麵店的官網。
+A website for a late-night ramen shop.</pre></div>
+    <div class="card brandcard"><div class="tag brand">起手式 B · 先細</div>
+      <p class="mini" style="margin-top:6px">一次講清楚「給誰、做什麼事」。適合<b>企劃已完成</b>的同學，也就是 10.5 的五欄位寫法。</p>
+<pre class="code wrap"><span class="c-cm"># 先細</span>
+一個深夜拉麵店官網，讓下班的上班族
+查看今日營業狀態、招牌菜單、開地圖導航。</pre></div>
+  </div>
+  <h3 class="sec"><span>形容詞決定「氣氛」：配色、字型、圖片都跟著變</span></h3>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>你寫的形容詞</th><th>Stitch 通常會往哪裡走</th><th>適合的品牌</th></tr></thead>
+      <tbody>
+        <tr><td>安靜、溫暖、職人感<br><span class="wk">quiet, warm, artisanal</span></td><td>深色底、暖色強調、留白多、襯線或細字</td><td>十二席拉麵、手沖咖啡</td></tr>
+        <tr><td>活潑、鼓勵的<br><span class="wk">vibrant, encouraging</span></td><td>高彩度、大按鈕、圓角、插畫感</td><td>運動、兒童、手搖飲</td></tr>
+        <tr><td>極簡、專注的<br><span class="wk">minimalist, focused</span></td><td>大量留白、單一主色、細線條</td><td>工作室、作品集、冥想</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="good"><b>和 W1 的連結：</b>你在品牌企劃裡定的「調性三形容詞」不是寫好看的，它就是 Stitch 的風格開關。</div>
+</section>
+
+<section class="slide" data-toc="10.10 提示詞指南②：一次只改一兩件" data-n="10.10">
+  <div class="eyebrow"><span class="num">10.10</span><span class="kicker">Prompt Guide · 2</span></div>
+  <h2 class="title">提示詞指南②　一個畫面、一次只改一兩件</h2>
+  <p class="lead">第一版生成後，Stitch 最怕「一句話塞五個要求」。官方建議每次只針對<b>一個畫面或一個元件</b>，做<b>一到兩個</b>修改，並且同時說清楚「改什麼」和「怎麼改」。</p>
+  <div class="split">
+    <div class="flat">
+      <h3 class="sec"><span>修改句型：照這個順序填</span></h3>
+      <div class="flow"><span>在【哪個畫面】</span><i>→</i><span>的【哪個元件】</span><i>→</i><span>把【什麼】</span><i>→</i><span>改成【怎樣】</span></div>
+      <ul class="mini">
+        <li>✗「把首頁弄好看一點」→ 沒說改哪裡、改成怎樣</li>
+        <li>○「在<b>首頁</b>的<b>頁首</b>，加一個<b>搜尋列</b>」</li>
+        <li>○「把<b>菜單頁</b>的<b>主要按鈕</b>放大，改成品牌主色 <code>#E05A33</code>」</li>
+      </ul>
+    </div>
+<pre class="code wrap"><span class="c-cm"># 十二席拉麵：分三次送出，不要合成一句</span>
+<span class="c-attr">第 1 次</span>：在首頁的首屏，把店名放大成最顯眼的文字。
+<span class="c-attr">第 2 次</span>：在首頁的首屏，店名下方加上「今日營業中 21:00–02:00」。
+<span class="c-attr">第 3 次</span>：把首頁所有按鈕改成 #E05A33、圓角 4px。</pre>
+  </div>
+  <h3 class="sec"><span>論壇使用者踩過的坑</span></h3>
+  <div class="grid3">
+    <div class="card brandcard"><div class="tag brand">坑 1 · 整頁重畫</div><p class="mini" style="margin-top:6px">有人一次要求加篩選器、改標題、換圖示，結果 Stitch 把整個版面重做。拆成單一修改後才穩定。</p></div>
+    <div class="card brandcard"><div class="tag brand">坑 2 · 它不記得</div><p class="mini" style="margin-top:6px">Stitch 不一定記得上一版長怎樣，偶爾還會被重設。<b>每改好一步就截圖</b>，檔名 <code>w10_v2.png</code>、<code>v3</code>……</p></div>
+    <div class="card brandcard"><div class="tag brand">坑 3 · 太長會漏</div><p class="mini" style="margin-top:6px">有人貼了超過 5,000 字的提示詞，部分區塊直接消失。第一次用簡單白話，複雜的留到逐頁修改時再加。</p></div>
+  </div>
+  <div class="note"><b>這跟 10.8 是同一件事：</b>五個看點一次挑一個，提示詞一次改一件。這樣你才知道是哪一句起作用。</div>
+</section>
+
+<section class="slide" data-toc="10.11 提示詞指南③：配色、字型、圖片、語言" data-n="10.11">
+  <div class="eyebrow"><span class="num">10.11</span><span class="kicker">Prompt Guide · 3</span></div>
+  <h2 class="title">提示詞指南③　配色、字型、圖片、語言怎麼下指令</h2>
+  <p class="lead">指南裡的配色、字型、圖片、語言修改，<b>全部都用提示詞完成</b>。Stitch 介面按鈕常改版、又是英文，找不到按鈕時，直接用打字的就對了。</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>想改</th><th>兩種講法</th><th>十二席拉麵範例（中英皆可貼）</th></tr></thead>
+      <tbody>
+        <tr><td><b>配色</b></td><td>指定顏色，或描述氣氛</td><td>「把主色改成 #E05A33」<br>「整體改成溫暖、昏黃燈光的配色」<br><span class="wk">Change primary color to #E05A33.</span></td></tr>
+        <tr><td><b>字型</b></td><td>說字型「類型」，不用說字型名稱</td><td>「標題改用襯線字型，內文用無襯線」<br><span class="wk">Change headings to a serif font.</span></td></tr>
+        <tr><td><b>邊框／圓角</b></td><td>指定元件＋數值</td><td>「所有按鈕改成全圓角」<br>「輸入框加 1px 米白實線邊框」</td></tr>
+        <tr><td><b>一句話定主題</b></td><td>產品類型＋字型＋主色</td><td>「拉麵店官網：內文用襯線字，強調色用朱紅」</td></tr>
+        <tr><td><b>圖片</b></td><td>用畫面上的內容「點名」是哪張圖</td><td>「把首頁<b>所有菜單圖片</b>的背景改成深木紋」<br>「菜單頁『豚骨拉麵』那張圖，改成俯拍、有蒸氣」</td></tr>
+        <tr><td><b>換主題時連圖一起換</b></td><td>要明講圖片和圖示也要跟著變</td><td>「主題改成深藍色，<b>所有圖片與圖示也配合新配色</b>」</td></tr>
+        <tr><td><b>語言</b></td><td>直接要求切換</td><td>「把所有文案和按鈕文字改成繁體中文」</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="ai-callout"><b>小技巧：</b>中文提示詞 Stitch 看得懂。但如果某個修改一直不成功，把<b>元件名稱換成英文</b>（下一頁的對照表）常常就準了。</div>
+</section>
+
+<section class="slide" data-toc="10.12 介面與元件中英對照" data-n="10.12">
+  <div class="eyebrow"><span class="num">10.12</span><span class="kicker">Glossary</span></div>
+  <h2 class="title">看不懂英文？元件中英對照表</h2>
+  <p class="lead">指南特別提醒：用 UI/UX 的專有名詞、明確指出是「哪一個元件」，Stitch 才不會猜錯。下面是最常用的一批，寫提示詞時可以中英並列。</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>英文（寫進提示詞）</th><th>中文</th><th>在十二席拉麵首頁是哪裡</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">header / navigation bar</td><td>頁首／導覽列</td><td>最上方放店名與選單連結的那一條</td></tr>
+        <tr><td class="mono">hero section</td><td>首屏主視覺區</td><td>一打開就看到的大圖＋店名＋營業狀態</td></tr>
+        <tr><td class="mono">call-to-action (CTA) button</td><td>行動呼籲按鈕</td><td>「開啟地圖」「立即訂位」這種要人按的按鈕</td></tr>
+        <tr><td class="mono">primary / secondary button</td><td>主要／次要按鈕</td><td>朱紅實心按鈕 vs. 只有外框的按鈕</td></tr>
+        <tr><td class="mono">card layout</td><td>卡片式排版</td><td>三道招牌菜各自一個方塊</td></tr>
+        <tr><td class="mono">input field / form</td><td>輸入框／表單</td><td>訂位表單裡填姓名、人數的欄位</td></tr>
+        <tr><td class="mono">icon / illustration</td><td>圖示／插圖</td><td>地址旁的小地標、營業時間旁的時鐘</td></tr>
+        <tr><td class="mono">footer</td><td>頁尾</td><td>最底下的地址、社群連結、版權</td></tr>
+        <tr><td class="mono">serif / sans-serif</td><td>襯線／無襯線字型</td><td>明體感 vs. 黑體感</td></tr>
+        <tr><td class="mono">rounded corners / border</td><td>圓角／邊框</td><td>按鈕的四個角、輸入框外框</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="good"><b>點名要精準：</b>不要寫「那個按鈕」，要寫「<b>訂位表單上的主要按鈕</b>」（<span class="wk">primary button on the reservation form</span>）。</div>
+</section>
+
+<section class="slide" data-toc="10.13 跟做③：用指南改三輪＋出錯怎麼辦" data-n="10.13">
+  <div class="eyebrow"><span class="num">10.13</span><span class="kicker">B · Follow Along 3</span></div>
+  <h2 class="title">跟做③　用指南改三輪，順便學會「改壞了怎麼辦」</h2>
+  <p class="lead">拿你 10.7 的第一版，照 10.8 挑出的問題，用 10.10 的句型分三次修改。每一輪都截圖。</p>
+  <div class="split">
+    <ul class="chk card mini">
+      <li><b>第 1 輪</b>：改一個「版面」問題（例：營業狀態移到首屏）→ 存 <code>w10_v2.png</code></li>
+      <li><b>第 2 輪</b>：改一個「主題」問題（例：按鈕統一主色）→ 存 <code>w10_v3.png</code></li>
+      <li><b>第 3 輪</b>：改一張「圖片」或「語言」→ 存 <code>w10_v4.png</code></li>
+      <li>三句提示詞全文另存，討論③要貼</li>
+    </ul>
+    <div class="flat">
+      <h3 class="sec"><span>結果不對時，依序試</span></h3>
+      <ol class="mini">
+        <li><b>換句話說</b>：同一個意思換個講法</li>
+        <li><b>縮小範圍</b>：從「首頁」縮到「首屏的店名」</li>
+        <li><b>換成英文元件名</b>：查 10.12 對照表</li>
+        <li><b>退回上一版</b>：用截圖對照，回到還正常的那一版再改</li>
+      </ol>
+    </div>
+  </div>
+  <details class="check"><summary>檢核點：哪一句提示詞最可能讓 Stitch 把整頁重畫？</summary><p>「首頁加篩選器、標題改成店名、圖示換成拉麵碗、背景改深色」——一句塞了四件事。拆成四次送出，每次只動一個元件。</p></details>
+  <p class="mini" style="color:var(--ink-3)">資料來源：Google AI Developers Forum〈<a href="https://discuss.ai.google.dev/t/stitch-prompt-guide/83844" target="_blank" rel="noopener">Stitch Prompt Guide</a>〉（2025/05）及討論串回覆，本講義改寫為中文並以十二席拉麵為例。</p>
+</section>
+
+<section class="slide" data-toc="10.14 示範②：匯出，選對格式" data-n="10.14">
+  <div class="eyebrow"><span class="num">10.14</span><span class="kicker">A · Demo 2</span></div>
   <h2 class="title">示範②　匯出：選對格式最重要</h2>
   <p class="lead">Stitch 的匯出選單有很多選項（Figma、AI Studio、React、Flutter……）。這門課只要一種：<b>HTML（Tailwind）程式碼</b>，或包好的 <b>.zip</b>。</p>
   <div class="compare">
@@ -515,8 +643,8 @@ pre.code.wrap{white-space:pre-wrap;word-break:break-all}
 <span class="c-cm">&lt;!-- 看到它就代表：這份檔案的樣式是用 Tailwind 寫的（W5 學過怎麼讀） --&gt;</span></pre>
 </section>
 
-<section class="slide" data-toc="10.10 跟做②：讀懂你拿到的檔案" data-n="10.10">
-  <div class="eyebrow"><span class="num">10.10</span><span class="kicker">B · Follow Along 2</span></div>
+<section class="slide" data-toc="10.15 跟做②：讀懂你拿到的檔案" data-n="10.15">
+  <div class="eyebrow"><span class="num">10.15</span><span class="kicker">B · Follow Along 2</span></div>
   <h2 class="title">跟做②　讀懂你拿到的檔案</h2>
   <p class="lead">把匯出的檔案用 vscode.dev 打開（下週才裝桌面版）。不用改，只要<b>找得到</b>。</p>
   <div class="split">
@@ -535,8 +663,8 @@ pre.code.wrap{white-space:pre-wrap;word-break:break-all}
   <details class="check"><summary>為什麼中文先不修？</summary><p>字型問題要在檔案裡加一行 CSS，桌面版 VS Code 比較好操作。W11 的核心示範就是「一行修好它」，現在先記下修改前的樣子，下週對比會很有感。</p></details>
 </section>
 
-<section class="slide" data-toc="10.11 為什麼只要主頁＋一頁" data-n="10.11">
-  <div class="eyebrow"><span class="num">10.11</span><span class="kicker">Scope</span></div>
+<section class="slide" data-toc="10.16 為什麼只要主頁＋一頁" data-n="10.16">
+  <div class="eyebrow"><span class="num">10.16</span><span class="kicker">Scope</span></div>
   <h2 class="title">為什麼期末只要「主頁＋一頁」</h2>
   <p class="lead">Stitch 每畫一頁都像換了一位設計師：第一頁米白字，第二頁可能變成純白字、按鈕變圓。</p>
   <div class="grid2">
@@ -546,8 +674,8 @@ pre.code.wrap{white-space:pre-wrap;word-break:break-all}
   <div class="good"><b>做少一點、做好一點：</b>一頁風格一致、能上線的網頁，比五頁風格亂掉的網站有說服力。</div>
 </section>
 
-<section class="slide" data-toc="10.12 本週任務與討論③" data-n="10.12">
-  <div class="eyebrow"><span class="num">10.12</span><span class="kicker">This Week's Task</span></div>
+<section class="slide" data-toc="10.17 本週任務與討論③" data-n="10.17">
+  <div class="eyebrow"><span class="num">10.17</span><span class="kicker">This Week's Task</span></div>
   <h2 class="title">本週任務與討論③</h2>
   <div class="ai-callout"><b>影片檢核點：</b>影片中的檢核點可以無限次重答，答對就通過，不扣分。</div>
   <div class="card brandcard"><div class="tag brand">討論③ · 無程式碼平台 vs. AI 切版</div>
@@ -563,8 +691,8 @@ pre.code.wrap{white-space:pre-wrap;word-break:break-all}
   <div class="note"><b>保存好匯出檔：</b>.html 或 .zip 請存在固定的資料夾，下週直接用。</div>
 </section>
 
-<section class="slide" data-toc="11 下週銜接" data-n="10.13">
-  <div class="eyebrow"><span class="num">10.13</span><span class="kicker">Next Up</span></div>
+<section class="slide" data-toc="10.18 下週銜接" data-n="10.18">
+  <div class="eyebrow"><span class="num">10.18</span><span class="kicker">Next Up</span></div>
   <h2 class="title">下週銜接</h2>
   <div class="ai-callout"><b>第十一單元：</b>★安裝桌面版 VS Code，把這週的 Stitch 檔案變成一個「專案資料夾」，並用<b>一行 CSS</b>修好中文字型。沒跟上的同學可以從起始檔上車。</div>
   <div class="good"><b>下週前先做一件事：</b>確認你找得到這週匯出的檔案，並記住它存在哪裡。</div>
