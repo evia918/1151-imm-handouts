@@ -17,7 +17,7 @@
 <section class="slide" data-toc="11.0 本單元目錄" data-n="11.0">
   <div class="eyebrow"><span class="num">11.0</span><span class="kicker">Unit Map</span></div>
   <h2 class="title">本單元目錄</h2>
-  <p class="lead">這週做兩件事：把散落的檔案整理成專案資料夾，再用一行 CSS 修好中文字型。</p>
+  <p class="lead">這週做兩件事：把散落的檔案整理成專案資料夾，再改兩處程式碼，換上 Stitch 字型清單裡沒有的<b>芫荽字體</b>。</p>
   <div class="toc" id="toc"></div>
 </section>
 
@@ -27,8 +27,8 @@
   <div class="grid2">
     <div class="flat"><span class="pill f2f">應用</span><p>安裝桌面版 VS Code，用 <b>開啟資料夾</b> 的方式管理網站</p></div>
     <div class="flat"><span class="pill video">理解</span><p>說出專案資料夾的 <b>命名規則</b>，以及為什麼要這樣命名</p></div>
-    <div class="flat"><span class="pill video">理解</span><p>用「點餐順序」解釋 <b>font-family</b> 為什麼會讓中文變怪</p></div>
-    <div class="flat"><span class="pill f2f">應用</span><p>加入 <b>兩行程式碼</b>，修好 Stitch 頁面的中文字型</p></div>
+    <div class="flat"><span class="pill video">理解</span><p>用「點餐順序」解釋 <b>font-family</b> 怎麼決定畫面用哪個字型</p></div>
+    <div class="flat"><span class="pill f2f">應用</span><p>改 <b>兩處程式碼</b>，把頁面換成 Stitch 清單裡沒有的芫荽字體</p></div>
   </div>
 </section>
 
@@ -100,14 +100,20 @@
   <h2 class="title">跟做①　建立你的專案資料夾</h2>
   <p class="lead">請暫停影片，跟著做。</p>
   <ul class="chk card mini">
+    <li><b>先開啟副檔名顯示</b>：檔案總管 → 檢視 → 顯示 → 勾「副檔名」</li>
     <li>在「文件」裡新增資料夾 <code>my-site</code></li>
     <li>把 W10 匯出的 Stitch 檔案放進去，<b>改名為 <code>index.html</code></b>（.zip 請先解壓縮）</li>
     <li>新增 <code>images</code> 資料夾（有圖片就放進去）</li>
     <li>VS Code → 檔案 → <b>開啟資料夾</b> → 選 <code>my-site</code></li>
     <li>對 <code>index.html</code> 按右鍵 → Open with Live Server（或直接雙擊用瀏覽器開）</li>
+    <li>按 <span class="kbd">Shift</span>+<span class="kbd">Alt</span>+<span class="kbd">F</span> 自動排版，擠成一團的程式碼會變整齊</li>
     <li>截圖左側的檔案總管（評量③要交）</li>
   </ul>
-  <div class="note"><b>常見錯誤：</b>用「開啟檔案」而不是「開啟資料夾」。左側看不到資料夾結構，就是開錯了。</div>
+  <div class="grid2">
+    <div class="note"><b>常見錯誤①：</b>用「開啟檔案」而不是「開啟資料夾」。左側看不到資料夾結構，就是開錯了。</div>
+    <div class="note"><b>常見錯誤②：</b>沒開副檔名就改名，檔案變成 <code>index.html.html</code>，上線後 404。開了副檔名一眼就看得出來。</div>
+  </div>
+  <div class="ai-callout"><b>從現在起的分工規則：</b>版面、配色等大方向，<b>匯出前</b>在 Stitch 改；<b>匯出後只在 VS Code 改</b>。回 Stitch 改完再匯出一次，你在 VS Code 手改的地方會被整份蓋掉。</div>
 </section>
 
 <section class="slide" data-toc="11.7 起始檔上車點②" data-n="11.7">
@@ -121,45 +127,62 @@
   <div class="good"><b>使用起始檔不扣分。</b>它的用途是讓你接得上後面三週，不是認輸。</div>
 </section>
 
-<section class="slide" data-toc="11.8 中文為什麼怪：字型的點餐順序" data-n="11.8">
+<section class="slide" data-toc="11.8 字型的點餐順序：font-family" data-n="11.8">
   <div class="eyebrow"><span class="num">11.8</span><span class="kicker">Concept</span></div>
-  <h2 class="title">中文為什麼怪：字型的「點餐順序」</h2>
-  <p class="lead">打開 Stitch 頁面，英文很好看，中文卻粗細不一、像拼湊出來的。原因藏在 <code>font-family</code> 這個屬性裡。</p>
+  <h2 class="title">字型的「點餐順序」：font-family</h2>
+  <p class="lead">W10 你在 Stitch 的 Theme 面板選了 Noto Sans TC，中文正常顯示。但清單裡只有幾十種字型，像<b>芫荽（Iansui）</b>這種手寫風中文字型就不在裡面。想用，就得自己改程式碼。</p>
   <div class="split">
     <div class="flat">
       <p class="mini"><code>font-family</code> 像點餐：「我要 A，沒有的話 B，再沒有就隨便」。</p>
-      <p class="mini">Stitch 只點了英文字型（例如 Inter）。英文字型裡<b>沒有中文字</b>，瀏覽器只好每個中文字都「隨便」，於是你看到的是系統臨時湊出來的字。</p>
+      <p class="mini">瀏覽器從左到右找，<b>第一個「有載入、又有這個字」的字型</b>就拿來用。所以換字型要做兩件事：</p>
+      <ol class="mini">
+        <li><b>載入</b>：讓瀏覽器拿得到芫荽（加一行 <code>&lt;link&gt;</code>）</li>
+        <li><b>指定</b>：把芫荽排在點餐順序第一位</li>
+      </ol>
     </div>
-<pre class="code"><span class="c-prop">font-family</span>: <span class="c-val">"Inter"</span>, <span class="c-val">sans-serif</span>;
-<span class="c-cm">/* Inter：有英文、沒有中文
-   sans-serif：瀏覽器自己找一個「隨便」 */</span></pre>
+<pre class="code"><span class="c-prop">font-family</span>: <span class="c-val">"Iansui"</span>, <span class="c-val">"Noto Sans TC"</span>, <span class="c-val">sans-serif</span>;
+<span class="c-cm">/* Iansui：第一志願，芫荽
+   Noto Sans TC：芫荽沒有的字，用思源黑體補
+   sans-serif：前兩個都沒有，瀏覽器自己找 */</span></pre>
   </div>
+  <div class="note"><b>只做一半最常見：</b>只載入不指定，畫面不會變；只指定不載入，瀏覽器找不到芫荽，直接跳到第二位。<b>兩處都要改。</b></div>
   <details class="check"><summary>如果看到的是「□□□」或「銝剜」這種真正的亂碼呢？</summary><p>那是編碼問題，不是字型問題。檢查 <code>&lt;head&gt;</code> 裡有沒有 <code>&lt;meta charset="UTF-8"&gt;</code>，存檔時編碼也要是 UTF-8（VS Code 右下角會顯示）。</p></details>
 </section>
 
-<section class="slide" data-toc="11.9 示範②：兩行修好中文" data-n="11.9">
+<section class="slide" data-toc="11.9 示範②：換成芫荽字體" data-n="11.9">
   <div class="eyebrow"><span class="num">11.9</span><span class="kicker">A · Demo 2</span></div>
-  <h2 class="title">示範②　一行載入、一行套用</h2>
-  <p class="lead">在 <code>index.html</code> 的 <code>&lt;/head&gt;</code> 正上方，貼上這兩行：</p>
-<pre class="code wrap"><span class="c-cm">&lt;!-- ① 向 Google Fonts 借思源黑體（Noto Sans TC） --&gt;</span>
-<span class="c-tag">&lt;link</span> <span class="c-attr">rel</span>=<span class="c-val">"stylesheet"</span> <span class="c-attr">href</span>=<span class="c-val">"https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&amp;display=swap"</span><span class="c-tag">&gt;</span>
-<span class="c-cm">&lt;!-- ② 點餐順序第一位改成思源黑體 --&gt;</span>
-<span class="c-tag">&lt;style&gt;</span><span class="c-sel">body</span>{<span class="c-prop">font-family</span>:<span class="c-val">"Noto Sans TC"</span>,<span class="c-val">sans-serif</span>;}<span class="c-tag">&lt;/style&gt;</span></pre>
-  <div class="ai-callout"><b>為什麼放在 &lt;/head&gt; 正上方：</b>CSS 是後寫的蓋掉先寫的（W5「樣式打架」）。放在最後面，你的設定最有機會贏。</div>
+  <h2 class="title">示範②　兩處程式碼，換成芫荽字體</h2>
+  <p class="lead">芫荽是台灣字型設計師 But Ko 的開源字型，收錄在 Google Fonts，免費、可商用。</p>
+  <div class="stepgrid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+    <div class="stepbox"><div class="sn">① 載入</div><h4>在 &lt;head&gt; 裡加一行</h4><p>找到 Stitch 原本載入 Google Fonts 的 <code>&lt;link&gt;</code>，在它<b>下面</b>貼上：</p>
+<pre class="code wrap"><span class="c-cm">&lt;!-- 向 Google Fonts 借芫荽字體 --&gt;</span>
+<span class="c-tag">&lt;link</span> <span class="c-attr">rel</span>=<span class="c-val">"stylesheet"</span> <span class="c-attr">href</span>=<span class="c-val">"https://fonts.googleapis.com/css2?family=Iansui&amp;display=swap"</span><span class="c-tag">&gt;</span></pre></div>
+    <div class="stepbox"><div class="sn">② 指定</div><h4>用「取代」把字型名稱換掉</h4><p>按 <span class="kbd">Ctrl</span>+<span class="kbd">H</span>，上面填你在 Stitch 選的字型名稱，下面填芫荽，按「全部取代」：</p>
+<pre class="code wrap"><span class="c-cm">尋找：</span>Noto Sans TC
+<span class="c-cm">取代：</span>Iansui</pre>
+      <p class="mini">只換名字，不動名字外面的引號（單引號、雙引號都一樣）。左下角會顯示取代了幾處。</p></div>
+  </div>
+  <div class="ai-callout"><b>為什麼用「取代」而不是自己加一行 CSS：</b>Stitch 的程式碼可能在好幾個地方寫了字型名稱（例如 Tailwind 設定裡的 <code>fontFamily</code>）。只改一處，其他地方還是舊字型。用取代可以一次全部換到。</div>
+  <div class="good"><b>網址裡的不會被換到：</b>Stitch 原本那行 <code>&lt;link&gt;</code> 網址寫的是 <code>Noto+Sans+TC</code>（用 <code>+</code> 連接），不會被取代，留著不影響。想加 11.8 的備胎寫法，可以之後請 Gemini 幫你調整。</div>
 </section>
 
-<section class="slide" data-toc="11.10 跟做②：修好並截前後圖" data-n="11.10">
+<section class="slide" data-toc="11.10 跟做②：換字型並截前後圖" data-n="11.10">
   <div class="eyebrow"><span class="num">11.10</span><span class="kicker">B · Follow Along 2</span></div>
-  <h2 class="title">跟做②　修好你的頁面，截前後對比</h2>
+  <h2 class="title">跟做②　換上芫荽，截前後對比</h2>
   <ul class="chk card mini">
-    <li><b>修改前</b>先截圖（W10 已截過可沿用）</li>
-    <li>貼上 11.9 的兩行 → 存檔（<span class="kbd">Ctrl</span>+<span class="kbd">S</span>）→ 重新整理瀏覽器</li>
+    <li><b>修改前</b>先截圖（W10 跟做②已截過可沿用）</li>
+    <li>照 11.9 做 ①載入 ②取代 → 存檔（<span class="kbd">Ctrl</span>+<span class="kbd">S</span>）→ 重新整理瀏覽器</li>
     <li><b>修改後</b>截圖，兩張放在一起比對</li>
   </ul>
   <div class="grid2">
-    <div class="note"><b>有些標題還是舊字型？</b>那些元素身上有 Tailwind 的字型 class（例如 <code>font-display</code>），優先權比 body 高。把那一行貼給 Gemini，問「這個 class 在畫面上做什麼」。</div>
-    <div class="note"><b>圖示變成英文字（如 arrow_forward）？</b>你可能用了 <code>*{font-family:... !important}</code>，把圖示字型也蓋掉了。改回 11.9 的寫法，只設定 <code>body</code>。</div>
+    <div class="note"><b>畫面完全沒變？</b>依序檢查：① <code>&lt;link&gt;</code> 網址有沒有打錯 ② 按 <span class="kbd">Ctrl</span>+<span class="kbd">F</span> 搜尋 <code>Iansui</code>，看取代有沒有成功 ③ 有沒有存檔。</div>
+    <div class="note"><b>顯示「取代了 0 處」？</b>你在 Stitch 選的不是 Noto Sans TC。按 <span class="kbd">Ctrl</span>+<span class="kbd">F</span> 搜尋 <code>font</code>，找到檔案裡實際寫的字型名稱，再用它來取代。</div>
   </div>
+  <div class="flat">
+    <h3 class="sec"><span>設計判斷：芫荽適合放哪裡？</span></h3>
+    <p class="mini">芫荽<b>只有一種粗細</b>。標題的粗體會被瀏覽器「硬加粗」，筆畫可能變糊。手寫感適合溫暖、親切的品牌，但不一定適合每一段文字。<b>全頁都換、只換標題，還是只換店主的話？</b>選一種並想好理由，W16 同儕互評時會被問到。</p>
+  </div>
+  <div class="good"><b>不一定要用芫荽：</b>到 <code>fonts.google.com</code>，語言選「Chinese (Traditional)」，挑一個 Stitch 清單裡沒有、又符合你品牌調性的字型，做法完全一樣。</div>
 </section>
 
 <section class="slide" data-toc="11.11 Gemini 換角色：從解釋器到產生器" data-n="11.11">
@@ -182,12 +205,13 @@
   <div class="card brandcard"><div class="tag brand">評量③ · Stitch 程式碼匯入 VS Code</div>
     <ol style="margin-top:8px">
       <li><b>VS Code 專案資料夾結構截圖</b>：左側檔案總管要看得到 <code>my-site</code>、<code>index.html</code></li>
-      <li><b>中文字型修正前／後對比截圖</b>：兩張，同一個區塊</li>
+      <li><b>中文字型更換前／後對比截圖</b>：兩張，同一個區塊</li>
+      <li><b>W10 Stitch 生成紀錄</b>：提示詞與生成畫面的截圖（或分享連結）</li>
     </ol></div>
-  <div class="good"><b>用起始檔的同學：</b>一樣繳這兩張圖，至少把首屏的 <code>TODO</code> 換成自己的內容再截。</div>
+  <div class="good"><b>用起始檔的同學：</b>一樣繳資料夾結構與字型對比截圖，至少把首屏的 <code>TODO</code> 換成自己的內容再截；第 3 項免交。</div>
 </section>
 
-<section class="slide" data-toc="12 下週銜接" data-n="11.13">
+<section class="slide" data-toc="11.13 下週銜接" data-n="11.13">
   <div class="eyebrow"><span class="num">11.13</span><span class="kicker">Next Up</span></div>
   <h2 class="title">下週銜接</h2>
   <div class="ai-callout"><b>第十二單元：</b>JavaScript 基礎與 AI Agent 排錯。不用寫 JS，學的是<b>讀懂它在做什麼、壞了怎麼找原因</b>。測驗③上線。</div>
