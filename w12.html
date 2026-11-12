@@ -528,8 +528,44 @@ pre.code.wrap{white-space:pre-wrap;word-break:break-all}
   </details>
 </section>
 
-<section class="slide" data-toc="12.12 AI 的建議要驗證" data-n="12.12">
-  <div class="eyebrow"><span class="num">12.12</span><span class="kicker">Verify</span></div>
+<section class="slide" data-toc="12.12 請 AI 加互動：限定原生 JS" data-n="12.12">
+  <div class="eyebrow"><span class="num">12.12</span><span class="kicker">Ask AI</span></div>
+  <h2 class="title">請 AI 加互動：限定「原生 JS、同一個檔案」</h2>
+  <p class="lead">Stitch 畫的按鈕很多只是「樣子」。十二席首頁的「開啟地圖導航」看起來能按，打開程式碼才發現：按下去只會跳出一句提示，根本沒有開地圖。</p>
+<pre class="code wrap"><span class="c-tag">&lt;button</span> <span class="c-attr">onclick</span>=<span class="c-val">"alert('正在開啟導航：台中市西區精誠路 12 巷 12 號')"</span><span class="c-tag">&gt;</span>開啟地圖導航<span class="c-tag">&lt;/button&gt;</span>
+<span class="c-cm">&lt;!-- alert 只會跳出提示框，不會打開地圖 --&gt;</span></pre>
+  <div class="split">
+<pre class="code wrap"><span class="c-cm"># 請 AI 加互動的提問模板</span>
+<span class="c-attr">我的狀況</span>：Stitch 匯出、在 VS Code 改過的 index.html
+<span class="c-attr">我想要</span>：按「開啟地圖導航」時，用 Google 地圖
+  開啟「台中市西區精誠路 12 巷 12 號」
+<span class="c-attr">限制</span>：用原生 JavaScript 或 HTML，寫在同一個檔案；
+  不要用 React，不要改其他區塊
+<span class="c-attr">相關程式碼</span>：（只貼那一個 button）
+<span class="c-attr">請你</span>：先說明這段在畫面上做什麼，再告訴我改哪裡</pre>
+    <div class="flat">
+      <h3 class="sec"><span>為什麼要寫「限制」</span></h3>
+      <p class="mini">沒寫限制，AI 常會給你一整套新的寫法，甚至改用 React。寫清楚「原生、同一個檔案、只改這裡」，它給的答案你才放得回去。</p>
+      <details class="check"><summary>好答案長什麼樣子？</summary><p>很可能連 JS 都不用：把 <code>&lt;button&gt;</code> 改成 <code>&lt;a href="https://www.google.com/maps/search/?api=1&amp;query=台中市西區精誠路12巷12號" target="_blank"&gt;</code>。<b>能用 HTML 解決的，就不必寫 JS</b>，這也是判斷 AI 答案好不好的一個標準。</p></details>
+    </div>
+  </div>
+  <div class="card brandcard"><div class="tag brand">⚠ 不要用 Stitch 的 Export › AI Studio</div>
+    <div class="grid2" style="margin-top:8px">
+      <figure class="fig"><a href="w12img/ai-studio-rewrite.webp" target="_blank" rel="noopener"><img src="w12img/ai-studio-rewrite.webp" alt="AI Studio 重新產生的英文網站：Midnight Ramen Sanctuary" loading="lazy"></a><figcaption>實測：整個網站被重寫成英文</figcaption></figure>
+      <div>
+        <p class="mini">實測把十二席首頁從 Stitch 送到 AI Studio，它不是幫你「加功能」，而是<b>重新做一個 App</b>：</p>
+        <ul class="mini">
+          <li>變成 React＋TypeScript 專案（一堆 <code>.tsx</code> 檔），雙擊打不開，W14 也不能直接上線</li>
+          <li>內容整個走樣：店名變英文、價格變美元、營業時間變成 04:00、多出企劃書沒有的頁面</li>
+        </ul>
+        <p class="mini"><b>本課做法：</b>把你自己的 <code>index.html</code> 片段貼給 Gemini，用上面的模板問。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-toc="12.13 AI 的建議要驗證" data-n="12.13">
+  <div class="eyebrow"><span class="num">12.13</span><span class="kicker">Verify</span></div>
   <h2 class="title">AI 的建議，你負責驗證</h2>
   <p class="lead">Gemini 很會修，但它看不到你的畫面，有時候會「修好一個、弄壞兩個」。</p>
   <div class="compare">
@@ -539,18 +575,18 @@ pre.code.wrap{white-space:pre-wrap;word-break:break-all}
   <div class="good"><b>驗證就是 W11 的三步：</b>先備份 → 只改一處 → 存檔看畫面，Console 紅字消失、結果正確才算數。</div>
 </section>
 
-<section class="slide" data-toc="12.13 本週任務與測驗③" data-n="12.13">
-  <div class="eyebrow"><span class="num">12.13</span><span class="kicker">This Week's Task</span></div>
+<section class="slide" data-toc="12.14 本週任務與測驗③" data-n="12.14">
+  <div class="eyebrow"><span class="num">12.14</span><span class="kicker">This Week's Task</span></div>
   <h2 class="title">本週任務與測驗③</h2>
   <div class="ai-callout"><b>影片檢核點：</b>可以無限次重答，答對就通過，不扣分。</div>
   <div class="card brandcard"><div class="tag brand">測驗③ · JavaScript「壞在哪」</div>
     <p class="mini" style="margin-top:6px">8 題單選，<b>不用寫程式</b>。題目會給你一段程式碼或 Console 訊息，問你「壞在哪」、「下一步該做什麼」、「AI 這樣建議能不能照用」。</p></div>
   <div class="flat"><h3 class="sec"><span>練習（不計分，建議做）</span></h3>
-    <p class="mini">在自己的頁面加一個簡單互動（例如 12.6 的選單或 12.7 的營業標籤），請 Gemini 依你的 id 改好給你，<b>用三個問題寫下它在做什麼</b>。</p></div>
+    <p class="mini">在自己的頁面加一個簡單互動（例如 12.6 的選單、12.7 的營業標籤，或 12.12 的地圖按鈕），用 12.12 的模板請 Gemini 改好給你，<b>用三個問題寫下它在做什麼</b>。</p></div>
 </section>
 
-<section class="slide" data-toc="13 下週銜接" data-n="12.14">
-  <div class="eyebrow"><span class="num">12.14</span><span class="kicker">Next Up</span></div>
+<section class="slide" data-toc="12.15 下週銜接" data-n="12.15">
+  <div class="eyebrow"><span class="num">12.15</span><span class="kicker">Next Up</span></div>
   <h2 class="title">下週銜接</h2>
   <div class="ai-callout"><b>第十三單元：</b>Figma 與自適應版面微調。同一頁在手機和電腦上長得不一樣，你要學會<b>看懂斷點</b>，說出它在哪裡變形。討論④上線。</div>
   <div class="good"><b>下週前先做一件事：</b>用手機打開你的頁面，截一張圖。</div>
