@@ -511,7 +511,8 @@ pre.code.wrap{white-space:pre-wrap;word-break:break-all}
 <span class="c-cm">取代：</span>", "Iansui"]</pre>
       <p class="mini">每一行結尾的 <code>"]</code> 都會變成 <code>", "Iansui"]</code>，等於幫每一道菜加上芫荽當第二志願。</p></div>
   </div>
-  <div class="ai-callout"><b>為什麼要先選取範圍：</b>只在 <code>fontFamily</code> 這一段裡取代，就不會誤改到檔案其他地方。取代後左下角顯示的處數，應該等於 <code>fontFamily</code> 的行數（範例檔是 11 處）。</div>
+  <div class="note"><b>取代後檢查一件事：</b>如果某一行原本最後是 <code>"sans-serif"</code>（桌機版常見），取代後會變成 <code>["Plus Jakarta Sans", "sans-serif", "Iansui"]</code>。<code>sans-serif</code> 就是點餐裡的「隨便」，排在它後面的永遠輪不到，<b>要把 <code>"Iansui"</code> 移到 <code>"sans-serif"</code> 前面</b>：<code>["Plus Jakarta Sans", "Iansui", "sans-serif"]</code>。</div>
+  <div class="ai-callout"><b>為什麼要先選取範圍：</b>只在 <code>fontFamily</code> 這一段裡取代，就不會誤改到檔案其他地方。取代後左下角顯示的處數，應該等於 <code>fontFamily</code> 的行數（手機版範例檔 11 處，桌機版只有 1 處）。</div>
   <div class="good"><b>想讓英文也用芫荽？</b>把 <code>"Iansui"</code> 改排在第一位就好。但英文維持原本的設計字型、中文用芫荽，通常是比較好看的中英混排。</div>
 </section>
 
@@ -524,7 +525,7 @@ pre.code.wrap{white-space:pre-wrap;word-break:break-all}
     <li><b>修改後</b>截圖，兩張放在一起比對</li>
   </ul>
   <div class="grid2">
-    <div class="note"><b>畫面完全沒變？</b>依序檢查：① <code>&lt;link&gt;</code> 網址有沒有打錯 ② 按 <span class="kbd">Ctrl</span>+<span class="kbd">F</span> 搜尋 <code>Iansui</code>，fontFamily 每一行都要有 ③ 有沒有存檔，再按 <span class="kbd">Ctrl</span>+<span class="kbd">F5</span> 強制重新整理。</div>
+    <div class="note"><b>畫面完全沒變？</b>依序檢查：① <code>&lt;link&gt;</code> 網址有沒有打錯 ② 按 <span class="kbd">Ctrl</span>+<span class="kbd">F</span> 搜尋 <code>Iansui</code>，fontFamily 每一行都要有，而且要排在 <code>"sans-serif"</code> 前面 ③ 有沒有存檔，再按 <span class="kbd">Ctrl</span>+<span class="kbd">F5</span> 強制重新整理。</div>
     <div class="note"><b>顯示「取代了 0 處」？</b>① 沒按 <span class="kbd">Alt</span>+<span class="kbd">L</span> 或沒先選取 ② 你的檔案用的是單引號：改成尋找 <code>']</code>、取代成 <code>', 'Iansui']</code>。</div>
   </div>
   <div class="flat">
