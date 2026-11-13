@@ -32,12 +32,12 @@
   </div>
 </section>
 
-<section class="slide" data-toc="11.2 開場：下載資料夾裡的第三份檔案" data-n="11.2">
+<section class="slide" data-toc="11.2 開場：下載資料夾裡的 stitch_.zip" data-n="11.2">
   <div class="eyebrow"><span class="num">11.2</span><span class="kicker">Scenario</span></div>
-  <h2 class="title">下載資料夾裡的 <code>stitch_export (3).html</code></h2>
-  <p class="lead">上週匯出的檔案，現在躺在「下載」資料夾，旁邊是發票 PDF、手機照片，還有 <code>(1)</code>、<code>(2)</code>、<code>(3)</code> 三個版本。哪一個才是最新的？</p>
+  <h2 class="title">下載資料夾裡的 <code>stitch_.zip</code></h2>
+  <p class="lead">上週從 Stitch 不論按 Download 或 Export，存下來的都是一個壓縮檔 <code>stitch_.zip</code>。打開後才看到三個檔案：<code>code.html</code>、<code>DESIGN.md</code>、<code>screen.png</code>。檔名看不出是哪個專案；再下載一次，就多一包 <code>stitch_ (1).zip</code>，裡面還是同樣三個檔名。哪一包才是最新的？</p>
   <div class="grid2">
-    <div class="card brandcard"><div class="tag brand">散在桌上的文件</div><p class="mini" style="margin-top:6px">每次要用都要翻找，圖片跟網頁分開放，網頁一搬家圖片就破掉。</p></div>
+    <div class="card brandcard"><div class="tag brand">散在桌上的文件</div><p class="mini" style="margin-top:6px">壓縮檔一包包躺在下載資料夾，每次要用都要翻找、解壓；圖片跟網頁分開放，網頁一搬家圖片就破掉。</p></div>
     <div class="card aicard"><div class="tag ai">歸好檔的資料夾</div><p class="mini" style="margin-top:6px">一個網站＝一個資料夾。網頁、圖片都在裡面，整包搬走也不會壞。<b>W14 上線就是整包上傳。</b></p></div>
   </div>
   <div class="ai-callout"><b>「專案化」只有一個意思：</b>一個網站所需要的所有東西，都放在同一個資料夾裡。</div>
@@ -79,6 +79,8 @@
 <pre class="code"><span class="c-sel">my-site/</span>              <span class="c-cm">← 整個網站就是這個資料夾</span>
 ├── <span class="c-tag">index.html</span>        <span class="c-cm">← 首頁，名字固定是這個</span>
 ├── <span class="c-tag">menu.html</span>         <span class="c-cm">← 第二頁（期末那「一頁」）</span>
+├── <span class="c-val">DESIGN.md</span>         <span class="c-cm">← Stitch 附的設計規格（保留原名）</span>
+├── <span class="c-val">screen.png</span>        <span class="c-cm">← Stitch 附的畫面截圖</span>
 └── <span class="c-sel">images/</span>
     ├── <span class="c-val">logo.png</span>
     └── <span class="c-val">ramen-01.jpg</span></pre>
@@ -102,7 +104,8 @@
   <ul class="chk card mini">
     <li><b>先開啟副檔名顯示</b>：檔案總管 → 檢視 → 顯示 → 勾「副檔名」</li>
     <li>在「文件」裡新增資料夾 <code>my-site</code></li>
-    <li>把 W10 匯出的 Stitch 檔案放進去，<b>改名為 <code>index.html</code></b>（.zip 請先解壓縮）</li>
+    <li>對 W10 下載的 <code>stitch_.zip</code> 按右鍵 → <b>全部解壓縮</b>，得到 <code>code.html</code>、<code>DESIGN.md</code>、<code>screen.png</code></li>
+    <li>三個檔案搬進 <code>my-site</code>，把 <b><code>code.html</code> 改名為 <code>index.html</code></b></li>
     <li>新增 <code>images</code> 資料夾（有圖片就放進去）</li>
     <li>VS Code → 檔案 → <b>開啟資料夾</b> → 選 <code>my-site</code></li>
     <li>對 <code>index.html</code> 按右鍵 → Open with Live Server（或直接雙擊用瀏覽器開）</li>
@@ -113,6 +116,7 @@
     <div class="note"><b>常見錯誤①：</b>用「開啟檔案」而不是「開啟資料夾」。左側看不到資料夾結構，就是開錯了。</div>
     <div class="note"><b>常見錯誤②：</b>沒開副檔名就改名，檔案變成 <code>index.html.html</code>，上線後 404。開了副檔名一眼就看得出來。</div>
   </div>
+  <div class="note"><b>常見錯誤③：</b>沒解壓縮，直接在 zip 裡雙擊 <code>code.html</code>。那是系統的暫存複本，改了也存不回去，關掉就不見。<b>一定先解壓縮</b>。</div>
   <div class="ai-callout"><b>從現在起的分工規則：</b>版面、配色等大方向，<b>匯出前</b>在 Stitch 改；<b>匯出後只在 VS Code 改</b>。回 Stitch 改完再匯出一次，你在 VS Code 手改的地方會被整份蓋掉。</div>
 </section>
 
