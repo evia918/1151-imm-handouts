@@ -458,6 +458,16 @@ pre.code.wrap{white-space:pre-wrap;word-break:break-all}
     <div class="stepbox"><div class="sn">04</div><h4>上傳、等更新</h4><p>路線 B 看 Deploys 有沒有成功</p></div>
     <div class="stepbox"><div class="sn">05</div><h4>分享測試</h4><p>貼到 LINE 傳給自己，跟 W16 的截圖比較</p></div>
   </div>
+  <div class="flat">
+    <h3 class="sec"><span>AI 寫的社群標籤也要檢查</span></h3>
+    <p class="mini">實測把十二席首頁交給 Google AI Studio 轉換，它主動補了這幾行：</p>
+<pre class="code wrap"><span class="c-tag">&lt;meta</span> <span class="c-attr">name</span>=<span class="c-val">"description"</span> <span class="c-attr">content</span>=<span class="c-val">"巷弄裡的 12 個座位，專屬深夜的溫暖味蕾。…"</span><span class="c-tag">&gt;</span>
+<span class="c-tag">&lt;meta</span> <span class="c-attr">property</span>=<span class="c-val">"og:title"</span> …<span class="c-tag">&gt;</span>
+<span class="c-tag">&lt;meta</span> <span class="c-attr">property</span>=<span class="c-val">"og:description"</span> …<span class="c-tag">&gt;</span>
+<span class="c-tag">&lt;meta</span> <span class="c-attr">property</span>=<span class="c-val">"og:type"</span> <span class="c-attr">content</span>=<span class="c-val">"website"</span><span class="c-tag">&gt;</span>
+<span class="c-tag">&lt;meta</span> <span class="c-attr">name</span>=<span class="c-val">"twitter:card"</span> <span class="c-attr">content</span>=<span class="c-val">"summary_large_image"</span><span class="c-tag">&gt;</span></pre>
+    <details class="check"><summary>對照 17.6 的五行 og 標籤，它少了哪兩行？會有什麼結果？</summary><p>少了 <code>og:image</code> 和 <code>og:url</code>。沒有 og:image，分享到 LINE 時<b>卡片沒有圖</b>；twitter:card 寫了「大圖卡片」卻沒給圖，也是白寫。AI 會幫你寫，但<b>寫得完不完整，要你用這頁的清單檢查</b>。</p></details>
+  </div>
   <div class="note"><b>預覽沒變？</b>LINE 和 Facebook 會記住舊的預覽一段時間。Facebook 可以用官方的「分享偵錯工具」（Sharing Debugger）重新抓取；LINE 可以在網址後面加 <code>?v=2</code> 再試。</div>
 </section>
 

@@ -549,23 +549,69 @@ pre.code.wrap{white-space:pre-wrap;word-break:break-all}
       <details class="check"><summary>好答案長什麼樣子？</summary><p>很可能連 JS 都不用：把 <code>&lt;button&gt;</code> 改成 <code>&lt;a href="https://www.google.com/maps/search/?api=1&amp;query=台中市西區精誠路12巷12號" target="_blank"&gt;</code>。<b>能用 HTML 解決的，就不必寫 JS</b>，這也是判斷 AI 答案好不好的一個標準。</p></details>
     </div>
   </div>
-  <div class="card brandcard"><div class="tag brand">⚠ 不要用 Stitch 的 Export › AI Studio</div>
+  <div class="card brandcard"><div class="tag brand">⚠ 不要用 Stitch 的 Export › AI Studio（自動提示詞）</div>
     <div class="grid2" style="margin-top:8px">
       <figure class="fig"><a href="w12img/ai-studio-rewrite.webp" target="_blank" rel="noopener"><img src="w12img/ai-studio-rewrite.webp" alt="AI Studio 重新產生的英文網站：Midnight Ramen Sanctuary" loading="lazy"></a><figcaption>實測：整個網站被重寫成英文</figcaption></figure>
       <div>
-        <p class="mini">實測把十二席首頁從 Stitch 送到 AI Studio，它不是幫你「加功能」，而是<b>重新做一個 App</b>：</p>
+        <p class="mini">從 Stitch 直接按 Export › AI Studio，系統自動帶的提示詞是「照這些畫面做一個 App」，所以它<b>重新做了一個 App</b>：</p>
         <ul class="mini">
           <li>變成 React＋TypeScript 專案（一堆 <code>.tsx</code> 檔），雙擊打不開，W14 也不能直接上線</li>
           <li>內容整個走樣：店名變英文、價格變美元、營業時間變成 04:00、多出企劃書沒有的頁面</li>
         </ul>
-        <p class="mini"><b>本課做法：</b>把你自己的 <code>index.html</code> 片段貼給 Gemini，用上面的模板問。</p>
+        <p class="mini">自己上傳 HTML 並寫明「圖文、版面不可更動」，內容就能保留（見 12.13），但產出<b>仍是 React 專案</b>。<b>本課做法：</b>把你自己的 <code>index.html</code> 片段貼給 Gemini，用上面的模板問。</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="slide" data-toc="12.13 AI 的建議要驗證" data-n="12.13">
-  <div class="eyebrow"><span class="num">12.13</span><span class="kicker">Verify</span></div>
+<section class="slide" data-toc="12.13 對照：HTML 版 vs. React 版" data-n="12.13">
+  <div class="eyebrow"><span class="num">12.13</span><span class="kicker">Compare</span></div>
+  <h2 class="title">同一頁，HTML 版 vs. React 版：AI 到底多做了什麼？</h2>
+  <p class="lead">把十二席桌機版 <code>code.html</code> 上傳到 AI Studio，提示詞寫「轉成具響應式功能的 React 組件，圖文內容、版面編排不可更動」。逐字比對後，圖文完全保留，但資料夾多出十幾個檔案。</p>
+  <div class="grid2">
+    <div class="card aicard"><div class="tag ai">真正多做的只有三件事</div>
+      <ol class="mini" style="margin-top:6px">
+        <li><b>手機版選單</b>：原檔導覽列是 <code>hidden md:flex</code>，手機上整排看不到；React 版加了開合按鈕</li>
+        <li><b>無障礙標籤</b>：「開啟選單」「主要導覽」等說明文字，給螢幕報讀器用</li>
+        <li><b>SEO／社群標籤</b>：description、og:title 等（W17 會教）</li>
+      </ol></div>
+    <div class="card brandcard"><div class="tag brand">其他都是「施工設備」</div>
+      <ul class="mini" style="margin-top:6px">
+        <li><code>package.json</code>、<code>vite.config.ts</code>：要先裝 Node.js、執行 <code>npm install</code></li>
+        <li><code>index.html</code> 只是空殼（<code>&lt;div id="root"&gt;</code>），<b>雙擊打開一片空白</b></li>
+        <li><code>public/assets/aistudio/</code> 裡是你上傳的原檔副本，App 沒用到</li>
+      </ul></div>
+  </div>
+  <h3 class="sec"><span>三件事，HTML 也做得到：以手機版選單為例</span></h3>
+  <div class="split">
+<pre class="code wrap"><span class="c-cm">&lt;!-- 手機才顯示的選單按鈕 --&gt;</span>
+<span class="c-tag">&lt;button</span> <span class="c-attr">id</span>=<span class="c-val">"menu-btn"</span> <span class="c-attr">class</span>=<span class="c-val">"md:hidden"</span> <span class="c-attr">aria-label</span>=<span class="c-val">"開啟選單"</span><span class="c-tag">&gt;</span>☰<span class="c-tag">&lt;/button&gt;</span>
+<span class="c-cm">&lt;!-- 手機版選單，一開始藏起來 --&gt;</span>
+<span class="c-tag">&lt;nav</span> <span class="c-attr">id</span>=<span class="c-val">"mobile-menu"</span> <span class="c-attr">class</span>=<span class="c-val">"hidden flex flex-col md:hidden"</span><span class="c-tag">&gt;</span>
+  <span class="c-tag">&lt;a</span> <span class="c-attr">href</span>=<span class="c-val">"#menu"</span><span class="c-tag">&gt;</span>招牌菜單<span class="c-tag">&lt;/a&gt;</span> …
+<span class="c-tag">&lt;/nav&gt;</span>
+<span class="c-tag">&lt;script&gt;</span>
+  <span class="c-prop">const</span> btn  = document.getElementById(<span class="c-val">'menu-btn'</span>);
+  <span class="c-prop">const</span> menu = document.getElementById(<span class="c-val">'mobile-menu'</span>);
+  btn.addEventListener(<span class="c-val">'click'</span>, () =&gt; {
+    menu.classList.toggle(<span class="c-val">'hidden'</span>); <span class="c-cm">// 有 hidden 就拿掉，沒有就加上</span>
+  });
+<span class="c-tag">&lt;/script&gt;</span></pre>
+    <div class="flat">
+      <h3 class="sec"><span>用 12.5 的三個問題讀它</span></h3>
+      <ol class="mini">
+        <li><b>抓誰：</b><code>menu-btn</code> 按鈕和 <code>mobile-menu</code> 選單</li>
+        <li><b>等什麼：</b>等按鈕被點擊（<code>'click'</code>）</li>
+        <li><b>做什麼：</b>切換 <code>hidden</code>，藏起來的就打開，打開的就藏起來</li>
+      </ol>
+      <p class="mini">這段可以用 12.12 的模板請 Gemini 寫：「我想要：手機上按按鈕打開導覽選單；限制：原生 JS、同一個檔案」。拿到答案後，用上面三個問題確認它在做什麼。</p>
+    </div>
+  </div>
+  <div class="good"><b>結論：</b>React 的好處（元件重複使用、管理大量互動、串 API）要在大型網站才顯現。一頁介紹網站，HTML＋幾行 JS 就夠，還能直接雙擊預覽、直接上線。</div>
+</section>
+
+<section class="slide" data-toc="12.14 AI 的建議要驗證" data-n="12.14">
+  <div class="eyebrow"><span class="num">12.14</span><span class="kicker">Verify</span></div>
   <h2 class="title">AI 的建議，你負責驗證</h2>
   <p class="lead">Gemini 很會修，但它看不到你的畫面，有時候會「修好一個、弄壞兩個」。</p>
   <div class="compare">
@@ -575,18 +621,18 @@ pre.code.wrap{white-space:pre-wrap;word-break:break-all}
   <div class="good"><b>驗證就是 W11 的三步：</b>先備份 → 只改一處 → 存檔看畫面，Console 紅字消失、結果正確才算數。</div>
 </section>
 
-<section class="slide" data-toc="12.14 本週任務與測驗③" data-n="12.14">
-  <div class="eyebrow"><span class="num">12.14</span><span class="kicker">This Week's Task</span></div>
+<section class="slide" data-toc="12.15 本週任務與測驗③" data-n="12.15">
+  <div class="eyebrow"><span class="num">12.15</span><span class="kicker">This Week's Task</span></div>
   <h2 class="title">本週任務與測驗③</h2>
   <div class="ai-callout"><b>影片檢核點：</b>可以無限次重答，答對就通過，不扣分。</div>
   <div class="card brandcard"><div class="tag brand">測驗③ · JavaScript「壞在哪」</div>
     <p class="mini" style="margin-top:6px">8 題單選，<b>不用寫程式</b>。題目會給你一段程式碼或 Console 訊息，問你「壞在哪」、「下一步該做什麼」、「AI 這樣建議能不能照用」。</p></div>
   <div class="flat"><h3 class="sec"><span>練習（不計分，建議做）</span></h3>
-    <p class="mini">在自己的頁面加一個簡單互動（例如 12.6 的選單、12.7 的營業標籤，或 12.12 的地圖按鈕），用 12.12 的模板請 Gemini 改好給你，<b>用三個問題寫下它在做什麼</b>。</p></div>
+    <p class="mini">在自己的頁面加一個簡單互動（例如 12.6 的選單、12.7 的營業標籤，、12.12 的地圖按鈕或 12.13 的手機選單），用 12.12 的模板請 Gemini 改好給你，<b>用三個問題寫下它在做什麼</b>。</p></div>
 </section>
 
-<section class="slide" data-toc="12.15 下週銜接" data-n="12.15">
-  <div class="eyebrow"><span class="num">12.15</span><span class="kicker">Next Up</span></div>
+<section class="slide" data-toc="12.16 下週銜接" data-n="12.16">
+  <div class="eyebrow"><span class="num">12.16</span><span class="kicker">Next Up</span></div>
   <h2 class="title">下週銜接</h2>
   <div class="ai-callout"><b>第十三單元：</b>Figma 與自適應版面微調。同一頁在手機和電腦上長得不一樣，你要學會<b>看懂斷點</b>，說出它在哪裡變形。討論④上線。</div>
   <div class="good"><b>下週前先做一件事：</b>用手機打開你的頁面，截一張圖。</div>
